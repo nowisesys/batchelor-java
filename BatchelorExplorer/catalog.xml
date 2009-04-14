@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://127.0.0.1:80/batchelor/ws/wsdl/?wsdl" uri="xml-resources/web-service-references/WsClient/wsdl/127.0.0.1_80/batchelor/ws/wsdl/.wsdl"/>
+    <system systemId="http://127.0.0.1:80/batchelor/ws/wsdl/?xsd" uri="xml-resources/web-service-references/WsClient/wsdl/127.0.0.1_80/batchelor/ws/wsdl/.xsd"/>
+</catalog>
