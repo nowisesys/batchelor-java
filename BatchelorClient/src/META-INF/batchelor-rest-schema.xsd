@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://it.bmc.uu.se/batchelor/rest/200901"
+    xmlns:tns="http://it.bmc.uu.se/batchelor/rest/200901"
+    xmlns:xlink0="http://www.w3.org/1999/xlink"
+    xmlns:xlink="http://it.bmc.uu.se/batchelor/xlink/200901">
+    <xsd:import schemaLocation="../META-INF/batchelor-xlink.xsd" namespace="http://it.bmc.uu.se/batchelor/xlink/200901"/>
+    <xsd:element name="result">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="error" type="tns:error" minOccurs="0"></xsd:element>
+                <xsd:element name="status" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="job" type="tns:job" maxOccurs="unbounded" minOccurs="0"/>
+                <xsd:element name="link" maxOccurs="unbounded" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:attribute ref="tns:get"/>
+                        <xsd:attribute ref="tns:post"/>
+                        <xsd:attribute ref="tns:put"/>
+                        <xsd:attribute ref="tns:delete"/>
+                        <xsd:attribute ref="xlink:href" use="required"/>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="file" maxOccurs="unbounded" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:attribute ref="tns:encoding"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="state" type="xsd:string"/>
+            <xsd:attribute name="type" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="error">
+        <xsd:sequence>
+            <xsd:element name="code" type="xsd:integer"/>
+            <xsd:element name="message" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="job">
+        <xsd:sequence maxOccurs="unbounded">
+            <xsd:element name="node" form="unqualified" maxOccurs="unbounded" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="timezone" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="encoding">
+        <xsd:choice>
+            <xsd:element name="base64" type="xsd:string"/>
+            <xsd:element name="binary" type="xsd:string"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:attribute name="get" type="xsd:string"/>
+    <xsd:attribute name="post" type="xsd:string"/>
+    <xsd:attribute name="delete" type="xsd:string"/>
+    <xsd:attribute name="put" type="xsd:string"/>
+    <xsd:attributeGroup name="request">
+        <xsd:attribute ref="tns:delete"/>
+        <xsd:attribute ref="tns:get"/>
+        <xsd:attribute ref="tns:post"/>
+        <xsd:attribute ref="tns:put"/>
+    </xsd:attributeGroup>
+    <xsd:attribute name="encoding" type="xsd:string"/>
+</xsd:schema>
