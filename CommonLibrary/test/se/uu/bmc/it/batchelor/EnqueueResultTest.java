@@ -70,7 +70,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testGetJobID() {
-        System.out.println("(i) EnqueueResultTest -> getJobID()");
+        System.out.println("(i) *** EnqueueResultTest -> getJobID()");
         assertEquals(null, obj1.getJobID());
         assertEquals(JOB_ID, obj2.getJobID());
     }
@@ -80,7 +80,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testSetJobID() {
-        System.out.println("(i) EnqueueResultTest -> setJobID()");
+        System.out.println("(i) *** EnqueueResultTest -> setJobID()");
         String jobID = "Job 999";
         obj1.setJobID(jobID);
         assertEquals(jobID, obj1.getJobID());
@@ -93,7 +93,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testGetResult() {
-        System.out.println("(i) EnqueueResultTest -> getResult()");
+        System.out.println("(i) *** EnqueueResultTest -> getResult()");
         assertEquals(null, obj1.getResult());
         assertEquals(RESULT, obj2.getResult());
     }
@@ -103,7 +103,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testSetResult() {
-        System.out.println("(i) EnqueueResultTest -> setResult()");
+        System.out.println("(i) *** EnqueueResultTest -> setResult()");
         String result = "999666333000";
         obj1.setResult(result);
         assertEquals(result, obj1.getResult());
@@ -116,7 +116,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testSetDate() {
-        System.out.println("(i) EnqueueResultTest -> setDate()");
+        System.out.println("(i) *** EnqueueResultTest -> setDate()");
         String date = "1998-04-28";
         obj1.setDate(date);
         assertEquals(date, obj1.getDate());
@@ -129,7 +129,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testGetDate() {
-        System.out.println("(i) EnqueueResultTest -> getDate()");
+        System.out.println("(i) *** EnqueueResultTest -> getDate()");
         assertEquals(null, obj1.getDate());
         assertEquals(DATE, obj2.getDate());
     }
@@ -139,7 +139,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testSetTime() {
-        System.out.println("(i) EnqueueResultTest -> setTime()");
+        System.out.println("(i) *** EnqueueResultTest -> setTime()");
         String time = "12:34:56";
         obj1.setTime(time);
         assertEquals(time, obj1.getTime());
@@ -152,7 +152,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testGetTime() {
-        System.out.println("(i) EnqueueResultTest -> getTime()");
+        System.out.println("(i) *** EnqueueResultTest -> getTime()");
         assertEquals(null, obj1.getTime());
         assertEquals(TIME, obj2.getTime());
     }
@@ -162,7 +162,7 @@ public class EnqueueResultTest {
      */
     @Test
     public void testSetStamp() {
-        System.out.println("(i) EnqueueResultTest -> setStamp()");
+        System.out.println("(i) *** EnqueueResultTest -> setStamp()");
         int stamp = 01010101;
         obj1.setStamp(stamp);
         assertEquals(stamp, obj1.getStamp());
@@ -175,14 +175,14 @@ public class EnqueueResultTest {
      */
     @Test
     public void testGetStamp() {
-        System.out.println("(i) EnqueueResultTest -> getStamp()");
+        System.out.println("(i) *** EnqueueResultTest -> getStamp()");
         assertEquals(0, obj1.getStamp());
         assertEquals(STAMP, obj2.getStamp());
     }
 
     @Test
     public void testGetJobIdentity() {
-        System.out.println("(i) EnqueueResultTest -> getJobIdentity()");
+        System.out.println("(i) *** EnqueueResultTest -> getJobIdentity()");
         JobIdentity ident1 = new JobIdentity(JOB_ID, RESULT);
         JobIdentity ident2 = obj2.getJobIdentity();
         assertEquals(ident1.getJobID(), ident2.getJobID());

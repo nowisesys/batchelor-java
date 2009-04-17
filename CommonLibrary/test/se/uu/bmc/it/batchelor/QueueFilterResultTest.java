@@ -60,7 +60,7 @@ public class QueueFilterResultTest {
      */
     @Test
     public void testValues() {
-        System.out.println("(i) QueueFilterResultTest -> values()");
+        System.out.println("(i) *** QueueFilterResultTest -> values()");
         QueueFilterResult[] result = QueueFilterResult.values();
         assertNotNull(result);
     }
@@ -70,7 +70,7 @@ public class QueueFilterResultTest {
      */
     @Test
     public void testGetValue() {
-        System.out.println("(i) QueueFilterResultTest -> getValue()");
+        System.out.println("(i) *** QueueFilterResultTest -> getValue()");
         assertEquals("all", QueueFilterResult.ALL.getValue());
         assertEquals("all", QueueFilterResult.NONE.getValue());
         assertEquals("pending", QueueFilterResult.PENDING.getValue());
@@ -89,7 +89,7 @@ public class QueueFilterResultTest {
      */
     @Test
     public void testValueOf() {
-        System.out.println("(i) QueueFilterResultTest -> valueOf(String)");
+        System.out.println("(i) *** QueueFilterResultTest -> valueOf(String)");
         assertEquals(QueueFilterResult.ALL, QueueFilterResult.valueOf("ALL"));
         assertEquals(QueueFilterResult.NONE, QueueFilterResult.valueOf("NONE"));
         assertEquals(QueueFilterResult.PENDING, QueueFilterResult.valueOf("PENDING"));
@@ -107,7 +107,7 @@ public class QueueFilterResultTest {
      */
     @Test
     public void testAlias() {
-        System.out.println("(i) QueueFilterResultTest -> testing aliases:");
+        System.out.println("(i) *** QueueFilterResultTest -> testing aliases:");
         assertEquals(QueueFilterResult.ALL.getValue(), QueueFilterResult.NONE.getValue());
         assertEquals(QueueFilterResult.WAITING.getValue(), QueueFilterResult.UNFINISHED.getValue());
         assertEquals(QueueFilterResult.SUCCESS.getValue(), QueueFilterResult.FINISHED.getValue());

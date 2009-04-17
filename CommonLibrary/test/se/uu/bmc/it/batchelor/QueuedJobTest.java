@@ -73,7 +73,7 @@ public class QueuedJobTest {
      */
     @Test
     public void testGetJobIdentity() {
-        System.out.println("(i) QueuedJobTest -> getJobIdentity()");
+        System.out.println("(i) *** QueuedJobTest -> getJobIdentity()");
         assertNotNull(obj1.getJobIdentity());
         assertEquals(IDENT, obj2.getJobIdentity());
         assertEquals(IDENT, obj3.getJobIdentity());
@@ -84,7 +84,7 @@ public class QueuedJobTest {
      */
     @Test
     public void testSetState() {
-        System.out.println("(i) QueuedJobTest -> setState()");
+        System.out.println("(i) *** QueuedJobTest -> setState()");
         String state = "queued";
         obj1.setState(state);
         assertEquals(state, obj1.getState());
@@ -97,7 +97,7 @@ public class QueuedJobTest {
      */
     @Test
     public void testGetState() {
-        System.out.println("(i) QueuedJobTest -> getState()");
+        System.out.println("(i) *** QueuedJobTest -> getState()");
         assertEquals(null, obj1.getState());
         assertEquals(null, obj2.getState());
         assertEquals(STATE, obj3.getState());

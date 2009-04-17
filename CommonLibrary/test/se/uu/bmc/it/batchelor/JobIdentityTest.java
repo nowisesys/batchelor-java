@@ -67,7 +67,7 @@ public class JobIdentityTest {
      */
     @Test
     public void testGetJobID() {
-        System.out.println("(i) JobIdentityTest -> getJobId()");
+        System.out.println("(i) *** JobIdentityTest -> getJobId()");
         assertEquals(null, obj1.getJobID());
         assertEquals(JOB_ID, obj2.getJobID());
     }
@@ -77,21 +77,21 @@ public class JobIdentityTest {
      */
     @Test
     public void testGetResult() {
-        System.out.println("(i) JobIdentityTest -> getResult()");
+        System.out.println("(i) *** JobIdentityTest -> getResult()");
         assertEquals(null, obj1.getResult());
         assertEquals(RESULT, obj2.getResult());
     }
 
     @Test
     public void testSetJobID() {
-        System.out.println("(i) JobIdentityTest -> setJobID(String)");
+        System.out.println("(i) *** JobIdentityTest -> setJobID(String)");
         obj1.setJobID(JOB_ID);
         assertEquals(JOB_ID, obj1.getJobID());
     }
 
     @Test
     public void testSetResult() {
-        System.out.println("(i) JobIdentityTest -> setResult(String)");
+        System.out.println("(i) *** JobIdentityTest -> setResult(String)");
         obj1.setResult(RESULT);
         assertEquals(RESULT, obj1.getResult());
     }

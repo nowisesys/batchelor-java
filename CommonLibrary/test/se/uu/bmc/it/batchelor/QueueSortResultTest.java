@@ -61,7 +61,7 @@ public class QueueSortResultTest {
      */
     @Test
     public void testValues() {
-        System.out.println("(i) QueueSortResultTest -> values()");
+        System.out.println("(i) *** QueueSortResultTest -> values()");
         QueueSortResult[] result = QueueSortResult.values();
         assertNotNull(result);
     }
@@ -71,7 +71,7 @@ public class QueueSortResultTest {
      */
     @Test
     public void testGetValue() {
-        System.out.println("(i) QueueSortResultTest -> getValue()");
+        System.out.println("(i) *** QueueSortResultTest -> getValue()");
         assertEquals("none", QueueSortResult.NONE.getValue());
         assertEquals("started", QueueSortResult.STARTED.getValue());
         assertEquals("jobid", QueueSortResult.JOB_ID.getValue());
@@ -85,7 +85,7 @@ public class QueueSortResultTest {
      */
     @Test
     public void testValueOf() {
-        System.out.println("(i) QueueSortResultTest -> valueOf(String)");
+        System.out.println("(i) *** QueueSortResultTest -> valueOf(String)");
         assertEquals(QueueSortResult.JOB_ID, QueueSortResult.valueOf("JOB_ID"));
         assertEquals(QueueSortResult.NAME, QueueSortResult.valueOf("NAME"));
         assertEquals(QueueSortResult.NONE, QueueSortResult.valueOf("NONE"));
@@ -99,7 +99,7 @@ public class QueueSortResultTest {
      */
     @Test
     public void testAlias() {
-        System.out.println("(i) QueueSortResultTest -> testing aliases:");
+        System.out.println("(i) *** QueueSortResultTest -> testing aliases:");
         assertEquals(QueueSortResult.STATE.getValue(), QueueSortResult.STATUS.getValue());
     }
 

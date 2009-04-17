@@ -34,6 +34,7 @@ import static org.junit.Assert.*;
 import se.uu.bmc.it.batchelor.EnqueueResult;
 import se.uu.bmc.it.batchelor.JobIdentity;
 import se.uu.bmc.it.batchelor.QueuedJob;
+import se.uu.bmc.it.batchelor.soap.local.BatchelorSoapLoopback;
 
 import java.rmi.RemoteException;
 
@@ -48,7 +49,7 @@ public class BatchelorSoapClientTest {
     private BatchelorSoapClient service;
 
     public BatchelorSoapClientTest() {
-        service = new BatchelorSoapClient();
+        service = new BatchelorSoapLoopback();
     }
 
     @BeforeClass
@@ -72,7 +73,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testVersion() {
-        System.out.println("(i) BatchelorSoapClientTest -> version()");
+        System.out.println("(i) *** BatchelorSoapClientTest -> version()");
         try {
             String result = service.version();
             assertNotNull(result);
@@ -87,7 +88,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testEnqueue() {
-        System.out.println("(i) BatchelorSoapClientTest -> enqueue(String)");
+        System.out.println("(i) *** BatchelorSoapClientTest -> enqueue(String)");
         try {
             EnqueueResult[] results = service.enqueue("test");
             assertNotNull(results);
@@ -108,7 +109,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testDequeue() {
-        System.out.println("(i) BatchelorSoapClientTest -> dequeue(JobIdentity)");
+        System.out.println("(i) *** BatchelorSoapClientTest -> dequeue(JobIdentity)");
         try {
             assertEquals(true, service.dequeue(null));
             assertEquals(true, service.dequeue(new JobIdentity()));
@@ -122,7 +123,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testQueue() {
-        System.out.println("(i) BatchelorSoapClientTest -> queue(String, String)");
+        System.out.println("(i) *** BatchelorSoapClientTest -> queue(String, String)");
         try {
             QueuedJob[] results;
             results = service.queue(null, null);
@@ -150,7 +151,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testWatch() {
-        System.out.println("(i) BatchelorSoapClientTest -> watch(int)");
+        System.out.println("(i) *** BatchelorSoapClientTest -> watch(int)");
         try {
             QueuedJob[] results;
             results = service.watch(0);
@@ -176,7 +177,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testSuspend() {
-        System.out.println("(i) BatchelorSoapClientTest -> suspend(JobIdentity)");
+        System.out.println("(i) *** BatchelorSoapClientTest -> suspend(JobIdentity)");
         try {
             assertEquals(true, service.suspend(null));
             assertEquals(true, service.suspend(new JobIdentity()));
@@ -190,7 +191,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testResume() {
-        System.out.println("(i) BatchelorSoapClientTest -> resume(JobIdentity)");
+        System.out.println("(i) *** BatchelorSoapClientTest -> resume(JobIdentity)");
         try {
             assertEquals(true, service.resume(null));
             assertEquals(true, service.resume(new JobIdentity()));
@@ -204,7 +205,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testOpendir() {
-        System.out.println("(i) BatchelorSoapClientTest -> opendir()");
+        System.out.println("(i) *** BatchelorSoapClientTest -> opendir()");
         try {
             JobIdentity[] results = service.opendir();
             assertNotNull(results);
@@ -223,7 +224,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testReaddir() {
-        System.out.println("(i) BatchelorSoapClientTest -> readdir(JobIdentity)");
+        System.out.println("(i) *** BatchelorSoapClientTest -> readdir(JobIdentity)");
         try {
             String[] results;
             results = service.readdir(null);
@@ -244,7 +245,7 @@ public class BatchelorSoapClientTest {
      */
     @Test
     public void testFopen() {
-        System.out.println("(i) BatchelorSoapClientTest -> fopen(JobIdentity, String)");
+        System.out.println("(i) *** BatchelorSoapClientTest -> fopen(JobIdentity, String)");
         try {
             byte[] result;
             String str;
