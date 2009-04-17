@@ -170,7 +170,7 @@ public class BatchelorSoapService implements WebServiceInterface {
     @WebMethod(operationName = "stat")
     public QueuedJob stat(@WebParam(name = "job")
     final JobIdentity job) throws RemoteException {
-        //TODO write your implementation code here:
-        return null;
+        QueuedJob result = new QueuedJob(job, "error");
+        return result;
     }
 }

@@ -136,6 +136,16 @@ public class BatchelorSoapServiceTest {
     }
 
     /**
+     * Test of stat method, of class BatchelorSoapService.
+     */
+    @Test
+    public void testStat() throws Exception {
+        System.out.println("(i) *** BatchelorSoapServiceTest -> stat(JobIdentity)");
+        assertNotNull(service.stat(new JobIdentity()));
+        assertNotNull(service.stat(null));
+    }
+
+    /**
      * Test of opendir method, of class BatchelorSoapService.
      */
     @Test
