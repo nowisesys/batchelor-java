@@ -52,19 +52,6 @@ public class BatchelorSoapClient implements WebServiceInterface {
     private String name;  // The service name.
 
     /**
-     * Create an Batchelor SOAP client using the WSDL location at build time.
-     * This constructor is only useful for communication with the web service
-     * that JAX-WS has generated the client source from.
-     *
-     * Use this constructor if you like to consume the service at:
-     * http://localhost:8080/BatchelorService/BatchelorSoapService?wsdl
-     */
-    public BatchelorSoapClient() {
-        this.url = null;
-        this.name = null;
-    }
-
-    /**
      * This contructor overrides the WSDL location that JAX-WS has generated
      * the service code from. Use this constructor for binding to an volatile
      * Batchelor service (on some host).
