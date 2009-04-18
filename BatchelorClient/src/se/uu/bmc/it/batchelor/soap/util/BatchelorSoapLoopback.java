@@ -29,7 +29,7 @@
  * Author:  Anders Lövgren (QNET/BMC CompDept)
  */
 
-package se.uu.bmc.it.batchelor.soap.local;
+package se.uu.bmc.it.batchelor.soap.util;
 
 import se.uu.bmc.it.batchelor.soap.BatchelorSoapClient;
 
