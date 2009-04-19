@@ -56,7 +56,7 @@ public class BatchelorSoapRemoteTest {
 
     private BatchelorSoapClient service;
     private static EnqueueResult queued;
-    private static String urlWSDL = "http://localhost/batchelor/ws/wsdl/?wsdl";
+    private static String urlWSDL = "http://localhost/batchelor/ws/schema/wsdl/?wsdl";
 
     public BatchelorSoapRemoteTest() throws MalformedURLException {
         URL url = new URL(urlWSDL);
