@@ -16,7 +16,7 @@
    The package se.uu.bmc.it.batchelor contains common classes and interfaces.
    All service specific classes (REST and SOAP) is found in their own packages.
    
-   An simple example on using the REST interface with FOA as the result 
+   An simple example on using the REST interface with FOA as the response
    encoding method:
    
      import se.uu.bmc.it.batchelor.*;
@@ -25,11 +25,11 @@
      class Client {
         
          private RestWebService service;
-	 private FoaResponseDecoder decoder;
+	 private ResponseEncoder encoder;
 	
 	 Client(URL url) {
-	     decoder = new FoaResponseDecoder();
-	     service = new RestWebService(url, decoder);
+	     encoder = new ResponseEncoder.FOA;
+	     service = new RestWebService(url, encoder);
 	 }
 	 
 	 // ... methods calling service.XXX()
@@ -37,7 +37,7 @@
      }
      
    The kind of web service interfaces that can be used dependens on how
-   the server (running batchelor) is configured.
+   the server (that runs batchelor) is configured.
 
 ** LICENS:
 
