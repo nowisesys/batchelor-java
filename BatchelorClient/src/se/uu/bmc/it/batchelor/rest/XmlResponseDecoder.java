@@ -51,7 +51,7 @@ public class XmlResponseDecoder extends ContentHandler {
 
     /**
      * Return a result object wrapping an error object. This function extends
-     * the error type for local errors.
+     * the result error type with local errors.
      * @param message The error message.
      * @return The result object representing the error.
      */
