@@ -34,7 +34,7 @@ import static org.junit.Assert.*;
 import se.uu.bmc.it.batchelor.EnqueueResult;
 import se.uu.bmc.it.batchelor.JobIdentity;
 import se.uu.bmc.it.batchelor.QueuedJob;
-import se.uu.bmc.it.batchelor.soap.local.BatchelorSoapLoopback;
+import se.uu.bmc.it.batchelor.soap.util.BatchelorSoapLoopback;
 
 import java.rmi.RemoteException;
 
