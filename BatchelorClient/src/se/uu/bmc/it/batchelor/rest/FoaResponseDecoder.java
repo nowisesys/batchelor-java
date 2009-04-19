@@ -31,14 +31,27 @@
 
 package se.uu.bmc.it.batchelor.rest;
 
+import java.net.ContentHandler;
+import java.net.URLConnection;
+
 /**
- * This class implements the ResponseDecoder interface for decoding FOA
- * encoded response messages from the Batchelor web service.
+ * This class extends the ContentHandler class to decoding FOA encoded response
+ * messages from the Batchelor REST service.
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
  * @see ResponseDecoder
  * @see <a href="http://it.bmc.uu.se/andlov/proj/libfoa">FOA</a>
  */
-public class FoaResponseDecoder implements ResponseDecoder {
+public class FoaResponseDecoder extends ContentHandler {
 
+    /**
+     * Get next FOA encoded object from input stream (contained in the URL
+     * connection).
+     * @param connection The URL connection to read from.
+     * @return The next object from decoded FOA encoded response message.
+     */
+    public Object getContent(URLConnection connection) {
+        // TODO: implement this function to decode FOA encoded objects from the stream and return them as String, EnqueueResult, JobIdentity or QueuedJob objects.
+        return null;
+    }
 }
