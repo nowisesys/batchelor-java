@@ -36,6 +36,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import se.uu.bmc.it.batchelor.rest.schema.Result;
+import se.uu.bmc.it.batchelor.rest.schema.Error;
+import se.uu.bmc.it.batchelor.rest.schema.File;
+import se.uu.bmc.it.batchelor.rest.schema.Job;
+import se.uu.bmc.it.batchelor.rest.schema.Link;
 
 /**
  *
@@ -71,21 +75,79 @@ public class XmlResponseDecoderTest {
     public void testGetContent() {
         System.out.println("(i) *** XmlResponseDecoderTest -> getContent()");
         try {
-            URL url = new URL("http://localhost/batchelor/ws/rest/version");
+
+            // Decode a version message:
+            URL url = new URL("http://localhost/batchelor/ws/rest/version?encode=xml");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             Result result = (Result) connection.getContent();
             assertNull(result.getError());
             assertEquals("success", result.getState());
             assertEquals("version", result.getType());
+            assertNotNull(result.getVersion());
             connection.disconnect();
+            System.out.println("(+) Successful decoded version message.");
 
-            url = new URL("http://localhost/batchelor/ws/rest/missing");
+            // Decode a job message:
+            url = new URL("http://localhost/batchelor/ws/rest/queue/all/data?encode=xml");
             connection = (HttpURLConnection) url.openConnection();
             result = (Result) connection.getContent();
-            assertNotNull(result.getError());
+            assertNull(result.getError());
+            assertEquals("success", result.getState());
+            assertEquals("job", result.getType());
+            assertNotNull(result.getJob());
+            for (Job job : result.getJob()) {
+                assertNotNull(job.getTimezone());
+                assertNotNull(job.getJobid());
+                assertNotNull(job.getResult());
+            }
+            connection.disconnect();
+            System.out.println("(+) Successful decoded job message.");
+
+            // Decode a link message:
+            url = new URL("http://localhost/batchelor/ws/rest/result?encode=xml");
+            connection = (HttpURLConnection) url.openConnection();
+            result = (Result) connection.getContent();
+            assertNull(result.getError());
+            assertEquals("success", result.getState());
+            assertEquals("link", result.getType());
+            assertNotNull(result.getLink());
+            for (Link link : result.getLink()) {
+                assertNotNull(link.getHref());
+            }
+            connection.disconnect();
+            System.out.println("(+) Successful decoded link message.");
+
+            // Decode a file object from previous link object:
+            url = new URL(result.getLink().get(0).getHref() + "/indata?encode=xml");
+            connection = (HttpURLConnection) url.openConnection();
+            result = (Result) connection.getContent();
+            assertNull(result.getError());
+            assertEquals("success", result.getState());
+            assertEquals("file", result.getType());
+            assertNotNull(result.getFile());
+            File file = result.getFile();
+            assertNull(file.getInputStream());
+            assertNotNull(file.getContent());
+            assertNotNull(file.getEncoding());
+            assertNotNull(file.getName());
+            assertNotNull(file.getSize());
+            assertTrue(file.getSize() != 0);
+            connection.disconnect();
+            System.out.println("(+) Successful decoded file message.");
+
+            // Trying to access a invalid REST URI should return an error:
+            url = new URL("http://localhost/batchelor/ws/rest/missing?encode=xml");
+            connection = (HttpURLConnection) url.openConnection();
+            result = (Result) connection.getContent();
             assertEquals("failed", result.getState());
             assertEquals("error", result.getType());
+            assertNotNull(result.getError());
+            Error error = result.getError();
+            assertNotNull(error.getOrigin());
+            assertNotNull(error.getMessage());
+            assertNotNull(error.getCode());
             connection.disconnect();
+            System.out.println("(+) Successful received error on invalid URI.");
 
             // Trying to read a missing page will throw an exception:
             url = new URL("http://localhost/batchelor/notfound.html");
@@ -95,9 +157,9 @@ public class XmlResponseDecoderTest {
                 result = (Result) connection.getContent();
             } catch (FileNotFoundException e) {
                 System.out.printf("Catched expected FileNotFoundException:\n%s (%d %s)\n",
-                        e.getMessage(),
-                        connection.getResponseCode(),
-                        connection.getResponseMessage());
+                    e.getMessage(),
+                    connection.getResponseCode(),
+                    connection.getResponseMessage());
             }
             connection.disconnect();
 
@@ -111,13 +173,13 @@ public class XmlResponseDecoderTest {
                 result = (Result) connection.getContent();
             } catch (ClassCastException e) {
                 System.out.printf("Catched expected ClassCastException:\n%s (%d %s)\n",
-                        e.getMessage(),
-                        connection.getResponseCode(),
-                        connection.getResponseMessage());
+                    e.getMessage(),
+                    connection.getResponseCode(),
+                    connection.getResponseMessage());
             }
             connection.disconnect();
         } catch (Exception e) {
-            fail(e.getMessage());
+            fail(e.toString());
         }
     }
 }
