@@ -129,12 +129,12 @@ public class FoaResponseDecoderTest {
             File file = result.getFile();
             assertNull(file.getContent());
             assertNotNull(file.getEncoding());
-            assertNotNull(file.getInputStream());
+            assertNotNull(file.getInputStreamReader());
             assertNotNull(file.getName());
             assertNotNull(file.getSize());
             assertTrue(file.getSize() != 0);
             // Test read size number of bytes from input stream:
-            Reader stream = (Reader) file.getInputStream();
+            Reader stream = (Reader) file.getInputStreamReader();
             System.out.println("(i) Content of file " + file.getName());
             for (long i = 0; i < file.getSize(); ++i) {
                 int ch = stream.read();

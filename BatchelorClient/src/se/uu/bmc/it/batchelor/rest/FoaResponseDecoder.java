@@ -297,7 +297,7 @@ public class FoaResponseDecoder extends ContentHandler {
         file.setEncoding(entity.getData());
 
         // Set stream for reading file content:
-        file.setInputStream(decoder.getStream());
+        file.setInputStreamReader(decoder.getStream());
 
         result.setFile(file);
     }

@@ -93,5 +93,6 @@ public class XmlResponseDecoder extends ContentHandler {
         } catch (IOException e) {
             return getError("Failed read response: " + e.getMessage());
         }
+        // TODO: should we catch generic exceptions here also?
     }
 }
