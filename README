@@ -1,15 +1,22 @@
-** BatchelorWebService - client side Java (tm) library for Batchelor **
+
+   ------------------------------------------------------------------------
+   BatchelorWebService - Java (tm) library for Batchelor Web Service API.
+   ------------------------------------------------------------------------
 
 ** INTRODUCTON:
 
-   The purpose of this library is to let developers create applications that
-   integrates with the batchelor web service interfaces (RESTful and SOAP), 
-   without forcing them getting dirty in all details of encoding/decoding the 
-   messages passed between the client and the server (the batchelor service).
+   This library makes it an easy task to write client side applications that
+   integrates with Batchelor (the batch job queue manager) thru its web
+   service interfaces (currently the SOAP and RESTful service are supported).
+   
+   The purpose is to present a simple to use API that allows end users to
+   communicate with the web service, without having to get dirty in all
+   details of encoding/decoding the messages passed between your application
+   and the server. 
 
-   This library is only useful for people who wants to develop clients that
-   interacts with the web application hosted by batchelor (the batch queue
-   manager).
+   The target audience are people writing client side applications or
+   integrating Batchelor in bussiness-to-bussiness systems. Thoose who likes
+   to roll their own bindings can still do so.
 
 ** API:
 
@@ -41,13 +48,14 @@
 
 ** LICENS:
 
-   BatchelorWebService is licensed under GPL with the classpath exception,
-   thus you are free to use this library even in commercial applications
-   (closed source), see the files COPYING and COPYING.CLASSPATH for details.
+   BatchelorWebService is licensed under GPL with the classpath exception.
+   This means that you are free to use this library even in commercial 
+   applications (closed source), see the files COPYING and COPYING.CLASSPATH 
+   for details.
    
    The license gives you permission to (freely) link to and use this library
    in unmodified form. If you use source code from this library, then the you 
-   have to release your work as open source.
+   have to release your work as open source as well.
    
 ** COPYRIGHT:
 
