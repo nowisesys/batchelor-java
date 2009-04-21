@@ -21,13 +21,13 @@
  * 
  * For more info: http://it.bmc.uu.se/andlov/proj/batchelor/
  */
-
 package se.uu.bmc.it.batchelor.rest;
 
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.net.ContentHandlerFactory;
 import java.io.FileNotFoundException;
+import java.io.Reader;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,6 +37,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import se.uu.bmc.it.batchelor.rest.schema.Result;
+import se.uu.bmc.it.batchelor.rest.schema.Error;
+import se.uu.bmc.it.batchelor.rest.schema.File;
+import se.uu.bmc.it.batchelor.rest.schema.Job;
+import se.uu.bmc.it.batchelor.rest.schema.Link;
 
 /**
  *
@@ -72,38 +76,67 @@ public class FoaResponseDecoderTest {
     public void testGetContent() {
         System.out.println("(i) *** FoaResponseDecoderTest -> getContent()");
         try {
+
             // Decode a version message:
             URL url = new URL("http://localhost/batchelor/ws/rest/version?encode=foa");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             Result result = (Result) connection.getContent();
             assertNull(result.getError());
-            assertNotNull(result.getVersion());
             assertEquals("success", result.getState());
             assertEquals("version", result.getType());
+            assertNotNull(result.getVersion());
             connection.disconnect();
             System.out.println("(+) Successful decoded version message.");
-
-            // Decode a link message:
-            url = new URL("http://localhost/batchelor/ws/rest/root?encode=foa");
-            connection = (HttpURLConnection) url.openConnection();
-            result = (Result) connection.getContent();
-            assertNull(result.getError());
-            assertNotNull(result.getLink());
-            assertEquals("success", result.getState());
-            assertEquals("link", result.getType());
-            connection.disconnect();
-            System.out.println("(+) Successful decoded link message.");
 
             // Decode a job message:
             url = new URL("http://localhost/batchelor/ws/rest/queue/all/data?encode=foa");
             connection = (HttpURLConnection) url.openConnection();
             result = (Result) connection.getContent();
             assertNull(result.getError());
-            assertNotNull(result.getJob());
             assertEquals("success", result.getState());
             assertEquals("job", result.getType());
+            assertNotNull(result.getJob());
+            for (Job job : result.getJob()) {
+                assertNotNull(job.getTimezone());
+                assertNotNull(job.getJobid());
+                assertNotNull(job.getResult());
+            }
             connection.disconnect();
             System.out.println("(+) Successful decoded job message.");
+
+            // Decode a link message:
+            url = new URL("http://localhost/batchelor/ws/rest/result?encode=foa");
+            connection = (HttpURLConnection) url.openConnection();
+            result = (Result) connection.getContent();
+            assertNull(result.getError());
+            assertEquals("success", result.getState());
+            assertEquals("link", result.getType());
+            assertNotNull(result.getLink());
+            for (Link link : result.getLink()) {
+                assertNotNull(link.getHref());
+            }
+            connection.disconnect();
+            System.out.println("(+) Successful decoded link message.");
+
+            // Decode a file object from previous link object:
+            url = new URL(result.getLink().get(0).getHref() + "/indata?encode=foa");
+            connection = (HttpURLConnection) url.openConnection();
+            result = (Result) connection.getContent();
+            assertNull(result.getError());
+            assertEquals("success", result.getState());
+            assertEquals("file", result.getType());
+            assertNotNull(result.getFile());
+            // Test read size number of bytes from input stream:
+            File file = result.getFile();
+            Reader stream = (Reader) file.getInputStream();
+            System.out.println("(i) Content of file " + file.getName());
+            for (long i = 0; i < file.getSize(); ++i) {
+                int ch = stream.read();
+                assertTrue(ch != -1);
+                System.out.print((char) ch);
+            }
+            connection.disconnect();
+            System.out.println("(+) Successful decoded file message.");
 
             // Trying to access a invalid REST URI should return an error:
             url = new URL("http://localhost/batchelor/ws/rest/missing?encode=foa");
@@ -123,9 +156,9 @@ public class FoaResponseDecoderTest {
                 result = (Result) connection.getContent();
             } catch (FileNotFoundException e) {
                 System.out.printf("Catched expected FileNotFoundException:\n%s (%d %s)\n",
-                        e.getMessage(),
-                        connection.getResponseCode(),
-                        connection.getResponseMessage());
+                    e.getMessage(),
+                    connection.getResponseCode(),
+                    connection.getResponseMessage());
             }
             connection.disconnect();
 
@@ -139,14 +172,13 @@ public class FoaResponseDecoderTest {
                 result = (Result) connection.getContent();
             } catch (ClassCastException e) {
                 System.out.printf("Catched expected ClassCastException:\n%s (%d %s)\n",
-                        e.getMessage(),
-                        connection.getResponseCode(),
-                        connection.getResponseMessage());
+                    e.getMessage(),
+                    connection.getResponseCode(),
+                    connection.getResponseMessage());
             }
             connection.disconnect();
         } catch (Exception e) {
-            fail(e.getMessage());
+            fail(e.toString());
         }
     }
-
 }
