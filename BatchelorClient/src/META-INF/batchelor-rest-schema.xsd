@@ -88,12 +88,8 @@
     <xsd:complexType name="file">
         <xsd:sequence>
             <xsd:element name="content" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="input-stream" type="xsd:anyType" minOccurs="0"/>
         </xsd:sequence>
-        <!--
-        <xsd:sequence>
-            <xsd:byte maxOccurs="unbounded" minOccurs="0"/>
-        </xsd:sequence>
-          -->
         <xsd:attribute ref="tns:encoding"/>
         <xsd:attribute name="name" type="xsd:string"/>
         <xsd:attribute name="size" type="xsd:long"/>
