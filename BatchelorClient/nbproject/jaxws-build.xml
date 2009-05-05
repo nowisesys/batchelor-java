@@ -13,12 +13,12 @@
     </target>
     <target name="wsimport-client-BatchelorSoapService" depends="wsimport-init">
         <property name="wsdl-BatchelorSoapService" location="xml-resources/web-service-references/BatchelorSoapService/wsdl/localhost_8080/BatchelorService/BatchelorSoapService.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/wsimport/client" destdir="${build.generated.dir}/wsimport/client" package="se.uu.bmc.it.batchelor" wsdl="${wsdl-BatchelorSoapService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8080/BatchelorService/BatchelorSoapService?wsdl" xnocompile="true">
-            <produces dir="${build.generated.dir}/wsimport/client/se/uu/bmc/it/batchelor" includes="BatchelorSoapService.java" casesensitive="no"/>
+        <wsimport sourcedestdir="${build.generated.dir}/wsimport/client" destdir="${build.generated.dir}/wsimport/client" package="se.uu.bmc.it.batchelor.soap.schema" wsdl="${wsdl-BatchelorSoapService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8080/BatchelorService/BatchelorSoapService?wsdl" xnocompile="true">
+            <produces dir="${build.generated.dir}/wsimport/client/se/uu/bmc/it/batchelor/soap/schema" includes="BatchelorSoapService.java" casesensitive="no"/>
         </wsimport>
     </target>
     <target name="wsimport-client-clean-BatchelorSoapService" depends="-init-project">
-        <delete dir="${build.generated.dir}/wsimport/client/se/uu/bmc/it/batchelor"/>
+        <delete dir="${build.generated.dir}/wsimport/client/se/uu/bmc/it/batchelor/soap/schema"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-BatchelorSoapService"/>
     <target name="wsimport-client-compile-depend" if="do.depend.true">

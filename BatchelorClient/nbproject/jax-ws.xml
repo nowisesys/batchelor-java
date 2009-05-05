@@ -5,7 +5,7 @@
     <client name="BatchelorSoapService">
       <wsdl-url>http://localhost:8080/BatchelorService/BatchelorSoapService?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/BatchelorService/BatchelorSoapService.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">se.uu.bmc.it.batchelor</package-name>
+      <package-name forceReplace="true">se.uu.bmc.it.batchelor.soap.schema</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
