@@ -21,23 +21,23 @@
         <code>3</code>
         <message>No such method</message>
     </error>
+    <!-- Queue list message: -->
     <job timezone="CET">
         <jobid>Job ABC</jobid>
+        <result>123456789</result>
+        <queued>123456789</queued>
+        <started>123456789</started>
         <finished>123456789</finished>
         <stdout>123456789</stdout>
-        <started>123456789</started>
-        <queued>123456789</queued>
         <state>finished</state>
-        <result>123456789</result>
     </job>
+    <!-- Enqueue result message: -->
     <job timezone="CET">
         <jobid>Job DEF</jobid>
-        <finished>987654321</finished>
-        <stdout>987654321</stdout>
-        <started>987654321</started>
-        <queued>987654321</queued>
-        <state>finished</state>
         <result>987654321</result>
+        <date>2009-04-22</date>
+        <time>02:46</time>
+        <stamp>1240358340</stamp>
     </job>
     <link tns:delete="" tns:get="" tns:post="" tns:put="" xlink:href="http://localhost/index.html"/>
     <link tns:delete="" tns:get="" tns:post="" tns:put="" xlink:href="http://localhost/index.html"/>

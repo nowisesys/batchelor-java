@@ -88,7 +88,7 @@
     <xsd:complexType name="file">
         <xsd:sequence>
             <xsd:element name="content" type="xsd:string" minOccurs="0"/>
-            <xsd:element name="input-stream-reader" type="xsd:anyType" minOccurs="0"/>
+            <xsd:element name="input-stream" type="xsd:anyType" minOccurs="0"/>
         </xsd:sequence>
         <xsd:attribute ref="tns:encoding"/>
         <xsd:attribute name="name" type="xsd:string"/>
@@ -107,13 +107,21 @@
     <!-- Job object type: -->
     <xsd:complexType name="job">
         <xsd:sequence>
+            <!-- Always present: -->
             <xsd:element name="jobid" type="xsd:string"/>
-            <xsd:element name="finished" type="xsd:int"/>
-            <xsd:element name="stdout" type="xsd:int"/>
-            <xsd:element name="started" type="xsd:int"/>
-            <xsd:element name="queued" type="xsd:int"/>
-            <xsd:element name="state" type="xsd:string"/>
             <xsd:element name="result" type="xsd:int"/>
+            <!-- Used for job listing: -->
+            <xsd:element name="queued" type="xsd:int" minOccurs="0"/>
+            <xsd:element name="started" type="xsd:int" minOccurs="0"/>
+            <xsd:element name="finished" type="xsd:int" minOccurs="0"/>
+            <xsd:element name="stdout" type="xsd:int" minOccurs="0"/>
+            <xsd:element name="stderr" type="xsd:int" minOccurs="0"/>
+            <xsd:element name="state" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+            <!-- Used for enqueue response: -->
+            <xsd:element name="date" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="time" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="stamp" type="xsd:int" minOccurs="0"/>
         </xsd:sequence>
         <xsd:attribute name="timezone" type="xsd:string"/>
     </xsd:complexType>
