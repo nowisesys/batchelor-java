@@ -68,6 +68,8 @@ public class XmlResponseDecoder extends ContentHandler {
         error.setOrigin("local");
 
         result.setError(error);
+        result.setState("failed");
+        
         return result;
     }
 
