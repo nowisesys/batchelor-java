@@ -53,7 +53,7 @@
 <xs:complexType name="jobIdentity">
 <xs:sequence>
 <xs:element name="jobID" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="result" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="result" type="xs:int"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -77,14 +77,14 @@
 
 <xs:complexType name="queue">
 <xs:sequence>
-<xs:element name="sort" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="filter" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="sort" type="tns:queueSortResult" minOccurs="0"></xs:element>
+<xs:element name="filter" type="tns:queueFilterResult" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="queueResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:queuedJob" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="return" type="tns:queuedJob" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -103,7 +103,7 @@
 
 <xs:complexType name="enqueueResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:enqueueResult" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="return" type="tns:enqueueResult" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -111,7 +111,7 @@
 <xs:sequence>
 <xs:element name="date" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="jobID" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="result" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="result" type="xs:int"></xs:element>
 <xs:element name="stamp" type="xs:int"></xs:element>
 <xs:element name="time" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
@@ -125,7 +125,7 @@
 
 <xs:complexType name="watchResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:queuedJob" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="return" type="tns:queuedJob" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -148,7 +148,7 @@
 
 <xs:complexType name="opendirResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:jobIdentity" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="return" type="tns:jobIdentity" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -172,7 +172,7 @@
 
 <xs:complexType name="readdirResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -197,4 +197,31 @@
 <xs:element name="return" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
+
+<xs:simpleType name="queueSortResult">
+<xs:restriction base="xs:string">
+<xs:enumeration value="NONE"></xs:enumeration>
+<xs:enumeration value="STARTED"></xs:enumeration>
+<xs:enumeration value="JOB_ID"></xs:enumeration>
+<xs:enumeration value="STATUS"></xs:enumeration>
+<xs:enumeration value="STATE"></xs:enumeration>
+<xs:enumeration value="NAME"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="queueFilterResult">
+<xs:restriction base="xs:string">
+<xs:enumeration value="ALL"></xs:enumeration>
+<xs:enumeration value="NONE"></xs:enumeration>
+<xs:enumeration value="WAITING"></xs:enumeration>
+<xs:enumeration value="UNFINISHED"></xs:enumeration>
+<xs:enumeration value="PENDING"></xs:enumeration>
+<xs:enumeration value="RUNNING"></xs:enumeration>
+<xs:enumeration value="FINISHED"></xs:enumeration>
+<xs:enumeration value="SUCCESS"></xs:enumeration>
+<xs:enumeration value="WARNING"></xs:enumeration>
+<xs:enumeration value="ERROR"></xs:enumeration>
+<xs:enumeration value="CRASHED"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
 </xs:schema>
