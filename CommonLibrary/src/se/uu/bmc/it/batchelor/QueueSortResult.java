@@ -71,6 +71,11 @@ public enum QueueSortResult {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
+
     /**
      * Get the value of the enum constant (i.e. "jobid").
      * @return The enum constant value.

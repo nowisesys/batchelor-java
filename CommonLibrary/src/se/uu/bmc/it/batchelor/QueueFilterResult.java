@@ -91,6 +91,11 @@ public enum QueueFilterResult {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
+
     /**
      * Get the value of the enum constant (i.e. "running").
      * @return The enum constant value.
@@ -98,6 +103,5 @@ public enum QueueFilterResult {
     public String getValue() {
         return value;
     }
-
     private String value;
 }
