@@ -38,7 +38,8 @@ import java.io.IOException;
 import se.uu.bmc.it.batchelor.rest.schema.Result;
 
 /**
- * The HTTP server connection.
+ * The server connection class implementing the HttpServerRequest interface
+ * for the HTTP protocol.
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
@@ -65,11 +66,17 @@ public class HttpServerConnection implements HttpServerRequest {
     }
 
     /**
-     * Set the new URL to use. Calling this function will disconnect an
-     * already opened connection.
-     * @param url The new URL.
+     * Used internal to open a connection with the server.
      * @throws java.io.IOException
      */
+    protected void openConnection() throws IOException {
+        if (proxy != null) {
+            connection = (HttpURLConnection) url.openConnection(proxy);
+        } else {
+            connection = (HttpURLConnection) url.openConnection();
+        }
+    }
+
     public void setURL(URL url) throws IOException {
         if (connection != null) {
             disconnect();
@@ -77,12 +84,6 @@ public class HttpServerConnection implements HttpServerRequest {
         this.url = url;
     }
 
-    /**
-     * Sets or clears the proxy server that is use to connect thru. Calling
-     * this function will disconnect an already opened connection.
-     * @param proxy The proxy server.
-     * @throws java.io.IOException
-     */
     public void setProxy(Proxy proxy) throws IOException {
         if (connection != null) {
             disconnect();
@@ -97,31 +98,12 @@ public class HttpServerConnection implements HttpServerRequest {
         return connection;
     }
 
-    /**
-     * Used internal to open a connection with the server.
-     * @throws java.io.IOException
-     */
-    protected void openConnection() throws IOException {
-        if (proxy != null) {
-            connection = (HttpURLConnection) url.openConnection(proxy);
-        } else {
-            connection = (HttpURLConnection) url.openConnection();
-        }
-    }
-
     public Result getServerResponse() throws IOException {
-        if (connection == null) {
-            openConnection();
-        }
+        connection = getConnection();
         connection.connect();
-        Result result = (Result) connection.getContent();
-        return result;
+        return (Result) connection.getContent();
     }
 
-    /**
-     * Returns true if the connection uses a proxy server.
-     * @return
-     */
     public boolean usingProxy() {
         return proxy != null;
     }
