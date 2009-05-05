@@ -46,7 +46,7 @@ public class BatchelorSoapLoopback extends BatchelorSoapClient {
      * This constructor is only useful for communication with the web service
      * that JAX-WS has generated the client source from.
      *
-     * Use this constructor if you like to consume the service at:
+     * Use this constructor to consume the service at:
      * http://localhost:8080/BatchelorService/BatchelorSoapService?wsdl
      */
     public BatchelorSoapLoopback() {
