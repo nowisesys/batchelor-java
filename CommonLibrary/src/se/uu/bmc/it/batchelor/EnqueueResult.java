@@ -42,7 +42,7 @@ import java.io.Serializable;
 public class EnqueueResult implements Serializable {
 
     private String jobID;   // The job ID.
-    private String result;  // The job directory.
+    private int result;     // The job directory.
 	private String date;    // Enqueue date.
 	private String time;    // Enqueue time.
 	private int stamp;      // UNIX timestamp (for calling watch).
@@ -53,7 +53,7 @@ public class EnqueueResult implements Serializable {
      */
 	public EnqueueResult() {
 		jobID = null;
-        result = null;
+        result = 0;
 		date = null;
 		time = null;
 		stamp = 0;
@@ -62,12 +62,12 @@ public class EnqueueResult implements Serializable {
     /**
      * Creates an enqueue result object.
      * @param jobID The job ID (could be numberic).
-     * @param result The result (job directory) string.
+     * @param result The result (job directory) identifier.
      * @param date The date as an string (i.e. yyyy-mm-dd).
      * @param time The time as an string (i.e. hh:mm:ss).
      * @param stamp The UNIX timestamp.
      */
-	public EnqueueResult(String jobID, String result, String date, String time, int stamp) {
+	public EnqueueResult(String jobID, int result, String date, String time, int stamp) {
 		this.jobID = jobID;
         this.result = result;
 		this.date = date;
@@ -91,17 +91,17 @@ public class EnqueueResult implements Serializable {
 	}
 
     /**
-     * @return The result (job directory) string.
+     * @return The result (job directory) identifier.
      */
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
     /**
-     * Sets the result (job directory) string.
+     * Sets the result (job directory) identifier.
      * @param result The result directory.
      */
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 

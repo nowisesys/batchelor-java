@@ -37,7 +37,7 @@ import static org.junit.Assert.*;
 public class JobIdentityTest {
 
     private final static String JOB_ID = "Job XYZ";
-    private final static String RESULT = "/var/cache/jobs/xyz/123";
+    private final static int    RESULT = 1234567890;
     private JobIdentity obj1;   // Uses default contructor.
     private JobIdentity obj2;   // Uses constructor taking arguments.
 
@@ -78,7 +78,7 @@ public class JobIdentityTest {
     @Test
     public void testGetResult() {
         System.out.println("(i) *** JobIdentityTest -> getResult()");
-        assertEquals(null, obj1.getResult());
+        assertEquals(0, obj1.getResult());
         assertEquals(RESULT, obj2.getResult());
     }
 

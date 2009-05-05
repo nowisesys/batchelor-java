@@ -40,14 +40,14 @@ import java.io.Serializable;
 public class JobIdentity implements Serializable {
 
     private String jobID;      // The Job ID
-    private String result;     // The job directory
+    private int result;        // The job directory
 
     /**
      * Creates an object with all member fields set to null.
      */
     public JobIdentity() {
         jobID = null;
-        result = null;
+        result = 0;
     }
 
     /**
@@ -55,7 +55,7 @@ public class JobIdentity implements Serializable {
      * @param jobID The job ID.
      * @param result The result directory (job directory).
      */
-    public JobIdentity(String jobID, String result) {
+    public JobIdentity(String jobID, int result) {
         this.jobID = jobID;
         this.result = result;
     }
@@ -70,7 +70,7 @@ public class JobIdentity implements Serializable {
     /**
      * @return The result directory (job directory).
      */
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
@@ -86,7 +86,7 @@ public class JobIdentity implements Serializable {
      * Sets the result directory (job directory).
      * @param result The result directory.
      */
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 

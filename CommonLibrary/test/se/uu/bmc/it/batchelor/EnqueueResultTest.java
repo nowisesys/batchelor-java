@@ -37,7 +37,7 @@ import static org.junit.Assert.*;
 public class EnqueueResultTest {
 
     private final static String JOB_ID = "Job XYZ";
-    private final static String RESULT = "1324354657687980";
+    private final static int    RESULT = 1324354657;
     private final static String TIME = "09:15:30";
     private final static String DATE = "2009-04-03";
     private final static int STAMP = 1234567890;
@@ -94,7 +94,7 @@ public class EnqueueResultTest {
     @Test
     public void testGetResult() {
         System.out.println("(i) *** EnqueueResultTest -> getResult()");
-        assertEquals(null, obj1.getResult());
+        assertEquals(0, obj1.getResult());
         assertEquals(RESULT, obj2.getResult());
     }
 
@@ -104,11 +104,11 @@ public class EnqueueResultTest {
     @Test
     public void testSetResult() {
         System.out.println("(i) *** EnqueueResultTest -> setResult()");
-        String result = "999666333000";
+        int result = 999666333;
         obj1.setResult(result);
         assertEquals(result, obj1.getResult());
-        obj1.setResult(null);
-        assertEquals(null, obj1.getResult());
+        obj1.setResult(0);
+        assertEquals(0, obj1.getResult());
     }
 
     /**
