@@ -21,18 +21,22 @@
  *
  * For more info: http://it.bmc.uu.se/andlov/proj/batchelor/
  */
-
 package se.uu.bmc.it.batchelor.soap;
 
 import java.rmi.RemoteException;
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.jws.WebParam;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
 import se.uu.bmc.it.batchelor.EnqueueResult;
 import se.uu.bmc.it.batchelor.JobIdentity;
 import se.uu.bmc.it.batchelor.QueuedJob;
 import se.uu.bmc.it.batchelor.WebServiceInterface;
-
-import javax.jws.WebMethod;
-import javax.jws.WebService;
+import se.uu.bmc.it.batchelor.QueueSortResult;
+import se.uu.bmc.it.batchelor.QueueFilterResult;
 
 /**
  * This class has two purposes:
@@ -63,10 +67,13 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "enqueue")
-    public EnqueueResult[] enqueue(@WebParam(name = "indata") String indata) throws RemoteException {
-        EnqueueResult[] result = new EnqueueResult[2];
-        result[0] = new EnqueueResult("Job ABC", "ABCD4321", "2009-04-06", "21:43:12", 234567890);
-        result[1] = new EnqueueResult("Job XYZ", "EFGH8765", "2009-04-07", "03:01:54", 123456789);
+    public List<EnqueueResult> enqueue(@WebParam(name = "indata") String indata) throws RemoteException {
+        if (indata == null) {
+            throw new RemoteException("Invalid indata (null)");
+        }
+        List<EnqueueResult> result = new ArrayList<EnqueueResult>();
+        result.add(new EnqueueResult("Job ABC", 123456789, "2009-04-06", "21:43:12", 234567890));
+        result.add(new EnqueueResult("Job XYZ", 243546567, "2009-04-07", "03:01:54", 123456789));
         return result;
     }
 
@@ -76,7 +83,13 @@ public class BatchelorSoapService implements WebServiceInterface {
      */
     @WebMethod(operationName = "dequeue")
     public boolean dequeue(@WebParam(name = "job")
-            final JobIdentity job) throws RemoteException {
+        final JobIdentity job) throws RemoteException {
+        if (job == null) {
+            return false;
+        }
+        if(job.getJobID() == null || job.getResult() == 0) {
+            return false;
+        }
         return true;
     }
 
@@ -85,10 +98,10 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "queue")
-    public QueuedJob[] queue(@WebParam(name = "sort") String sort, @WebParam(name = "filter") String filter) throws RemoteException {
-        QueuedJob[] result = new QueuedJob[2];
-        result[0] = new QueuedJob(new JobIdentity("Job ABC", "/var/cache/jobs/12345/67890"), "running");
-        result[1] = new QueuedJob(new JobIdentity("Job XYZ", "/var/cache/jobs/09876/54321"), "pending");
+    public List<QueuedJob> queue(@WebParam(name = "sort") QueueSortResult sort, @WebParam(name = "filter") QueueFilterResult filter) throws RemoteException {
+        List<QueuedJob> result = new ArrayList<QueuedJob>();
+        result.add(new QueuedJob(new JobIdentity("Job ABC", 123456789), "running"));
+        result.add(new QueuedJob(new JobIdentity("Job XYZ", 987654321), "pending"));
         return result;
     }
 
@@ -97,9 +110,9 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "watch")
-    public QueuedJob[] watch(@WebParam(name = "stamp") int stamp) throws RemoteException {
-        QueuedJob[] result = new QueuedJob[1];
-        result[0] = new QueuedJob(new JobIdentity("Job DEF", "/var/cache/jobs/54321/09876"), "running");
+    public List<QueuedJob> watch(@WebParam(name = "stamp") int stamp) throws RemoteException {
+        List<QueuedJob> result = new ArrayList<QueuedJob>();
+        result.add(new QueuedJob(new JobIdentity("Job DEF", 123456789), "running"));
         return result;
     }
 
@@ -109,7 +122,13 @@ public class BatchelorSoapService implements WebServiceInterface {
      */
     @WebMethod(operationName = "suspend")
     public boolean suspend(@WebParam(name = "job")
-            final JobIdentity job) throws RemoteException {
+        final JobIdentity job) throws RemoteException {
+        if (job == null) {
+            throw new RemoteException("Invalid indata (null)");
+        }
+        if(job.getJobID() == null || job.getResult() == 0) {
+            return false;
+        }
         return true;
     }
 
@@ -119,7 +138,13 @@ public class BatchelorSoapService implements WebServiceInterface {
      */
     @WebMethod(operationName = "resume")
     public boolean resume(@WebParam(name = "job")
-            final JobIdentity job) throws RemoteException {
+        final JobIdentity job) throws RemoteException {
+        if (job == null) {
+            throw new RemoteException("Invalid indata (null)");
+        }
+        if(job.getJobID() == null || job.getResult() == 0) {
+            return false;
+        }
         return true;
     }
 
@@ -128,10 +153,10 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "opendir")
-    public JobIdentity[] opendir() throws RemoteException {
-        JobIdentity[] result = new JobIdentity[2];
-        result[0] = new JobIdentity("Job GHI", "/var/cache/jobs/23456/78901");
-        result[1] = new JobIdentity("Job JKL", "/var/cache/jobs/34567/89012");
+    public List<JobIdentity> opendir() throws RemoteException {
+        List<JobIdentity> result = new ArrayList<JobIdentity>();
+        result.add(new JobIdentity("Job GHI", 123456789));
+        result.add(new JobIdentity("Job JKL", 987654321));
         return result;
     }
 
@@ -140,12 +165,18 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "readdir")
-    public java.lang.String[] readdir(@WebParam(name = "job")
-            final JobIdentity job) throws RemoteException {
-        String[] result = new String[3];
-        result[0] = "/var/cache/jobs/23456/78901/file1.txt";
-        result[1] = "/var/cache/jobs/23456/78901/image2.jpeg";
-        result[2] = "/var/cache/jobs/23456/78901/file3.pdf";
+    public List<String> readdir(@WebParam(name = "job")
+        final JobIdentity job) throws RemoteException {
+        if (job == null) {
+            throw new RemoteException("Invalid indata (null)");
+        }
+        List<String> result = new ArrayList<String>();
+        if(job.getJobID() == null || job.getResult() == 0) {
+            return result;
+        }
+        result.add("/var/cache/jobs/23456/78901/file1.txt");
+        result.add("/var/cache/jobs/23456/78901/image2.jpeg");
+        result.add("/var/cache/jobs/23456/78901/file3.pdf");
         return result;
     }
 
@@ -155,7 +186,13 @@ public class BatchelorSoapService implements WebServiceInterface {
      */
     @WebMethod(operationName = "fopen")
     public byte[] fopen(@WebParam(name = "job")
-            final JobIdentity job, @WebParam(name = "file") String file) throws RemoteException {
+        final JobIdentity job, @WebParam(name = "file") String file) throws RemoteException {
+        if (job == null || file == null) {
+            throw new RemoteException("Invalid indata (null)");
+        }
+        if(job.getJobID() == null || job.getResult() == 0) {
+            return null;
+        }
         int num = 100;  // Send 100 bytes.
         byte[] result = new byte[num];
         for (int i = 0; i < num; ++i) {
@@ -169,7 +206,13 @@ public class BatchelorSoapService implements WebServiceInterface {
      */
     @WebMethod(operationName = "stat")
     public QueuedJob stat(@WebParam(name = "job")
-    final JobIdentity job) throws RemoteException {
+        final JobIdentity job) throws RemoteException {
+        if (job == null) {
+            throw new RemoteException("Invalid indata (null)");
+        }
+        if(job.getJobID() == null || job.getResult() == 0) {
+            return null;
+        }
         QueuedJob result = new QueuedJob(job, "error");
         return result;
     }
