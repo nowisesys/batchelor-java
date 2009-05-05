@@ -31,6 +31,8 @@
 package se.uu.bmc.it.batchelor.rest;
 
 import java.net.HttpURLConnection;
+import java.net.Proxy;
+import java.net.URL;
 import java.io.IOException;
 
 import se.uu.bmc.it.batchelor.rest.schema.Result;
@@ -56,6 +58,28 @@ import se.uu.bmc.it.batchelor.rest.schema.Result;
 public interface HttpServerRequest {
 
     /**
+     * Set the new URL to use. Calling this function will disconnect an
+     * already opened connection.
+     * @param url The new URL.
+     * @throws java.io.IOException
+     */
+    void setURL(URL url) throws IOException;
+
+    /**
+     * Sets or clears the proxy server that is use to connect thru. Calling
+     * this function will disconnect an already opened connection.
+     * @param proxy The proxy server.
+     * @throws java.io.IOException
+     */
+    void setProxy(Proxy proxy) throws IOException;
+
+    /**
+     * Returns true if the connection uses a proxy server.
+     * @return
+     */
+    boolean usingProxy();
+
+    /**
      * <p>This method sends a REST service request and returns the server
      * response. This function will automatic connect to the server.</p>
      *
@@ -69,7 +93,7 @@ public interface HttpServerRequest {
     Result getServerResponse() throws IOException;
 
     /**
-     * Returns the HTTP(S) server connection. The connection will be opened 
+     * Returns the HTTP(S) server connection. The connection will be opened
      * (but not yet connected) if its not already opened.
      * @return The opened connection.
      * @throws java.io.IOException
