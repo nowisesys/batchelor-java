@@ -34,7 +34,10 @@ import static org.junit.Assume.*;
 import se.uu.bmc.it.batchelor.EnqueueResult;
 import se.uu.bmc.it.batchelor.JobIdentity;
 import se.uu.bmc.it.batchelor.QueuedJob;
+import se.uu.bmc.it.batchelor.QueueSortResult;
+import se.uu.bmc.it.batchelor.QueueFilterResult;
 
+import java.util.List;
 import java.rmi.RemoteException;
 import java.net.URL;
 import java.net.MalformedURLException;
@@ -100,16 +103,29 @@ public class BatchelorSoapRemoteTest {
      */
     @Test
     public void testQueue() {
-        System.out.println("(i) *** BatchelorSoapRemoteTest -> queue(String, String)");
+        System.out.println("(i) *** BatchelorSoapRemoteTest -> queue(QueueSortResult, QueueFilterResult)");
         try {
-            QueuedJob[] results;
+            List<QueuedJob> results;
+            for (QueueSortResult sort : QueueSortResult.values()) {
+                results = service.queue(sort, null);
+                assertNotNull(results);
+                for (QueueFilterResult filter : QueueFilterResult.values()) {
+                    results = service.queue(null, filter);
+                    assertNotNull(results);
+                    results = service.queue(sort, filter);
+                    assertNotNull(results);
+                    // Check that filtering is working:
+                    if (filter != QueueFilterResult.ALL &&
+                        filter != QueueFilterResult.NONE) {
+                        for (QueuedJob result : results) {
+                            assertEquals(filter.getValue(), result.getState());
+                        }
+                    }
+                }
+            }
             results = service.queue(null, null);
             assertNotNull(results);
-            results = service.queue("", null);
-            assertNotNull(results);
-            results = service.queue(null, "");
-            assertNotNull(results);
-            results = service.queue("", "");
+            results = service.queue(QueueSortResult.NONE, QueueFilterResult.ALL);
             assertNotNull(results);
             System.out.println("(+) QueuedJob:");
             for (QueuedJob result : results) {
@@ -132,8 +148,9 @@ public class BatchelorSoapRemoteTest {
     public void testEnqueue() {
         System.out.println("(i) *** BatchelorSoapRemoteTest -> enqueue(String)");
         try {
-            EnqueueResult[] results = service.enqueue("Test");
+            List<EnqueueResult> results = service.enqueue("Test");
             assertNotNull(results);
+            assertTrue(results.size() != 0);
             System.out.println("(+) EnqueueResult:");
             for (EnqueueResult result : results) {
                 assertNotNull(result.getJobID());
@@ -144,7 +161,7 @@ public class BatchelorSoapRemoteTest {
             }
             // Save first queued job and use it to test watch, suspend, resume
             // and dequeue methods.
-            queued = results[0];
+            queued = results.get(0);
             System.out.println("(i) Saving enqueued job: " + queued);
         } catch (RemoteException e) {
             fail("(!) Remote exception: " + e.getMessage());
@@ -265,7 +282,7 @@ public class BatchelorSoapRemoteTest {
     public void testWatch() {
         System.out.println("(i) *** BatchelorSoapRemoteTest -> watch(int)");
         try {
-            QueuedJob[] results;
+            List<QueuedJob> results;
             results = service.watch(0);
             assertNotNull(results);
             results = service.watch(-1);
@@ -274,20 +291,19 @@ public class BatchelorSoapRemoteTest {
             assertNotNull(results);
             results = service.watch(1999999999);  // Sometime in the future
             assertNotNull(results);
-            assertEquals(0, results.length);
+            assertTrue(results.isEmpty());
             // Watch previous enqueued job:
             System.out.println("(i) Watching " + queued);
             // Busy wait for job to complete:
             System.out.print("(i) Waiting for job to complete");
-            for (results = null;
-                    results == null || results.length == 0;) {
+            while (results.isEmpty()) {
                 results = service.watch(queued.getStamp());
                 assertNotNull(results);
                 System.out.print(".");
                 Thread.sleep(1000);
             }
             System.out.println(" done.");
-            assertTrue(results.length >= 1);
+            assertTrue(results.size() >= 1);
             System.out.println("(+) QueuedJob:");
             for (QueuedJob result : results) {
                 JobIdentity job = result.getJobIdentity();
@@ -309,8 +325,9 @@ public class BatchelorSoapRemoteTest {
     @Test
     public void testOpendir() {
         System.out.println("(i) *** BatchelorSoapRemoteTest -> opendir()");
+
         try {
-            JobIdentity[] results = service.opendir();
+            List<JobIdentity> results = service.opendir();
             assertNotNull(results);
             System.out.println("(+) JobIdentity:");
             for (JobIdentity result : results) {
@@ -322,7 +339,6 @@ public class BatchelorSoapRemoteTest {
         } catch (RemoteException e) {
             fail("(!) Remote exception: " + e.getMessage());
         }
-
     }
 
     /**
@@ -331,6 +347,7 @@ public class BatchelorSoapRemoteTest {
     @Test
     public void testReaddir() {
         System.out.println("(i) *** BatchelorSoapRemoteTest -> readdir(JobIdentity)");
+
         try {
             assertEquals(false, service.readdir(null));
             fail("(-) Remote exception expected");
@@ -344,24 +361,22 @@ public class BatchelorSoapRemoteTest {
         } catch (RemoteException e) {
             System.out.println("(+) Catched expected remote exception.");
         }
-// Test read list of files in job directory of newly started job.
 
+        // Test read list of files in job directory of newly started job.
         try {
             JobIdentity job = new JobIdentity();
             job.setJobID(queued.getJobID());
             job.setResult(queued.getResult());
-            String[] results = service.readdir(job);
+            List<String> results = service.readdir(job);
             assertNotNull(results);
             System.out.println("(+) Files:");
             for (String result : results) {
                 assertNotNull(result);
                 System.out.println("(i) " + result);
             }
-
         } catch (RemoteException e) {
             fail("(!) Remote exception: " + e.getMessage());
         }
-
     }
 
     /**
@@ -370,6 +385,7 @@ public class BatchelorSoapRemoteTest {
     @Test
     public void testFopen() {
         System.out.println("(i) *** BatchelorSoapRemoteTest -> fopen(JobIdentity, String)");
+
         // Test that expected exceptions gets thrown:
         try {
             assertEquals(false, service.fopen(null, null));
@@ -398,8 +414,8 @@ public class BatchelorSoapRemoteTest {
         } catch (RemoteException e) {
             System.out.println("(+) Catched expected remote exception.");
         }
-// Test get contents of stdout file in previous enqueued job:
 
+        // Test get contents of stdout file in previous enqueued job:
         try {
             byte[] result;
             String str;
@@ -407,18 +423,15 @@ public class BatchelorSoapRemoteTest {
             JobIdentity job = new JobIdentity();
             job.setJobID(queued.getJobID());
             job.setResult(queued.getResult());
-            result =
-                    service.fopen(job, "queued");
+            result = service.fopen(job, "queued");
             assertNotNull(result);
-            str =
-                    new String(result);
+            str = new String(result);
             assertNotNull(str);
             assertTrue(str.length() > 0);
             System.out.println("(+) Result: " + str);
         } catch (RemoteException e) {
             fail("(!) Remote exception: " + e.getMessage());
         }
-
     }
 
     /**
@@ -427,6 +440,7 @@ public class BatchelorSoapRemoteTest {
     @Test
     public void testDequeue() {
         System.out.println("(i) *** BatchelorSoapRemoteTest -> dequeue(JobIdentity)");
+
         try {
             assertEquals(false, service.dequeue(null));
             fail("(-) Remote exception expected");
@@ -440,7 +454,7 @@ public class BatchelorSoapRemoteTest {
         } catch (RemoteException e) {
             System.out.println("(+) Catched expected remote exception.");
         }
-// Test dequeue previous enqueued job:
+        // Test dequeue previous enqueued job:
 
         try {
             JobIdentity job = new JobIdentity();

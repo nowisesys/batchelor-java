@@ -34,10 +34,15 @@ import se.uu.bmc.it.batchelor.WebServiceInterface;
 import se.uu.bmc.it.batchelor.JobIdentity;
 import se.uu.bmc.it.batchelor.EnqueueResult;
 import se.uu.bmc.it.batchelor.QueuedJob;
-import se.uu.bmc.it.batchelor.BatchelorSoapServiceService;
-import se.uu.bmc.it.batchelor.BatchelorSoapService;
+import se.uu.bmc.it.batchelor.QueueSortResult;
+import se.uu.bmc.it.batchelor.QueueFilterResult;
+
+import se.uu.bmc.it.batchelor.soap.schema.BatchelorSoapServiceService;
+import se.uu.bmc.it.batchelor.soap.schema.BatchelorSoapService;
+import se.uu.bmc.it.batchelor.soap.convert.*;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.net.URL;
 import java.rmi.RemoteException;
 import javax.xml.namespace.QName;
@@ -107,16 +112,16 @@ public class BatchelorSoapClient implements WebServiceInterface {
             if (name != null) {
                 // Use custom WSDL and service name:
                 service = new BatchelorSoapServiceService(
-                        url,
-                        new QName("http://soap.batchelor.it.bmc.uu.se/", name));
+                    url,
+                    new QName("http://soap.batchelor.it.bmc.uu.se/", name));
                 port = service.getBatchelorSoapServicePort();
             } else {
                 // Use custom WSDL, but rely on that endpoint is using our
                 // default service name:
                 service = new BatchelorSoapServiceService(
-                        url,
-                        new QName("http://soap.batchelor.it.bmc.uu.se/",
-                        "BatchelorSoapServiceService"));
+                    url,
+                    new QName("http://soap.batchelor.it.bmc.uu.se/",
+                    "BatchelorSoapServiceService"));
                 port = service.getBatchelorSoapServicePort();
             }
         } else {
@@ -150,11 +155,14 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
      */
-    public EnqueueResult[] enqueue(String indata) throws RemoteException {
+    public List<EnqueueResult> enqueue(String indata) throws RemoteException {
 
         try { // Call Web Service Operation
-            List<EnqueueResult> result = getServicePort().enqueue(indata);
-            return result.toArray(new EnqueueResult[0]);
+            List<EnqueueResult> list = new ArrayList<EnqueueResult>();
+            for (se.uu.bmc.it.batchelor.soap.schema.EnqueueResult in : getServicePort().enqueue(indata)) {
+                list.add(EnqueueResultConverter.createEnqueueResult(in));
+            }
+            return list;
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -173,8 +181,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
     public boolean dequeue(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
-            Boolean result = getServicePort().dequeue(job);
-            return result;
+            return getServicePort().dequeue(JobIdentityConverter.createJobIdentity(job));
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -194,11 +201,16 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @see QueueFilterResult
      * @see QueueSortResult
      */
-    public QueuedJob[] queue(String sort, String filter) throws RemoteException {
+    public List<QueuedJob> queue(QueueSortResult sort, QueueFilterResult filter) throws RemoteException {
 
         try { // Call Web Service Operation
-            List<QueuedJob> result = getServicePort().queue(sort, filter);
-            return result.toArray(new QueuedJob[0]);
+            List<QueuedJob> list = new ArrayList<QueuedJob>();
+            for (se.uu.bmc.it.batchelor.soap.schema.QueuedJob in : getServicePort().queue(
+                QueueSortResultConverter.getQueueSortResult(sort),
+                QueueFilterResultConverter.getQueueFilterResult(filter))) {
+                list.add(QueuedJobConverter.createQueuedJob(in));
+            }
+            return list;
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -214,11 +226,14 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return The list of jobs enqueued after the UNIX stamp.
      * @throws java.rmi.RemoteException
      */
-    public QueuedJob[] watch(int stamp) throws RemoteException {
+    public List<QueuedJob> watch(int stamp) throws RemoteException {
 
         try { // Call Web Service Operation
-            List<QueuedJob> result = getServicePort().watch(stamp);
-            return result.toArray(new QueuedJob[0]);
+            List<QueuedJob> list = new ArrayList<QueuedJob>();
+            for (se.uu.bmc.it.batchelor.soap.schema.QueuedJob in : getServicePort().watch(stamp)) {
+                list.add(QueuedJobConverter.createQueuedJob(in));
+            }
+            return list;
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -236,8 +251,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
     public boolean suspend(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
-            boolean result = getServicePort().suspend(job);
-            return result;
+            return getServicePort().suspend(JobIdentityConverter.createJobIdentity(job));
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -255,8 +269,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
     public boolean resume(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
-            boolean result = getServicePort().resume(job);
-            return result;
+            return getServicePort().resume(JobIdentityConverter.createJobIdentity(job));
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -270,11 +283,14 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return The list of queued jobs.
      * @throws java.rmi.RemoteException
      */
-    public JobIdentity[] opendir() throws RemoteException {
+    public List<JobIdentity> opendir() throws RemoteException {
 
         try { // Call Web Service Operation
-            List<JobIdentity> result = getServicePort().opendir();
-            return result.toArray(new JobIdentity[0]);
+            List<JobIdentity> list = new ArrayList<JobIdentity>();
+            for (se.uu.bmc.it.batchelor.soap.schema.JobIdentity in : getServicePort().opendir()) {
+                list.add(JobIdentityConverter.createJobIdentity(in));
+            }
+            return list;
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -288,11 +304,10 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return The list of files and directories.
      * @throws java.rmi.RemoteException
      */
-    public String[] readdir(JobIdentity job) throws RemoteException {
+    public List<String> readdir(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
-            List<String> result = getServicePort().readdir(job);
-            return result.toArray(new String[0]);
+            return getServicePort().readdir(JobIdentityConverter.createJobIdentity(job));
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -311,8 +326,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
     public byte[] fopen(JobIdentity job, String file) throws RemoteException {
 
         try { // Call Web Service Operation
-            byte[] result = getServicePort().fopen(job, file);
-            return result;
+            return getServicePort().fopen(JobIdentityConverter.createJobIdentity(job), file);
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
@@ -329,8 +343,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
     public QueuedJob stat(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
-            QueuedJob result = getServicePort().stat(job);
-            return result;
+            return QueuedJobConverter.createQueuedJob(getServicePort().stat(JobIdentityConverter.createJobIdentity(job)));
         } catch (Exception ex) {
             throw new RemoteException("Calling remote method failed", ex);
         }
