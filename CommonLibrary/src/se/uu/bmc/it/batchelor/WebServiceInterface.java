@@ -30,6 +30,8 @@
  */
 package se.uu.bmc.it.batchelor;
 
+import java.util.List;
+
 /**
  * The interface that is implemented by concrete subclasses to provide client
  * side web service communication with Batchelors SOAP and RESTful web service
@@ -51,7 +53,7 @@ public interface WebServiceInterface {
      * @return The enqueue result. The array might contain more than one elemnt
      * if the enqueue operation results in multiple subjobs.
      */
-    public EnqueueResult[] enqueue(String indata) throws java.rmi.RemoteException;
+    public List<EnqueueResult> enqueue(String indata) throws java.rmi.RemoteException;
 
     /**
      * Dequeues an already existing job. Calling this method should result in
@@ -77,7 +79,7 @@ public interface WebServiceInterface {
      * @see QueueFilterResult
      * @see QueueSortResult
      */
-    public QueuedJob[] queue(String sort, String filter) throws java.rmi.RemoteException;
+    public List<QueuedJob> queue(QueueSortResult sort, QueueFilterResult filter) throws java.rmi.RemoteException;
 
     /**
      * This method gives the caller an opportunity to get an list of queued
@@ -88,7 +90,7 @@ public interface WebServiceInterface {
      * @param stamp The UNIX timestamp.
      * @return The list of jobs enqueued after the UNIX stamp.
      */
-    public QueuedJob[] watch(int stamp) throws java.rmi.RemoteException;
+    public List<QueuedJob> watch(int stamp) throws java.rmi.RemoteException;
 
     /**
      * Suspend (pause) an already running job. If the job is not in the running
@@ -117,7 +119,7 @@ public interface WebServiceInterface {
      *
      * @return The list of queued jobs.
      */
-    public JobIdentity[] opendir() throws java.rmi.RemoteException;
+    public List<JobIdentity> opendir() throws java.rmi.RemoteException;
 
     /**
      * Get a list of all files and directories in the job directory associated
@@ -126,7 +128,7 @@ public interface WebServiceInterface {
      * @param job An unique identifier of the queued job.
      * @return The list of files and directories.
      */
-    public String[] readdir(JobIdentity job) throws java.rmi.RemoteException;
+    public List<String> readdir(JobIdentity job) throws java.rmi.RemoteException;
 
     /**
      * Opens the given file from the job directory associated with the
