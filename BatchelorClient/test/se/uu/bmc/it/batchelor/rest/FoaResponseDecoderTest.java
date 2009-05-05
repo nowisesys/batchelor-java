@@ -37,7 +37,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import se.uu.bmc.it.batchelor.rest.schema.Result;
-import se.uu.bmc.it.batchelor.rest.schema.Error;
 import se.uu.bmc.it.batchelor.rest.schema.File;
 import se.uu.bmc.it.batchelor.rest.schema.Job;
 import se.uu.bmc.it.batchelor.rest.schema.Link;
@@ -129,12 +128,12 @@ public class FoaResponseDecoderTest {
             File file = result.getFile();
             assertNull(file.getContent());
             assertNotNull(file.getEncoding());
-            assertNotNull(file.getInputStreamReader());
+            assertNotNull(file.getInputStream());
             assertNotNull(file.getName());
             assertNotNull(file.getSize());
             assertTrue(file.getSize() != 0);
             // Test read size number of bytes from input stream:
-            Reader stream = (Reader) file.getInputStreamReader();
+            Reader stream = (Reader) file.getInputStream();
             System.out.println("(i) Content of file " + file.getName());
             for (long i = 0; i < file.getSize(); ++i) {
                 int ch = stream.read();

@@ -126,7 +126,7 @@ public class XmlResponseDecoderTest {
             assertEquals("file", result.getType());
             assertNotNull(result.getFile());
             File file = result.getFile();
-            assertNull(file.getInputStreamReader());
+            assertNull(file.getInputStream());
             assertNotNull(file.getContent());
             assertNotNull(file.getEncoding());
             assertNotNull(file.getName());
