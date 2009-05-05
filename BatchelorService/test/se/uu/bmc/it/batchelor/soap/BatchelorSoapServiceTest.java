@@ -21,7 +21,6 @@
  * 
  * For more info: http://it.bmc.uu.se/andlov/proj/batchelor/
  */
-
 package se.uu.bmc.it.batchelor.soap;
 
 import org.junit.After;
@@ -30,9 +29,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.rmi.RemoteException;
+
 import se.uu.bmc.it.batchelor.EnqueueResult;
 import se.uu.bmc.it.batchelor.JobIdentity;
 import se.uu.bmc.it.batchelor.QueuedJob;
+import se.uu.bmc.it.batchelor.QueueFilterResult;
+import se.uu.bmc.it.batchelor.QueueSortResult;
 
 /**
  *
@@ -78,7 +82,11 @@ public class BatchelorSoapServiceTest {
     @Test
     public void testEnqueue() throws Exception {
         System.out.println("(i) *** BatchelorSoapServiceTest -> enqueue(String)");
-        assertNotNull(service.enqueue(null));
+        try {
+            assertNull(service.enqueue(null));
+            fail("(-) Expected remote exception");
+        } catch (RemoteException e) {
+        }
         assertNotNull(service.enqueue(""));
     }
 
@@ -88,8 +96,14 @@ public class BatchelorSoapServiceTest {
     @Test
     public void testDequeue() throws Exception {
         System.out.println("(i) *** BatchelorSoapServiceTest -> dequeue(JobIdentity)");
-        assertEquals(true, service.dequeue(null));
-        assertEquals(true, service.dequeue(new JobIdentity()));
+        try {
+            assertEquals(false, service.dequeue(null));
+        } catch (RemoteException e) {
+        }
+        try {
+            assertEquals(false, service.dequeue(new JobIdentity()));
+        } catch (RemoteException e) {
+        }
     }
 
     /**
@@ -97,10 +111,10 @@ public class BatchelorSoapServiceTest {
      */
     @Test
     public void testQueue() throws Exception {
-        System.out.println("(i) *** BatchelorSoapServiceTest -> queue(String, String)");
-        assertNotNull(service.queue("", ""));
-        assertNotNull(service.queue("", null));
-        assertNotNull(service.queue(null, ""));
+        System.out.println("(i) *** BatchelorSoapServiceTest -> queue(QueueSortResult, QueueFilterResult)");
+        assertNotNull(service.queue(QueueSortResult.NONE, QueueFilterResult.ALL));
+        assertNotNull(service.queue(QueueSortResult.NONE, null));
+        assertNotNull(service.queue(null, QueueFilterResult.ALL));
         assertNotNull(service.queue(null, null));
     }
 
@@ -121,8 +135,12 @@ public class BatchelorSoapServiceTest {
     @Test
     public void testSuspend() throws Exception {
         System.out.println("(i) *** BatchelorSoapServiceTest -> suspend(JobIdentity)");
-        assertEquals(true, service.suspend(new JobIdentity()));
-        assertEquals(true, service.suspend(null));
+        assertEquals(false, service.suspend(new JobIdentity()));
+        try {
+            assertEquals(false, service.suspend(null));
+            fail("(-) Expected remote exception");
+        } catch (RemoteException e) {
+        }
     }
 
     /**
@@ -131,8 +149,12 @@ public class BatchelorSoapServiceTest {
     @Test
     public void testResume() throws Exception {
         System.out.println("(i) *** BatchelorSoapServiceTest -> resume(JobIdentity)");
-        assertEquals(true, service.resume(new JobIdentity()));
-        assertEquals(true, service.resume(null));
+        assertEquals(false, service.resume(new JobIdentity()));
+        try {
+            assertEquals(false, service.resume(null));
+            fail("(-) Expected remote exception");
+        } catch (RemoteException e) {
+        }
     }
 
     /**
@@ -141,8 +163,12 @@ public class BatchelorSoapServiceTest {
     @Test
     public void testStat() throws Exception {
         System.out.println("(i) *** BatchelorSoapServiceTest -> stat(JobIdentity)");
-        assertNotNull(service.stat(new JobIdentity()));
-        assertNotNull(service.stat(null));
+        assertNull(service.stat(new JobIdentity()));
+        try {
+            assertNull(service.stat(null));
+            fail("(-) Expected remote exception");
+        } catch (RemoteException e) {
+        }
     }
 
     /**
@@ -161,7 +187,11 @@ public class BatchelorSoapServiceTest {
     public void testReaddir() throws Exception {
         System.out.println("(i) *** BatchelorSoapServiceTest -> readdir(JobIdentity)");
         assertNotNull(service.readdir(new JobIdentity()));
-        assertNotNull(service.readdir(null));
+        try {
+            assertNull(service.readdir(null));
+            fail("(-) Expected remote exception");
+        } catch (RemoteException e) {
+        }
     }
 
     /**
@@ -170,10 +200,21 @@ public class BatchelorSoapServiceTest {
     @Test
     public void testFopen() throws Exception {
         System.out.println("(i) *** BatchelorSoapServiceTest -> fopen(JobIdentity, String)");
-        assertNotNull(service.fopen(new JobIdentity(), ""));
-        assertNotNull(service.fopen(new JobIdentity(), null));
-        assertNotNull(service.fopen(null, ""));
-        assertNotNull(service.fopen(null, null));
+        assertNull(service.fopen(new JobIdentity(), ""));
+        try {
+            assertNull(service.fopen(new JobIdentity(), null));
+            fail("(-) Expected remote exception");
+        } catch (RemoteException e) {
+        }
+        try {
+            assertNull(service.fopen(null, ""));
+            fail("(-) Expected remote exception");
+        } catch (RemoteException e) {
+        }
+        try {
+            assertNull(service.fopen(null, null));
+            fail("(-) Expected remote exception");
+        } catch (RemoteException e) {
+        }
     }
-
 }
