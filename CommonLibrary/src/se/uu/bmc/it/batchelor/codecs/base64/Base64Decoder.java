@@ -28,7 +28,7 @@
  * Created: Apr 27, 2009, 11:52:27 PM
  * Author:  Anders Lövgren (QNET/BMC CompDept)
  */
-package se.uu.bmc.it.batchelor.codecs;
+package se.uu.bmc.it.batchelor.codecs.base64;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -50,7 +50,7 @@ import java.io.IOException;
  * <p>The default number of bytes to decode is BUFFER_SIZE, but can be changed
  * dynamic before or in between calls to decode().</p>
  *
- * <p>This implementation is based on information from http://en.wikipedia.org/wiki/Base64
+ * <p>This implementation is based on information from <a href="http://en.wikipedia.org/wiki/Base64">http://en.wikipedia.org/wiki/Base64</a>
  * and verified against other Base64 implementations like the base64(1) command
  * from the GNU coreutils package.</p>
  * 
@@ -212,6 +212,7 @@ public class Base64Decoder {
             return null;  // Nothing read.
         }
         if (size > 0) {
+            bufferSize = buffer.length - size;
             for (int i = buffer.length - size; i < buffer.length; ++i) {
                 buffer[i] = -1;
             }

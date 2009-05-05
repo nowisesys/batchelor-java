@@ -28,7 +28,7 @@
  * Created: May 3, 2009, 11:07:14 PM
  * Author:  Anders Lövgren (QNET/BMC CompDept)
  */
-package se.uu.bmc.it.batchelor.codecs;
+package se.uu.bmc.it.batchelor.codecs.base64;
 
 import java.io.InputStream;
 import java.io.OutputStream;
