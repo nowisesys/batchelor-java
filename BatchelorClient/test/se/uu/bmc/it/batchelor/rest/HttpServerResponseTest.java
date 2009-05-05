@@ -30,9 +30,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import se.uu.bmc.it.batchelor.rest.HttpServerResponse.State;
-import se.uu.bmc.it.batchelor.rest.HttpServerResponse.Type;
-
 import se.uu.bmc.it.batchelor.rest.schema.Result;
 import se.uu.bmc.it.batchelor.rest.schema.Error;
 import se.uu.bmc.it.batchelor.rest.schema.File;
@@ -212,7 +209,7 @@ public class HttpServerResponseTest {
      */
     @Test
     public void testIsLinkCollection() {
-        System.out.println("(i) *** HttpServerResponseTest -> isJobCollection()");
+        System.out.println("(i) *** HttpServerResponseTest -> isLinkCollection()");
         HttpServerResponse response = new HttpServerResponse(resultLink);
         assertTrue(response.isLinkCollection());
         response.setResult(resultJob);
