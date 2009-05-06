@@ -1,9 +1,9 @@
 
-   ------------------------------------------------------------------------
-   BatchelorWebService - Java (tm) library for Batchelor Web Service API.
-   ------------------------------------------------------------------------
+   ----------------------------------------------------------------------------
+    BatchelorWebService - Java (TM) library for the Batchelor Web Service API.
+   ----------------------------------------------------------------------------
 
-** INTRODUCTON:
+** INTRODUCTION:
 
    This library makes it an easy task to write client side applications that
    integrates with Batchelor (the batch job queue manager) thru its web
@@ -11,42 +11,65 @@
    
    The purpose is to present a simple to use API that allows end users to
    communicate with the web service, without having to get dirty in all
-   details of encoding/decoding the messages passed between your application
+   details of encoding/decoding messages passed between your application
    and the server. 
 
    The target audience are people writing client side applications or
-   integrating Batchelor in bussiness-to-bussiness systems. Thoose who likes
+   integrating Batchelor in business-to-business systems. Those who likes
    to roll their own bindings can still do so.
 
+** VERSION:
+
+   This is version is 1.0.0 of the library, released 2009-05-06. The major and 
+   minor numbers are based on the remote API it implements, while the revision 
+   gets incremented on each release.
+   
 ** API:
 
    The package se.uu.bmc.it.batchelor contains common classes and interfaces.
    All service specific classes (REST and SOAP) is found in their own packages.
    
-   An simple example on using the REST interface with FOA as the response
-   encoding method:
+   An simple example showing how to use the REST service class with FOA as 
+   the response encoding method:
    
+     import java.rmi.RemoteException;
+     import java.net.URL;
+     
      import se.uu.bmc.it.batchelor.*;
      import se.uu.bmc.it.batchelor.rest.*;
      
-     class Client {
-        
-         private RestWebService service;
-	 private ResponseEncoder encoder;
-	
-	 Client(URL url) {
-	     encoder = new ResponseEncoder.FOA;
-	     service = new RestWebService(url, encoder);
+     class RestServiceClient {
+         
+	 static {
+	     // 
+	     // Content handling must be initialized once and is global for the 
+	     // whole application and its entire lifetime.
+	     // 
+	     ContentHandlerFactory factory = ResponseDecoderFactory.getInstance();
+             HttpURLConnection.setContentHandlerFactory(factory);	
+	 }
+	 
+         private BatchelorRestClient client;
+         
+	 public RestServiceClient(URL url) {
+	     client = new RestWebService(url, ResponseEncoder.FOA);
 	 }
 	 
 	 // ... methods calling service.XXX()
 	 
      }
      
-   The kind of web service interfaces that can be used dependens on how
+   The kind of web service interfaces that can be used dependence on how
    the server (that runs batchelor) is configured.
 
-** LICENS:
+** DEPENDENCIES:
+
+   *) FOA encoding/decoding requires the foa-java library available for
+      download from http://it.bmc.uu.se/andlov/proj/foa-java (recommended).
+      
+   *) Sun Java JDK >= 1.5 or equivalent.
+   
+** LICENSE:
 
    BatchelorWebService is licensed under GPL with the classpath exception.
    This means that you are free to use this library even in commercial 
@@ -65,7 +88,6 @@
 
 ** ABOUT BATCHELOR:
 
-   See the project homepage for more info: 
-   http://it.bmc.uu.se/andlov/proj/batchelor/
+   See the project homepage: http://it.bmc.uu.se/andlov/proj/batchelor/
    
 // Anders Lövgren, 2009-04-04
