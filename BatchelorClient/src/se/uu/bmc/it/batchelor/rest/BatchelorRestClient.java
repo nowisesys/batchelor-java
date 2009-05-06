@@ -102,7 +102,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * encoder argument request that server response messages should be encoded
      * using a specific method.
      * @param url The REST service address.
-     * @param decoder Prefered response encoding method.
+     * @param encoder Prefered response encoding method.
      */
     public BatchelorRestClient(URL url, ResponseEncoder encoder) {
         this.url = url;
@@ -207,7 +207,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * Queues an job for later execution. This version of enqueue reads the
      * job data from the indata string.
      *
-     * @param indata The data to use for the enqueued job.
+     * @param indata The input data for the enqueued job.
      * @return The enqueue result. The array might contain more than one element
      * if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
@@ -221,7 +221,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * Queues an job for later execution. This version of enqueue reads the
      * job data from the supplied file.
      *
-     * @param indata The data to use for the enqueued job.
+     * @param file The file with input data for the enqueued job.
      * @return The enqueue result. The array might contain more than one element
      * if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
@@ -239,7 +239,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * gigabytes), so trying to use an byte array or string would lead to an
      * OutOfMemoryException.
      *
-     * @param stream The input stream to read job data from.
+     * @param stream The input stream to read job data and send to the enqeueud job.
      * @return The enqueue result. The array might contain more than one element
      * if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
@@ -613,9 +613,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      * If encoding is "binary", then the input stream will return the file
      * content "as-is". Basically, it means the file bytes has been sent without
      * any processing. If encoding is "base64", then the input stream will 
-     * return the file content encoded in Base64 encoding. The Base64Decoder
-     * class from se.uu.bmc.it.batchelor.codecs can be used to decode the 
-     * input stream.
+     * return the file content encoded in Base64 encoding. The se.uu.bmc.it.batchelor.codecs.base64.Base64Decoder
+     * class can be used to decode the input stream.
      * </p>
      *
      * @param job An unique identifier of the queued job.
@@ -623,7 +622,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param timeout Sets the read timeout to a specified timeout, in milliseconds. If the timeout expires before there is data available for read, a java.net.SocketTimeoutException is raised. A timeout of zero is interpreted as an infinite timeout.
      * @return The response file object.
      * @see se.uu.bmc.it.batchelor.rest.schema.File
-     * @see se.uu.bmc.it.batchelor.codecs.Base64Decoder
+     * @see se.uu.bmc.it.batchelor.codecs.base64.Base64Decoder
      * @throws java.rmi.RemoteException
      * @throws java.net.SocketTimeoutException
      */

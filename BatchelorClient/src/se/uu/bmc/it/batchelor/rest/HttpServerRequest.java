@@ -74,8 +74,8 @@ public interface HttpServerRequest {
     void setProxy(Proxy proxy) throws IOException;
 
     /**
-     * Returns true if the connection uses a proxy server.
-     * @return
+     * Check whether the HTTP connection is going thru a proxy or not.
+     * @return True if the connection uses a proxy server.
      */
     boolean usingProxy();
 

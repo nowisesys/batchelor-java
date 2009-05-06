@@ -67,8 +67,8 @@ public class QueuedJob implements Serializable {
      * @param ident The job ident.
      * @param state The state of the queued job (i.e. running or finished).
      */
-    public QueuedJob(JobIdentity identity, String state) {
-        this.ident = identity;
+    public QueuedJob(JobIdentity ident, String state) {
+        this.ident = ident;
         this.state = state;
     }
 

@@ -45,7 +45,7 @@ import se.uu.bmc.it.batchelor.rest.schema.*;
  * service response messages from the Batchelor REST service.
  * 
  * @author Anders Lövgren (QNET/BMC CompDept)
- * @see ResponseDecoder
+ * @see java.net.ContentHandler
  */
 public class XmlResponseDecoder extends ContentHandler {
 

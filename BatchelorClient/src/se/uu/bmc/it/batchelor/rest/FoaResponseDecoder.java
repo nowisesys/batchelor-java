@@ -33,7 +33,6 @@ package se.uu.bmc.it.batchelor.rest;
 import java.net.ContentHandler;
 import java.net.URLConnection;
 import java.io.Reader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
@@ -53,7 +52,8 @@ import se.uu.bmc.it.batchelor.rest.schema.Result;
  * messages from the Batchelor REST service.
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
- * @see ResponseDecoder
+ * @see java.net.ContentHandler
+ * @see se.uu.bmc.it.foa.Decoder
  * @see <a href="http://it.bmc.uu.se/andlov/proj/libfoa">FOA</a>
  */
 public class FoaResponseDecoder extends ContentHandler {
