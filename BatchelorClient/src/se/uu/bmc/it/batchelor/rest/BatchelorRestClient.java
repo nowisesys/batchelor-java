@@ -720,8 +720,6 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param file The remote filename.
      * @return The file contents as an byte array.
      * @throws java.rmi.RemoteException
-     *
-     * TODO: add variant of fopen that returns a stream instead of a byte array.
      */
     public byte[] fopen(JobIdentity job, String file) throws RemoteException {
 

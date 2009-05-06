@@ -33,12 +33,13 @@ package se.uu.bmc.it.batchelor;
 import java.io.Serializable;
 
 /**
- * This class represent an already enqueued job as read from the 
- * queue.
+ * This class represent an already enqueued job as read from the queue.
  * 
  * @author Anders Lövgren
  */
 public class QueuedJob implements Serializable {
+
+    // TODO: Should we return more job attributes (like name and date/time) in the QueuedJob object?
 
     private JobIdentity ident;
     private String state;

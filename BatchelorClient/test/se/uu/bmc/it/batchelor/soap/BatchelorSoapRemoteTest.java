@@ -135,7 +135,6 @@ public class BatchelorSoapRemoteTest {
                 assertNotNull(result.getState());
                 System.out.printf("(i) %s\n", result);
             }
-        // TODO: add test of sorting and filtering. Should we return more info (like name and date/time) in the QueuedJob object?
         } catch (RemoteException e) {
             fail("(!) Remote exception: " + e.getMessage());
         }
