@@ -20,7 +20,7 @@
 
 ** VERSION:
 
-   This is version is 1.0.0 of the library, released 2009-05-06. The major and 
+   This is version is 1.0.1 of the library, released 2009-05-06. The major and 
    minor numbers are based on the remote API it implements, while the revision 
    gets incremented on each release.
    
