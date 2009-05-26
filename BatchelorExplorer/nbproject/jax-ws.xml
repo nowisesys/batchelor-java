@@ -3,8 +3,8 @@
   <services/>
   <clients>
     <client name="WsClient">
-      <wsdl-url>http://127.0.0.1:80/batchelor/ws/wsdl/?wsdl</wsdl-url>
-      <local-wsdl-file>127.0.0.1_80/batchelor/ws/wsdl/.wsdl</local-wsdl-file>
+      <wsdl-url>http://127.0.0.1:80/batchelor/ws/schema/wsdl/?wsdl</wsdl-url>
+      <local-wsdl-file>127.0.0.1_80/batchelor/ws/schema/wsdl/.wsdl</local-wsdl-file>
       <package-name forceReplace="true">se.uu.bmc.it.batchelor</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
@@ -18,7 +18,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://127.0.0.1:80/batchelor/ws/wsdl/?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://127.0.0.1:80/batchelor/ws/schema/wsdl/?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>

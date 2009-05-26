@@ -12,8 +12,8 @@
         </taskdef>
     </target>
     <target name="wsimport-client-WsClient" depends="wsimport-init">
-        <property name="wsdl-WsClient" location="xml-resources/web-service-references/WsClient/wsdl/127.0.0.1_80/batchelor/ws/wsdl/.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/wsimport/client" destdir="${build.generated.dir}/wsimport/client" package="se.uu.bmc.it.batchelor" wsdl="${wsdl-WsClient}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://127.0.0.1:80/batchelor/ws/wsdl/?wsdl" xnocompile="true">
+        <property name="wsdl-WsClient" location="xml-resources/web-service-references/WsClient/wsdl/127.0.0.1_80/batchelor/ws/schema/wsdl/.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/wsimport/client" destdir="${build.generated.dir}/wsimport/client" package="se.uu.bmc.it.batchelor" wsdl="${wsdl-WsClient}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://127.0.0.1:80/batchelor/ws/schema/wsdl/?wsdl" xnocompile="true">
             <produces dir="${build.generated.dir}/wsimport/client/se/uu/bmc/it/batchelor" includes="WsClient.java" casesensitive="no"/>
         </wsimport>
     </target>
