@@ -72,6 +72,7 @@ public class BatchelorRestClientTest {
     public static void setUpClass() throws Exception {
         ContentHandlerFactory factory = ResponseDecoderFactory.getInstance();
         HttpURLConnection.setContentHandlerFactory(factory);
+        System.out.println("(i) *** BatchelorRestClientTest: using " + server + " as server");
     }
 
     @AfterClass
