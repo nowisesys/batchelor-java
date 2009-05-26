@@ -65,9 +65,49 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * This class implements a RESTful based client side for communication with
- * the Batchelor batch job queues web service interface.
+ * <p>This class implements the WebServiceInterface providing an RESTful client
+ * for interaction with the Batchelor REST web service on a remote system. The 
+ * REST URI space and its associated HTTP actions (GET, PUT, POST and DELETE) 
+ * is completely abstacted away within this class.</p>
  *
+ * <p>Things to keep in mind using this class is that content handling must
+ * be initialized before its first use and only once. Note that the content
+ * handler is global for the whole application and its entire lifetime. The
+ * following code demonstrates how to create a REST service client, complete
+ * with installing content handling using the ContentHandlerFactory obtained
+ * from ReponseDecoderFactory:</p>
+ *
+ * <p><pre><code>
+ * import java.rmi.RemoteException;
+ * import java.net.URL;
+ * import se.uu.bmc.it.batchelor.*;
+ * import se.uu.bmc.it.batchelor.rest.*;
+ *
+ * class RestServiceClient {
+ *
+ *     static {
+ *         //
+ *         // Installs content handlers for the text/xml and text/x-foa MIME types:
+ *         //
+ *         ContentHandlerFactory factory = ResponseDecoderFactory.getInstance();
+ *         HttpURLConnection.setContentHandlerFactory(factory);
+ *     }
+ *
+ *     private BatchelorRestClient client;
+ *
+ *     public RestServiceClient(URL url) {
+ *         client = new RestWebService(url, ResponseEncoder.FOA);
+ *     }
+ *
+ *     // ... methods calling client.XXX()
+ *
+ * }
+ * </code></pre></p>
+ *
+ * <p>See ReponseDecoderFactory for an example of how to handle the case
+ * where you already have an content handler installed.</p>
+ *
+ * @see se.uu.bmc.it.batchelor.rest.ResponseDecoderFactory
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
 public class BatchelorRestClient implements WebServiceInterface {

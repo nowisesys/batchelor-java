@@ -48,6 +48,34 @@ import java.rmi.RemoteException;
 import javax.xml.namespace.QName;
 
 /**
+ * <p>This class implements the WebServiceInterface providing an SOAP client
+ * that is used for connections against Batchelors SOAP web service interface.
+ * All remote methods might throw an RemoteException.</p>
+ *
+ * <p>The URL to use deserves an bit of explanation. It is the local or remote 
+ * location of an WSDL file that describes the Batchelor SOAP service, not the
+ * location of the Batchelor SOAP service or its base URL. An typical example
+ * is "http://host.example.com/batchelor/ws/schema/wsdl/?wsdl". Note that the
+ * WSDL and the SOAP service itself might be at different locations, it might
+ * not even be located at the same host!</p>
+ *
+ * <p>This example demonstrate the essential parts of using this class:</p>
+ * <p><pre><code>
+ * import java.rmi.RemoteException;
+ * import java.net.URL;
+ * import se.uu.bmc.it.batchelor.soap;
+ *
+ * class SoapServiceClient {
+ *     private BatchelorSoapClient service;
+ *
+ *     public SoapServiceClient(URL url) {
+ *         service = new BatchelorSoapClient(url);
+ *     }
+ *
+ *     // Add some functions that calls remote methods using the service member...
+ *
+ * }
+ * </code></pre></p>
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
@@ -220,7 +248,8 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * This method gives the caller an opportunity to get an list of queued
      * jobs that has been enqueued after the given timestamp. The timestamp
      * is the number of seconds since the start of the UNIX epoch (00:00:00
-     * UTC on January 1, 1970).
+     * UTC on January 1, 1970). The stamp to use is typical obtained by calling
+     * getStamp() using the EnqueueResult object returned by enqueue().
      *
      * @param stamp The UNIX timestamp.
      * @return The list of jobs enqueued after the UNIX stamp.

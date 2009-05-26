@@ -39,18 +39,21 @@ import java.net.ContentHandler;
  *
  * <p>A ContentHandlerFactory must be set prior to calling any functions that
  * communicates with the REST service. However, the ContentHandlerFactory is
- * system wide and can only be set once per application.</p>
+ * system wide and can only be set once per application. One thing to keep in
+ * mind is that content handling is an property of the stream handling within
+ * the JVM itself, by register an content handler factory you tell the JVM
+ * to call your code instead of its default handlers.</p>
  *
- * <p>If your application don't use any other ContentHandlerFactory:</p>
+ * <p>Case 1: If your application don't use any other ContentHandlerFactory:</p>
  * <pre>
  * ContentHandlerFactory factory = ResponseDecoderFactory.getInstance();
  * URLConnection.setContentHandlerFactory(factory);
  * </pre>
  * 
- * <p>If your application use another ContentHandlerFactory, then either 
- * decorate the existing class or create a subclass inheriting it:
+ * <p>Case 2: If your application use another ContentHandlerFactory, then either
+ * decorate your existing class or create a subclass inheriting it:
  * <pre>
- * public class YourContentHandlerFactory {
+ * public class YourContentHandlerFactory implements ContentHandlerFactory {
  *     public ContentHandler createContentHandler(String mimetype) {
  *         ContentHandlerFactory factory = ResponseDecoderFactory.getInstance();
  *         ContentHandler handle = factory.createContentHandler(mimetype);
@@ -61,7 +64,8 @@ import java.net.ContentHandler;
  *     }
  * }
  * </pre>
- * 
+ *
+ * @see java.net.HttpURLConnection
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
 public class ResponseDecoderFactory implements ContentHandlerFactory {
@@ -76,6 +80,11 @@ public class ResponseDecoderFactory implements ContentHandlerFactory {
         return factory;
     }
 
+    /**
+     * Don't call this function direct, it should only be called by the JVM.
+     * @param mimetype The MIME type.
+     * @return The content handler for the MIME type.
+     */
     public ContentHandler createContentHandler(String mimetype) {
         if(mimetype.compareTo("text/xml") == 0) {
             return new XmlResponseDecoder();
