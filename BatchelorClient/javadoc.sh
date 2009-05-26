@@ -9,7 +9,7 @@ ANT_COMMAND="ant"
 ANT_TARGET="jar"
 
 JAVADOC="javadoc"
-FOA_JAR="../../FOA/dist/foa-java-1.0.1.jar"
+FOA_JAR="../../FOA/dist/foa-java-1.0.*.jar"
 ENCODING="utf8"
 
 DESTDIR="dist/api"
