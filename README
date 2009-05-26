@@ -55,7 +55,7 @@
 	     client = new RestWebService(url, ResponseEncoder.FOA);
 	 }
 	 
-	 // ... methods calling service.XXX()
+	 // ... methods calling client.XXX()
 	 
      }
      
