@@ -1,0 +1,29 @@
+
+   BatchelorExplorer - A Java GUI application for Batchelor
+
+** GENERAL:
+
+   This is a java application for interaction with the web service API of
+   Batchelor (the REST and SOAP interface).
+
+** FEATURES:
+
+   In addition to browsing pending, running and finished jobs, this application 
+   can also submit new jobs, suspend/resume running jobs and delete finished
+   jobs.
+
+** DEVELOPMENT:
+
+   This application was created using NetBeans IDE 6.7.1 downloaded from
+   http://www.netbeans.org.
+
+** CREDITS:
+
+   The Nuvola SVG icon theme: http://www.icon-king.com/
+
+** LINKS:
+
+   Batchelor (the web application/web service) and BatchelorExplorer can be
+   downloaded from http://it.bmc.uu.se/andlov/proj/batchelor/
+
+// Anders Lövgren, 2009-10-16
