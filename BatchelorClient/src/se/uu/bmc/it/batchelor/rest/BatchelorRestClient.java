@@ -728,7 +728,9 @@ public class BatchelorRestClient implements WebServiceInterface {
                     buff = decoder.decode(in);
                 }
             } else {
-                out.write(decoder.decode(remote.getContent()));
+                if (remote.getSize() != 0) {
+                    out.write(decoder.decode(remote.getContent()));
+                }
             }
         } else {
             if (remote.getInputStream() != null) {
