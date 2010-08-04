@@ -148,7 +148,7 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
                             while ((line = reader.readLine()) != null) {
                                 input.append(line);
                             }
-                            List<EnqueueResult> list = client.enqueue(null);
+                            List<EnqueueResult> list = client.enqueue(input.toString());
                             for (EnqueueResult result : list) {
                                 addChildNode(result.getJobIdentity());
                             }
