@@ -7,7 +7,7 @@
         <servlet-name>BatchelorSoapService</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
-        </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BatchelorSoapService</servlet-name>
         <url-pattern>/BatchelorSoapService</url-pattern>
@@ -19,5 +19,5 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
-        </welcome-file-list>
-    </web-app>
+    </welcome-file-list>
+</web-app>

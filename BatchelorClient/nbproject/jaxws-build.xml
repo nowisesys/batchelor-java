@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+        *** GENERATED FROM jax-ws.xml - DO NOT EDIT !                             ***
+        *** TO MODIFY wsimport options USE Web Service node -> Edit WS Attributes ***
+        *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
+        *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
+
+        -->
 <project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
     <!--
                 ===================
@@ -14,7 +21,7 @@
     <target name="wsimport-client-BatchelorSoapService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/BatchelorSoapService"/>
         <property name="wsdl-BatchelorSoapService" location="xml-resources/web-service-references/BatchelorSoapService/wsdl/localhost_8080/BatchelorService/BatchelorSoapService.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/BatchelorSoapService" destdir="${build.generated.dir}/jax-wsCache/BatchelorSoapService" package="se.uu.bmc.it.batchelor.soap.schema" wsdl="${wsdl-BatchelorSoapService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8080/BatchelorService/BatchelorSoapService?wsdl" xnocompile="true">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/BatchelorSoapService" destdir="${build.generated.dir}/jax-wsCache/BatchelorSoapService" wsdl="${wsdl-BatchelorSoapService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8080/BatchelorService/BatchelorSoapService?wsdl" xendorsed="true" package="se.uu.bmc.it.batchelor.soap.schema">
             <depends file="${wsdl-BatchelorSoapService}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/BatchelorSoapService"/>
         </wsimport>

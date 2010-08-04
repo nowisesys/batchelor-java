@@ -21,8 +21,12 @@
           <wsimport-option-value>http://localhost:8080/BatchelorService/BatchelorSoapService?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
-          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>se.uu.bmc.it.batchelor.soap.schema</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

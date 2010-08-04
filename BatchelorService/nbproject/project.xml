@@ -3,19 +3,17 @@
     <type>org.netbeans.modules.web.project</type>
     <configuration>
         <buildExtensions xmlns="http://www.netbeans.org/ns/ant-build-extender/1">
-            <extension file="jaxws-build.xml" id="jaxws">
-                <dependency dependsOn="wsgen-service-compile" target="-post-compile"/>
-            </extension>
+            <extension file="jaxws-build.xml" id="jaxws"/>
         </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
             <name>BatchelorService</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
-                <library>
+                <library dirs="200">
                     <file>${libs.jaxws21.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
-                <library>
+                <library dirs="200">
                     <file>${reference.CommonLibrary.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
