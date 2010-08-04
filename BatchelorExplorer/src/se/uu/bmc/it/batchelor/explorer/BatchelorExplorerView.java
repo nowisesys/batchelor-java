@@ -202,11 +202,11 @@ public class BatchelorExplorerView extends FrameView {
         jPanelContent.setLayout(jPanelContentLayout);
         jPanelContentLayout.setHorizontalGroup(
             jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGap(0, 622, Short.MAX_VALUE)
         );
         jPanelContentLayout.setVerticalGroup(
             jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
+            .addGap(0, 337, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanelContent);
@@ -217,7 +217,7 @@ public class BatchelorExplorerView extends FrameView {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(se.uu.bmc.it.batchelor.explorer.BatchelorExplorerApp.class).getContext().getResourceMap(BatchelorExplorerView.class);
         jTreeJobs.setBackground(resourceMap.getColor("jTreeJobs.background")); // NOI18N
         jTreeJobs.setName("jTreeJobs"); // NOI18N
-        jTreeJobs.setPreferredSize(new java.awt.Dimension(170, 68));
+        jTreeJobs.setPreferredSize(null);
         jScrollPane1.setViewportView(jTreeJobs);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
