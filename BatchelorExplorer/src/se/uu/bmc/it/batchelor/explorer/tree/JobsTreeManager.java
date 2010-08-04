@@ -22,7 +22,6 @@ import java.rmi.RemoteException;
 
 import java.awt.event.ActionListener;
 import javax.swing.Icon;
-import javax.swing.JPopupMenu;
 
 /**
  * This class encapsulate the tree view management, thus making the main frame
@@ -33,9 +32,6 @@ import javax.swing.JPopupMenu;
 public class JobsTreeManager implements ActionListener {
 
     private JTree tree;
-    private JPopupMenu fileContextMenu = null;
-    private JPopupMenu serviceContextMenu = null;
-    private JPopupMenu queuedJobContextMenu = null;
     private static JobsTreeManager manager = null;
 
     /**
@@ -59,6 +55,7 @@ public class JobsTreeManager implements ActionListener {
      * @param tree The tree object.
      */
     public JobsTreeManager(JTree tree) {
+        
         this.tree = tree;
         this.tree.addTreeSelectionListener(new JobsTreeSelectionHandler(tree));
         this.tree.addTreeWillExpandListener(new JobsTreeWillExpandHandler(tree));
@@ -75,7 +72,7 @@ public class JobsTreeManager implements ActionListener {
      * Set the active tree root node. If root is null, then the tree gets emptied.
      * @param node The root node for the tree.
      */
-    public void setRootNode(TreeNode node) {
+    public final void setRootNode(TreeNode node) {
         ((DefaultTreeModel) tree.getModel()).setRoot(node);
     }
 
@@ -92,47 +89,6 @@ public class JobsTreeManager implements ActionListener {
     public TreeNode getSelectedNode() {
         return (TreeNode) tree.getSelectionPath().getLastPathComponent();
     }
-
-//    /**
-//     * Set the server connection to use. This will clear all nodes from the tree
-//     * and populate it with all jobs from the web service.
-//     * @param service The web service client.
-//     * @throws RemoteException
-//     */
-//    public void setServiceConnection(WebServiceClient service) throws RemoteException {
-//        setRootNode(null);   // Clear all nodes
-//        ServiceTreeNode root = new ServiceTreeNode(service);
-//        root.addChildNodes();
-//        setRootNode(root);
-//    }
-//
-//    public void closeServiceConnection() {
-//        setRootNode(null);
-//    }
-
-//    public JPopupMenu getFileContextMenu() {
-//        return fileContextMenu;
-//    }
-//
-//    public void setFileContextMenu(JPopupMenu menu) {
-//        fileContextMenu = menu;
-//    }
-//
-//    public JPopupMenu getServiceContextMenu() {
-//        return serviceContextMenu;
-//    }
-//
-//    public void setServiceContextMenu(JPopupMenu menu) {
-//        serviceContextMenu = menu;
-//    }
-//
-//    public JPopupMenu getQueuedJobContextMenu() {
-//        return queuedJobContextMenu;
-//    }
-//
-//    public void setQueuedJobContextMenu(JPopupMenu menu) {
-//        queuedJobContextMenu = menu;
-//    }
 
     //
     // Called to refresh the tree.
@@ -154,4 +110,5 @@ public class JobsTreeManager implements ActionListener {
         JobsTreeCellRenderer renderer = (JobsTreeCellRenderer)tree.getCellRenderer();
         return renderer.getIcon(type);
     }
+
 }

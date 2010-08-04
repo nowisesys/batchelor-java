@@ -61,6 +61,7 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
      * Insert all remotelly queued jobs as child nodes in the tree.
      * @throws RemoteException
      */
+    @Override
     public void addChildNodes() throws RemoteException {
         WebServiceClient service = getWebServiceClient();
         List<QueuedJob> list = service.getService().queue(QueueSortResult.NONE, QueueFilterResult.ALL);
@@ -92,6 +93,7 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
      * remotelly queued jobs from the web service and inserting them in the tree.
      * @throws RemoteException
      */
+    @Override
     public void refreshChildNodes() throws RemoteException {
         removeAllChildren();
         addChildNodes();
@@ -105,6 +107,7 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
     /**
      * @return The context menu associated with the service tree node.
      */
+    @Override
     public JPopupMenu getContextMenu() {
         JMenuItem menuItem;
         JPopupMenu popup = new JPopupMenu();
@@ -112,6 +115,7 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
         menuItem = popup.add(new JMenuItem("Disconnect"));
         menuItem.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 JobsTreeManager manager = JobsTreeManager.getManager();
                 manager.clearTree();
@@ -120,6 +124,7 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
         menuItem = popup.add(new JMenuItem("Submit..."));
         menuItem.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 JFrame frame = BatchelorExplorerApp.getApplication().getMainFrame();
                 JFileChooser dialog = new JFileChooser();
@@ -178,95 +183,10 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
         return popup;
     }
 
-//    /**
-//     * @return The context menu associated with the service tree node.
-//     */
-//    public JPopupMenu getContextMenu() {
-//        JobsTreeManager manager = JobsTreeManager.getManager();
-//        return manager.getServiceContextMenu();
-//    }
-//
-//    /**
-//     * Create the shared popup (context) menu for all service tree nodes.
-//     * @return The popup menu.
-//     */
-//    public static JPopupMenu createContextMenu() {
-//        JMenuItem menuItem;
-//        JPopupMenu popup = new JPopupMenu();
-//        menuItem = popup.add(new JMenuItem("Disconnect"));
-//        menuItem.addActionListener(new ActionListener() {
-//
-//            public void actionPerformed(ActionEvent event) {
-//                JobsTreeManager manager = JobsTreeManager.getManager();
-//                manager.clearTree();
-//            }
-//        });
-//        menuItem = popup.add(new JMenuItem("Submit..."));
-//        menuItem.addActionListener(new ActionListener() {
-//
-//            public void actionPerformed(ActionEvent event) {
-//                JFrame frame = BatchelorExplorerApp.getApplication().getMainFrame();
-//                JFileChooser dialog = new JFileChooser();
-//                if (dialog.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
-//                    JobsTreeManager manager = JobsTreeManager.getManager();
-//                    ServiceTreeNode root = (ServiceTreeNode) manager.getRootNode();
-//                    WebServiceClient service = root.getWebServiceClient();
-//                    if (service.getType() == WebServiceClientType.REST) {
-//                        try {
-//                            BatchelorRestClient client = (BatchelorRestClient) service.getService();
-//                            List<EnqueueResult> list = client.enqueue(dialog.getSelectedFile());
-//                            for (EnqueueResult result : list) {
-//                                root.addChildNode(result.getJobIdentity());
-//                            }
-//                        } catch (RemoteException ex) {
-//                            Logger.getLogger(ServiceTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-//                        } catch (FileNotFoundException ex) {
-//                            Logger.getLogger(ServiceTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    } else {
-//                        InputStreamReader stream = null;
-//                        try {
-//                            BatchelorSoapClient client = (BatchelorSoapClient) service.getService();
-//                            stream = new InputStreamReader(new FileInputStream(dialog.getSelectedFile()));
-//                            BufferedReader reader = new BufferedReader(stream);
-//                            StringBuilder input = new StringBuilder();
-//                            String line;
-//                            while ((line = reader.readLine()) != null) {
-//                                input.append(line);
-//                            }
-//                            List<EnqueueResult> list = client.enqueue(null);
-//                            for (EnqueueResult result : list) {
-//                                root.addChildNode(result.getJobIdentity());
-//                            }
-//                        } catch (RemoteException ex) {
-//                            Logger.getLogger(ServiceTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-//                        } catch (FileNotFoundException ex) {
-//                            Logger.getLogger(ServiceTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-//                        } catch (IOException ex) {
-//                            Logger.getLogger(ServiceTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-//                        } finally {
-//                            try {
-//                                if (stream != null) {
-//                                    stream.close();
-//                                }
-//                            } catch (IOException ex) {
-//                                Logger.getLogger(ServiceTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        });
-//        popup.addSeparator();
-//        menuItem = popup.add(new JMenuItem("Refresh"));
-//        menuItem.addActionListener(JobsTreeManager.getManager());
-//
-//        return popup;
-//    }
-
     /**
      * @return The icon for this tree node.
      */
+    @Override
     public Icon getIcon() {
         return JobsTreeManager.getManager().getIcon(JobsTreeNodeIconType.WEB_SERVICE);
     }
