@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="batchelor" default="default" basedir=".">
+    <target depends="default" name="all"/>
+    <target depends="test,jar,javadoc" description="Build and test whole project." name="default"/>
+    <target name="clean">
+        <subant target="clean" description="Clean project">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+    <target name="compile" description="Compile source code">
+        <subant target="compile">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+    <target name="init">
+        <subant target="init">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+    <target depends="init,compile" name="test-report">
+        <subant target="test-report">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+    <target depends="init,compile-test,test-report" name="test">
+        <subant target="test">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+    <target depends="init,compile" name="compile-test">
+        <subant target="compile-test">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+    <target name="jar">
+        <subant target="jar">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+    <target depends="init" name="javadoc" description="Build Javadoc">
+        <property file="client/nbproject/private/config.properties"/>
+        <mkdir dir="docs/javadoc"/>
+        <javadoc author="${javadoc.author}"
+                 charset="UTF-8"
+                 destdir="docs/javadoc"
+                 docencoding="UTF-8"
+                 encoding="ISO-8859-1"
+                 failonerror="true"
+                 noindex="${javadoc.noindex}"
+                 nonavbar="${javadoc.nonavbar}"
+                 notree="${javadoc.notree}"
+                 private="${javadoc.private}"
+                 source="${javac.source}"
+                 splitindex="${javadoc.splitindex}"
+                 use="${javadoc.use}"
+                 useexternalfile="true"
+                 version="${javadoc.version}"
+                 windowtitle="${javadoc.windowtitle}">
+            <classpath>
+                <path path="${javac.classpath}"/>
+            </classpath>
+            <fileset dir="client/src">
+                <filename name="**/*.java"/>
+            </fileset>
+            <fileset dir="core/src">
+                <filename name="**/*.java"/>
+            </fileset>
+        </javadoc>
+    </target>
+</project>
