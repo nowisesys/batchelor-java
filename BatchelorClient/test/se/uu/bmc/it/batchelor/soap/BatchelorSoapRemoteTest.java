@@ -53,6 +53,9 @@ import java.net.MalformedURLException;
  * terminate too soon. The suspend and resume test will fail unless job control
  * is enabled in the Batchelor configuration.
  *
+ * Make sure that the indata passed by enqueue() is valid for the remote
+ * service, or all sub sequent tests depending on enqueued job will fail.
+ *
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
 public class BatchelorSoapRemoteTest {
