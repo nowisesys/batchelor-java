@@ -7,7 +7,7 @@
 # Date:   2009-05-13
 
 cwd="`pwd`"
-version="1.0.2"
+version="1.0.3"
 distdir="$cwd/dist"
 classes="$cwd/build/classes"
 
