@@ -14,7 +14,7 @@
             </test-roots>
         </data>
         <swingapp xmlns="http://www.netbeans.org/ns/form-swingapp/1">
-            <application-class name="batchelorexplorer.BatchelorExplorerApp"/>
+            <application-class name="se.uu.bmc.it.batchelor.explorer.BatchelorExplorerApp"/>
         </swingapp>
     </configuration>
 </project>
