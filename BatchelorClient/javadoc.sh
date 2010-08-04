@@ -13,7 +13,10 @@ FOA_JAR="../../FOA/dist/foa-java-1.0.*.jar"
 ENCODING="utf8"
 
 DESTDIR="dist/api"
-SRCDIR="../CommonLibrary/src src build/generated/wsimport/client"
+# NetBeans 6.5:
+# SRCDIR="../CommonLibrary/src src build/generated/wsimport/client"
+# NetBeans 6.7.1:
+SRCDIR="../CommonLibrary/src src build/generated-sources/jax-ws"
 
 JARS=${FOA_JAR}
 
