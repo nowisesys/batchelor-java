@@ -52,8 +52,13 @@ import se.uu.bmc.it.batchelor.QueueFilterResult;
 import se.uu.bmc.it.batchelor.QueueSortResult;
 
 /**
- * Unit test of the REST interface for the Batchelor service
- * running on localhost.
+ * Unit test of the REST interface for the Batchelor service running on
+ * localhost. Changed the server member to test against another system.
+ *
+ * Note:
+ *
+ * It's normal for the suspend/resume tests to fail if the enqueued job gets
+ * executed immediate.
  * 
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
