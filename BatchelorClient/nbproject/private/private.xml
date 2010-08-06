@@ -2,15 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/META-INF/BatchelorSoapService.xml</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/META-INF/batchelor-rest-response.xml</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/META-INF/batchelor-rest-schema.xsd</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/se/uu/bmc/it/batchelor/soap/convert/EnqueueResultConverter.java</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/META-INF/wsit-client.xml</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/META-INF/wsdl/localhost_8080/BatchelorService/BatchelorSoapService.wsdl</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/META-INF/wsdl/localhost_8080/BatchelorService/BatchelorSoapService.xsd_1.xsd</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/META-INF/batchelor-rest-xlink.xsd</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/META-INF/jax-ws-catalog.xml</file>
-        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/src/se/uu/bmc/it/batchelor/soap/BatchelorSoapClient.java</file>
+        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/test/se/uu/bmc/it/batchelor/rest/BatchelorRestClientTest.java</file>
+        <file>file:/home/andlov/Develop/NetBeans/BatchelorWebService/BatchelorClient/test/se/uu/bmc/it/batchelor/soap/BatchelorSoapRemoteTest.java</file>
     </open-files>
 </project-private>

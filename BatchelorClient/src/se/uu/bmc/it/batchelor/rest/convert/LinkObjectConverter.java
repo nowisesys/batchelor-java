@@ -63,6 +63,6 @@ public class LinkObjectConverter {
     public static String createFilePath(Link link, JobIdentity job) {
         String find = String.format("%d/%s", job.getResult(), job.getJobID());
         int pos = link.getHref().indexOf(find);
-        return link.getHref().substring(pos + find.length());
+        return link.getHref().substring(pos + find.length() + 1);
     }
 }
