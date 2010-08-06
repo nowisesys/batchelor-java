@@ -62,8 +62,7 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
         List<String> list = service.getService().readdir(identity);
 
         for (String file : list) {
-            TreePath path = new TreePath(file.substring(1).split("/"));
-            // addFileNode(this, path.getParentPath(), (String) path.getLastPathComponent(), identity);
+            TreePath path = new TreePath(file.split("/"));
             addFileNode(this, path.getParentPath(), (String) path.getLastPathComponent(), file, identity);
         }
     }
