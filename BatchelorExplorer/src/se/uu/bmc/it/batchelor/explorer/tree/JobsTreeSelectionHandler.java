@@ -28,6 +28,7 @@ public class JobsTreeSelectionHandler implements TreeSelectionListener {
         this.tree = tree;
     }
 
+    @Override
     public void valueChanged(TreeSelectionEvent event) {
     }
 

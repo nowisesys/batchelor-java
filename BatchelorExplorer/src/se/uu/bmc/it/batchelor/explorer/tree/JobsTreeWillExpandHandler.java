@@ -31,6 +31,7 @@ public class JobsTreeWillExpandHandler implements TreeWillExpandListener {
         this.tree = tree;
     }
 
+    @Override
     public void treeWillExpand(TreeExpansionEvent event) throws ExpandVetoException {
         try {
             JobsTreeNode node = (JobsTreeNode) event.getPath().getLastPathComponent();
@@ -48,6 +49,7 @@ public class JobsTreeWillExpandHandler implements TreeWillExpandListener {
         }
     }
 
+    @Override
     public void treeWillCollapse(TreeExpansionEvent event) throws ExpandVetoException {
     }
 }

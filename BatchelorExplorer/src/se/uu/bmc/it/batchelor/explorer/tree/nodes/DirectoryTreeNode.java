@@ -27,10 +27,12 @@ public class DirectoryTreeNode extends AbstractJobsTreeNode {
         super(obj);
     }
 
+    @Override
     public void addChildNodes() throws RemoteException {
         // Ignore
     }
 
+    @Override
     public void refreshChildNodes() throws RemoteException {
         // Ignore
     }
@@ -39,6 +41,7 @@ public class DirectoryTreeNode extends AbstractJobsTreeNode {
      * @return This function returns null always becasue theres no valid 
      * operations to perform on directory tree nodes.
      */
+    @Override
     public JPopupMenu getContextMenu() {
         return null;
     }
@@ -46,6 +49,7 @@ public class DirectoryTreeNode extends AbstractJobsTreeNode {
     /**
      * @return The icon for this tree node.
      */
+    @Override
     public Icon getIcon() {
         return JobsTreeManager.getManager().getIcon(JobsTreeNodeIconType.DIRECTORY);
     }

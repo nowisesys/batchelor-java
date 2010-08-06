@@ -81,10 +81,12 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
      * This method do nothing because file nodes are always leaf nodes.
      * @throws RemoteException
      */
+    @Override
     public void addChildNodes() throws RemoteException {
         // Objects of this class is always a leaf nodes.
     }
 
+    @Override
     public void refreshChildNodes() throws RemoteException {
         // Ignore
     }
@@ -92,6 +94,7 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
     /**
      * @return The context menu associated with this remote file node.
      */
+    @Override
     public JPopupMenu getContextMenu() {
         JPopupMenu popup = new JPopupMenu();
         JMenuItem menuItem;
@@ -99,6 +102,7 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
         menuItem = popup.add(new JMenuItem("Download..."));
         menuItem.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
 //                JobsTreeManager manager = JobsTreeManager.getManager();
 //                RemoteFileTreeNode node = (RemoteFileTreeNode) manager.getSelectedNode();
@@ -154,6 +158,7 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
         menuItem.setEnabled(false);
         menuItem.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: add unlink method to batchelor web service API.
                 throw new UnsupportedOperationException("Not supported yet.");
@@ -247,6 +252,7 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
     /**
      * @return The icon for this tree node.
      */
+    @Override
     public Icon getIcon() {
         JobsTreeManager manager = JobsTreeManager.getManager();
         String name = getName();

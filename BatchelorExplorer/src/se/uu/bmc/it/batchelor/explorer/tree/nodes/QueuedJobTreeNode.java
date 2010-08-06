@@ -50,11 +50,13 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
         return String.format("%d", getQueuedJob().getJobIdentity().getResult());
     }
 
+    @Override
     public void refreshChildNodes() throws RemoteException {
         this.removeAllChildren();
         addChildNodes();
     }
 
+    @Override
     public void addChildNodes() throws RemoteException {
         WebServiceClient service = getWebServiceClient();
         JobIdentity identity = getQueuedJob().getJobIdentity();
@@ -120,6 +122,7 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
     /**
      * @return The context menu associated with this queued job tree node.
      */
+    @Override
     public JPopupMenu getContextMenu() {
         JPopupMenu popup = new JPopupMenu();
         JMenuItem menuItem;
@@ -132,6 +135,7 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
         menuItem.setEnabled(state.compareTo("running") == 0);
         menuItem.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 try {
 //                    JobsTreeManager manager = JobsTreeManager.getManager();
@@ -147,6 +151,7 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
         menuItem.setEnabled(state.compareTo("running") == 0);
         menuItem.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 try {
 //                    JobsTreeManager manager = JobsTreeManager.getManager();
@@ -161,6 +166,7 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
         menuItem = popup.add(new JMenuItem("Delete"));
         menuItem.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent event) {
                 try {
 //                    JobsTreeManager manager = JobsTreeManager.getManager();
@@ -244,6 +250,7 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
     /**
      * @return The icon for this tree node.
      */
+    @Override
     public Icon getIcon() {
         JobsTreeManager manager = JobsTreeManager.getManager();
         String state = getQueuedJob().getState();

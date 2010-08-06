@@ -25,6 +25,7 @@ public abstract class AbstractJobsTreeNode extends DefaultMutableTreeNode implem
         super(obj);
     }
 
+    @Override
     public WebServiceClient getWebServiceClient() {
         return ((ServiceTreeNode) getRoot()).getWebServiceClient();
     }
