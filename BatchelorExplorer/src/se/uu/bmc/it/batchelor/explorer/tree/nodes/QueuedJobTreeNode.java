@@ -11,6 +11,7 @@
  */
 package se.uu.bmc.it.batchelor.explorer.tree.nodes;
 
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 import se.uu.bmc.it.batchelor.explorer.tree.*;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
 
@@ -269,5 +270,10 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public PluginType getPluginType() {
+	return PluginType.RESULT;
     }
 }

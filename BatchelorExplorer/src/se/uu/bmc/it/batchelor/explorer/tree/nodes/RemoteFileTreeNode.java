@@ -11,6 +11,7 @@
  */
 package se.uu.bmc.it.batchelor.explorer.tree.nodes;
 
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 import se.uu.bmc.it.batchelor.explorer.tree.*;
 import se.uu.bmc.it.batchelor.explorer.BatchelorExplorerApp;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
@@ -51,30 +52,30 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
      * @param identity The nodes associated job identity.
      */
     public RemoteFileTreeNode(String name, String file, JobIdentity identity) {
-        super(name);
-        this.file = file;
-        this.identity = identity;
+	super(name);
+	this.file = file;
+	this.identity = identity;
     }
 
     /**
      * @return The display name.
      */
     public String getName() {
-        return (String) getUserObject();
+	return (String) getUserObject();
     }
 
     /**
      * @return The remote file path.
      */
     public String getFile() {
-        return file;
+	return file;
     }
 
     /**
      * @return The associated job identity.
      */
     public JobIdentity getJobIdentity() {
-        return identity;
+	return identity;
     }
 
     /**
@@ -83,12 +84,12 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
      */
     @Override
     public void addChildNodes() throws RemoteException {
-        // Objects of this class is always a leaf nodes.
+	// Objects of this class is always a leaf nodes.
     }
 
     @Override
     public void refreshChildNodes() throws RemoteException {
-        // Ignore
+	// Ignore
     }
 
     /**
@@ -96,75 +97,75 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
      */
     @Override
     public JPopupMenu getContextMenu() {
-        JPopupMenu popup = new JPopupMenu();
-        JMenuItem menuItem;
+	JPopupMenu popup = new JPopupMenu();
+	JMenuItem menuItem;
 
-        menuItem = popup.add(new JMenuItem("Download..."));
-        menuItem.addActionListener(new ActionListener() {
+	menuItem = popup.add(new JMenuItem("Download..."));
+	menuItem.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
 //                JobsTreeManager manager = JobsTreeManager.getManager();
 //                RemoteFileTreeNode node = (RemoteFileTreeNode) manager.getSelectedNode();
 
-                JFrame frame = BatchelorExplorerApp.getApplication().getMainFrame();
-                JFileChooser dialog = new JFileChooser();
-                dialog.setSelectedFile(new File(file));
+		JFrame frame = BatchelorExplorerApp.getApplication().getMainFrame();
+		JFileChooser dialog = new JFileChooser();
+		dialog.setSelectedFile(new File(file));
 
-                if (dialog.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+		if (dialog.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
 //                    ServiceTreeNode root = (ServiceTreeNode) manager.getRootNode();
 //                    root = (ServiceTreeNode) manager.getRootNode();
 
-                    WebServiceClient service = getWebServiceClient();
-                    if (service.getType() == WebServiceClientType.REST) {
-                        try {
-                            BatchelorRestClient client = (BatchelorRestClient) service.getService();
-                            client.fopen(identity, file, dialog.getSelectedFile());
-                        } catch (RemoteException ex) {
-                            Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (FileNotFoundException ex) {
-                            Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IOException ex) {
-                            Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else if (service.getType() == WebServiceClientType.SOAP) {
-                        {
-                            OutputStream stream = null;
-                            try {
-                                BatchelorSoapClient client = (BatchelorSoapClient) service.getService();
-                                byte[] bytes = client.fopen(identity, file);
-                                stream = new FileOutputStream(dialog.getSelectedFile());
-                                stream.write(bytes);
-                            } catch (FileNotFoundException ex) {
-                                Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (RemoteException ex) {
-                                Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (IOException ex) {
-                                Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                            } finally {
-                                try {
-                                    stream.close();
-                                } catch (IOException ex) {
-                                    Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
+		    WebServiceClient service = getWebServiceClient();
+		    if (service.getType() == WebServiceClientType.REST) {
+			try {
+			    BatchelorRestClient client = (BatchelorRestClient) service.getService();
+			    client.fopen(identity, file, dialog.getSelectedFile());
+			} catch (RemoteException ex) {
+			    Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (FileNotFoundException ex) {
+			    Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (IOException ex) {
+			    Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		    } else if (service.getType() == WebServiceClientType.SOAP) {
+			{
+			    OutputStream stream = null;
+			    try {
+				BatchelorSoapClient client = (BatchelorSoapClient) service.getService();
+				byte[] bytes = client.fopen(identity, file);
+				stream = new FileOutputStream(dialog.getSelectedFile());
+				stream.write(bytes);
+			    } catch (FileNotFoundException ex) {
+				Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+			    } catch (RemoteException ex) {
+				Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+			    } catch (IOException ex) {
+				Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+			    } finally {
+				try {
+				    stream.close();
+				} catch (IOException ex) {
+				    Logger.getLogger(RemoteFileTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	});
 
-        menuItem = popup.add(new JMenuItem("Delete"));
-        menuItem.setEnabled(false);
-        menuItem.addActionListener(new ActionListener() {
+	menuItem = popup.add(new JMenuItem("Delete"));
+	menuItem.setEnabled(false);
+	menuItem.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO: add unlink method to batchelor web service API.
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-        });
-        return popup;
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		// TODO: add unlink method to batchelor web service API.
+		throw new UnsupportedOperationException("Not supported yet.");
+	    }
+	});
+	return popup;
     }
 
 //    /**
@@ -254,21 +255,26 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
      */
     @Override
     public Icon getIcon() {
-        JobsTreeManager manager = JobsTreeManager.getManager();
-        String name = getName();
+	JobsTreeManager manager = JobsTreeManager.getManager();
+	String name = getName();
 
-        if (name.compareTo("result.zip") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.FILE_TGZ);
-        } else if (name.compareTo("started") == 0 || name.compareTo("queued") == 0 || name.compareTo("finished") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.FILE_STAMP);
-        } else if (name.compareTo("stdout") == 0 || name.compareTo("stderr") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.FILE_LOG);
-        } else if (name.compareTo("indata") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.FILE_INDATA);
-        } else if (getParent().toString().indexOf("result") != -1) {
-            return manager.getIcon(JobsTreeNodeIconType.FILE_RESULT);
-        } else {
-            return manager.getIcon(JobsTreeNodeIconType.FILE_ASCII);
-        }
+	if (name.compareTo("result.zip") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.FILE_TGZ);
+	} else if (name.compareTo("started") == 0 || name.compareTo("queued") == 0 || name.compareTo("finished") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.FILE_STAMP);
+	} else if (name.compareTo("stdout") == 0 || name.compareTo("stderr") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.FILE_LOG);
+	} else if (name.compareTo("indata") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.FILE_INDATA);
+	} else if (getParent().toString().indexOf("result") != -1) {
+	    return manager.getIcon(JobsTreeNodeIconType.FILE_RESULT);
+	} else {
+	    return manager.getIcon(JobsTreeNodeIconType.FILE_ASCII);
+	}
+    }
+
+    @Override
+    public PluginType getPluginType() {
+	return PluginType.FILE;
     }
 }

@@ -17,6 +17,7 @@ import java.rmi.RemoteException;
 import javax.swing.Icon;
 import javax.swing.JPopupMenu;
 import javax.swing.tree.MutableTreeNode;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 
 /**
  * Interface for all tree node types in the jobs tree.
@@ -46,6 +47,11 @@ public interface JobsTreeNode extends MutableTreeNode {
      * @return The context menu associated with this tree node type.
      */
     JPopupMenu getContextMenu();
+
+    /**
+     * @return The service provider type for this tree node type.
+     */
+    PluginType getPluginType();
 
     /**
      * @return The icon for this tree node.

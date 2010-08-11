@@ -12,6 +12,7 @@
 
 package se.uu.bmc.it.batchelor.explorer.tree.nodes;
 
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 import se.uu.bmc.it.batchelor.explorer.tree.*;
 import java.rmi.RemoteException;
 import javax.swing.Icon;
@@ -52,6 +53,11 @@ public class DirectoryTreeNode extends AbstractJobsTreeNode {
     @Override
     public Icon getIcon() {
         return JobsTreeManager.getManager().getIcon(JobsTreeNodeIconType.DIRECTORY);
+    }
+
+    @Override
+    public PluginType getPluginType() {
+	return PluginType.DIRECTORY;
     }
 
 }

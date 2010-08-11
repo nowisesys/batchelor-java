@@ -1,0 +1,4 @@
+se.uu.bmc.it.batchelor.explorer.plugin.DefaultFilePlugin
+se.uu.bmc.it.batchelor.explorer.plugin.DefaultDirectoryPlugin
+se.uu.bmc.it.batchelor.explorer.plugin.DefaultResultPlugin
+se.uu.bmc.it.batchelor.explorer.plugin.DefaultServicePlugin

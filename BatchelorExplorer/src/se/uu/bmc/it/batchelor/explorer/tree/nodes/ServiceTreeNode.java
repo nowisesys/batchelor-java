@@ -11,6 +11,7 @@
  */
 package se.uu.bmc.it.batchelor.explorer.tree.nodes;
 
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 import se.uu.bmc.it.batchelor.explorer.tree.*;
 import se.uu.bmc.it.batchelor.explorer.BatchelorExplorerApp;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
@@ -189,5 +190,10 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
     @Override
     public Icon getIcon() {
         return JobsTreeManager.getManager().getIcon(JobsTreeNodeIconType.WEB_SERVICE);
+    }
+
+    @Override
+    public PluginType getPluginType() {
+	return PluginType.SERVICE;
     }
 }
