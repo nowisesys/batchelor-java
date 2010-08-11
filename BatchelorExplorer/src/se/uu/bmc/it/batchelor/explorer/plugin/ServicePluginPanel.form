@@ -39,6 +39,13 @@
               <Component id="jLabelHeader" pref="393" max="32767" attributes="0"/>
               <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelDateHeader" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jLabelDateValue" pref="309" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -61,7 +68,12 @@
                   <Component id="jLabelUrlHeader" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelUrlValue" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="61" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelDateHeader" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelDateValue" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -112,6 +124,19 @@
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="jLabelUrlValue.text"/>
         <Property name="name" type="java.lang.String" value="jLabelUrlValue" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelDateHeader">
+      <Properties>
+        <Property name="font" type="java.awt.Font" resourceKey="jLabelDateHeader.font"/>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelDateHeader.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelDateHeader" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelDateValue">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelDateValue.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelDateValue" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

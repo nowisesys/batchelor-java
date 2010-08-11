@@ -15,6 +15,7 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.net.HttpURLConnection;
 import java.net.ContentHandlerFactory;
+import java.util.Date;
 
 import se.uu.bmc.it.batchelor.*;
 import se.uu.bmc.it.batchelor.rest.*;
@@ -30,14 +31,15 @@ public class WebServiceClient {
     private String name;
     private WebServiceClientType type;
     private URL url;
+    private Date date;
 
-     static {
-         //
-         // Installs content handlers for the text/xml and text/x-foa MIME types:
-         //
-         ContentHandlerFactory factory = ResponseDecoderFactory.getInstance();
-         HttpURLConnection.setContentHandlerFactory(factory);
-     }
+    static {
+	//
+	// Installs content handlers for the text/xml and text/x-foa MIME types:
+	//
+	ContentHandlerFactory factory = ResponseDecoderFactory.getInstance();
+	HttpURLConnection.setContentHandlerFactory(factory);
+    }
 
     /**
      * Construct the web service client object. Use createWebServiceClient() instead
@@ -47,36 +49,44 @@ public class WebServiceClient {
      * @param type The web service type.
      */
     public WebServiceClient(URL url, String name, WebServiceClientType type) {
-        this.name = name;
-        this.type = type;
-        this.url = url;
-        
-        if(type == WebServiceClientType.REST) {
-            service = new BatchelorRestClient(url);
-        } else if(type == WebServiceClientType.SOAP) {
-            service = new BatchelorSoapClient(url);
-        }
+	this.date = new Date();
+	this.name = name;
+	this.type = type;
+	this.url = url;
+
+	if (type == WebServiceClientType.REST) {
+	    service = new BatchelorRestClient(url);
+	} else if (type == WebServiceClientType.SOAP) {
+	    service = new BatchelorSoapClient(url);
+	}
     }
 
     /**
      * @return Get the web service URL.
      */
     public URL getURL() {
-        return url;
+	return url;
+    }
+
+    /**
+     * @return The datetime for connection establishment.
+     */
+    public final Date getDate() {
+	return date;
     }
 
     /**
      * @return Get the associated service name.
      */
     public String getName() {
-        return name;
+	return name;
     }
 
     /**
      * @return Get the web service type.
      */
     public WebServiceClientType getType() {
-        return type;
+	return type;
     }
 
     /**
@@ -84,7 +94,7 @@ public class WebServiceClient {
      * interface WebServiceInterface.
      */
     public WebServiceInterface getService() {
-        return service;
+	return service;
     }
 
     /**
@@ -96,24 +106,24 @@ public class WebServiceClient {
      * @throws MalformedURLException
      */
     public static WebServiceClient createWebServiceClient(String name) throws MalformedURLException {
-        if(name.startsWith("http://") || name.startsWith("https://")) {
-            if(name.indexOf("/ws/rest") != -1) {
-                return new WebServiceClient(new URL(name), name, WebServiceClientType.REST);
-            } else if(name.indexOf("/ws/soap") != -1) {
-                return new WebServiceClient(new URL(name), name, WebServiceClientType.SOAP);
-            }
-        } else if(name.startsWith("rest://")) {
-            String url = "http://" + name.substring(7) + "/ws/rest";
-            return new WebServiceClient(new URL(url), name, WebServiceClientType.REST);
-        } else if(name.startsWith("soap://")) {
-            String url = "http://" + name.substring(7) + "/ws/schema/wsdl/?wsdl";
-            return new WebServiceClient(new URL(url), name, WebServiceClientType.SOAP);
-        }
-        return null;
+	if (name.startsWith("http://") || name.startsWith("https://")) {
+	    if (name.indexOf("/ws/rest") != -1) {
+		return new WebServiceClient(new URL(name), name, WebServiceClientType.REST);
+	    } else if (name.indexOf("/ws/soap") != -1) {
+		return new WebServiceClient(new URL(name), name, WebServiceClientType.SOAP);
+	    }
+	} else if (name.startsWith("rest://")) {
+	    String url = "http://" + name.substring(7) + "/ws/rest";
+	    return new WebServiceClient(new URL(url), name, WebServiceClientType.REST);
+	} else if (name.startsWith("soap://")) {
+	    String url = "http://" + name.substring(7) + "/ws/schema/wsdl/?wsdl";
+	    return new WebServiceClient(new URL(url), name, WebServiceClientType.SOAP);
+	}
+	return null;
     }
 
     @Override
     public String toString() {
-        return name;
+	return name;
     }
 }

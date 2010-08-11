@@ -10,6 +10,7 @@
  */
 package se.uu.bmc.it.batchelor.explorer.plugin;
 
+import java.text.DateFormat;
 import javax.swing.JPanel;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
 
@@ -42,6 +43,8 @@ public class ServicePluginPanel extends JPanel implements PluginPanelInterface {
         jLabelNameValue = new javax.swing.JLabel();
         jLabelTypeValue = new javax.swing.JLabel();
         jLabelUrlValue = new javax.swing.JLabel();
+        jLabelDateHeader = new javax.swing.JLabel();
+        jLabelDateValue = new javax.swing.JLabel();
 
         setName("Form"); // NOI18N
 
@@ -72,6 +75,13 @@ public class ServicePluginPanel extends JPanel implements PluginPanelInterface {
         jLabelUrlValue.setText(resourceMap.getString("jLabelUrlValue.text")); // NOI18N
         jLabelUrlValue.setName("jLabelUrlValue"); // NOI18N
 
+        jLabelDateHeader.setFont(resourceMap.getFont("jLabelDateHeader.font")); // NOI18N
+        jLabelDateHeader.setText(resourceMap.getString("jLabelDateHeader.text")); // NOI18N
+        jLabelDateHeader.setName("jLabelDateHeader"); // NOI18N
+
+        jLabelDateValue.setText(resourceMap.getString("jLabelDateValue.text")); // NOI18N
+        jLabelDateValue.setName("jLabelDateValue"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,6 +102,12 @@ public class ServicePluginPanel extends JPanel implements PluginPanelInterface {
                 .addGap(12, 12, 12)
                 .addComponent(jLabelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                 .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelDateHeader)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelDateValue, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,10 +126,16 @@ public class ServicePluginPanel extends JPanel implements PluginPanelInterface {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUrlHeader)
                     .addComponent(jLabelUrlValue))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDateHeader)
+                    .addComponent(jLabelDateValue))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelDateHeader;
+    private javax.swing.JLabel jLabelDateValue;
     private javax.swing.JLabel jLabelHeader;
     private javax.swing.JLabel jLabelNameHeader;
     private javax.swing.JLabel jLabelNameValue;
@@ -133,6 +155,7 @@ public class ServicePluginPanel extends JPanel implements PluginPanelInterface {
 	jLabelNameValue.setText(service.getName());
 	jLabelTypeValue.setText(service.getType().name());
 	jLabelUrlValue.setText(service.getURL().toString());
+	jLabelDateValue.setText(service.getDate().toString());
 	setVisible(active);
     }
 }
