@@ -19,10 +19,25 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="169" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelNameHeader" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelTypeHeader" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelUrlHeader" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelTypeValue" pref="340" max="32767" attributes="0"/>
+                  <Component id="jLabelNameValue" alignment="0" pref="340" max="32767" attributes="0"/>
+                  <Component id="jLabelUrlValue" alignment="0" pref="340" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+              <Component id="jLabelHeader" pref="393" max="32767" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -30,17 +45,73 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="156" max="32767" attributes="0"/>
+              <Component id="jLabelHeader" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelNameHeader" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelNameValue" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelTypeHeader" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelTypeValue" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelUrlHeader" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelUrlValue" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="61" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabelHeader">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
-        <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+        <Property name="font" type="java.awt.Font" resourceKey="jLabelHeader.font"/>
+        <Property name="icon" type="javax.swing.Icon" resourceKey="jLabelHeader.icon"/>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelHeader.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelHeader" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelNameHeader">
+      <Properties>
+        <Property name="font" type="java.awt.Font" resourceKey="jLabelUrlHeader.font"/>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelNameHeader.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelNameHeader" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelTypeHeader">
+      <Properties>
+        <Property name="font" type="java.awt.Font" resourceKey="jLabelUrlHeader.font"/>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelTypeHeader.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelTypeHeader" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelUrlHeader">
+      <Properties>
+        <Property name="font" type="java.awt.Font" resourceKey="jLabelUrlHeader.font"/>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelUrlHeader.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelUrlHeader" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelNameValue">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelNameValue.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelNameValue" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelTypeValue">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelTypeValue.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelTypeValue" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelUrlValue">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelUrlValue.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelUrlValue" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -34,33 +34,50 @@ public class FilePluginPanel extends javax.swing.JPanel implements PluginPanelIn
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelHeader = new javax.swing.JLabel();
+        jScrollPane = new javax.swing.JScrollPane();
+        jTextAreaContent = new javax.swing.JTextArea();
 
         setName("Form"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(se.uu.bmc.it.batchelor.explorer.BatchelorExplorerApp.class).getContext().getResourceMap(FilePluginPanel.class);
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        jLabelHeader.setFont(resourceMap.getFont("jLabelHeader.font")); // NOI18N
+        jLabelHeader.setIcon(resourceMap.getIcon("jLabelHeader.icon")); // NOI18N
+        jLabelHeader.setText(resourceMap.getString("jLabelHeader.text")); // NOI18N
+        jLabelHeader.setName("jLabelHeader"); // NOI18N
+
+        jScrollPane.setName("jScrollPane"); // NOI18N
+
+        jTextAreaContent.setColumns(20);
+        jTextAreaContent.setRows(5);
+        jTextAreaContent.setName("jTextAreaContent"); // NOI18N
+        jScrollPane.setViewportView(jTextAreaContent);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                    .addComponent(jLabelHeader, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addComponent(jLabelHeader)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelHeader;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JTextArea jTextAreaContent;
     // End of variables declaration//GEN-END:variables
 
     @Override
