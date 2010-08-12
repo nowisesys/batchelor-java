@@ -166,23 +166,29 @@ public class BatchelorExplorerView extends FrameView {
 		    if (path != null) {
 			jTreeJobs.setSelectionPath(path);
 			JobsTreeNode node = (JobsTreeNode) path.getLastPathComponent();
-			if(plugin != null) {
+			if (plugin != null) {
 			    plugin.setActive(false);
 			}
 			PluginService loader = PluginService.getInstance();
 			plugin = loader.getPlugin(node.getPluginType());
-			if(plugin != null) {
+			if (plugin != null) {
 			    jSplitPanel.setRightComponent(plugin.getComponent());
 			    plugin.setService(node.getWebServiceClient());
 			    plugin.setActive(true);
 			}
 		    }
 		} catch (Exception e) {
-		    
 		}
 
 	    }
 	});
+
+	PluginService loader = PluginService.getInstance();
+	plugin = loader.getPlugin(PluginType.START);
+	if (plugin != null) {
+	    jSplitPanel.setRightComponent(plugin.getComponent());
+	    plugin.setActive(true);
+	}
     }
 
     @Action

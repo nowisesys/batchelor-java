@@ -19,6 +19,10 @@ package se.uu.bmc.it.batchelor.explorer.plugin.spi;
 public enum PluginType {
 
     /**
+     * This plug-in shows the welcome and introduction page.
+     */
+    START,
+    /**
      * This plug-in handles viewing of file content.
      */
     FILE,
