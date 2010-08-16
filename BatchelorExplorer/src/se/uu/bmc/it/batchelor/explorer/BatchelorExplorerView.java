@@ -19,7 +19,6 @@ import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.tree.TreePath;
 import se.uu.bmc.it.batchelor.explorer.plugin.service.PluginService;
@@ -31,8 +30,6 @@ import se.uu.bmc.it.batchelor.explorer.tree.JobsTreeManager;
 import se.uu.bmc.it.batchelor.explorer.tree.nodes.JobsTreeNode;
 import se.uu.bmc.it.batchelor.explorer.tree.nodes.JobsTreeNodeIcon;
 import se.uu.bmc.it.batchelor.explorer.tree.nodes.JobsTreeNodeIconType;
-import se.uu.bmc.it.batchelor.explorer.tree.nodes.QueuedJobTreeNode;
-import se.uu.bmc.it.batchelor.explorer.tree.nodes.RemoteFileTreeNode;
 import se.uu.bmc.it.batchelor.explorer.tree.nodes.ServiceTreeNode;
 
 /**
@@ -144,6 +141,9 @@ public class BatchelorExplorerView extends FrameView {
 		showContextMenu(event);
 	    }
 
+	    //
+	    // Popup the context menu associated with this tree node.
+	    //
 	    private void showContextMenu(MouseEvent event) {
 		if (event.isPopupTrigger()) {
 		    try {
@@ -160,6 +160,9 @@ public class BatchelorExplorerView extends FrameView {
 
 	    }
 
+	    //
+	    // Set the plugin associated with this tree node.
+	    //
 	    private void setPluginComponent(MouseEvent event) {
 		try {
 		    TreePath path = jTreeJobs.getPathForLocation(event.getX(), event.getY());

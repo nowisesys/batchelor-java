@@ -19,24 +19,27 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane" alignment="0" pref="446" max="32767" attributes="0"/>
-                  <Component id="jLabelHeader" alignment="0" pref="446" max="32767" attributes="0"/>
-              </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jLabelHeader" pref="458" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jLabelFiles" min="-2" pref="222" max="-2" attributes="0"/>
+              <EmptySpace pref="248" max="32767" attributes="0"/>
+          </Group>
+          <Component id="jScrollPane" alignment="0" pref="470" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="jLabelHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane" pref="192" max="32767" attributes="0"/>
+              <Component id="jScrollPane" min="-2" pref="190" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelFiles" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,5 +79,11 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabelFiles">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabelFiles.text"/>
+        <Property name="name" type="java.lang.String" value="jLabelFiles" noResource="true"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

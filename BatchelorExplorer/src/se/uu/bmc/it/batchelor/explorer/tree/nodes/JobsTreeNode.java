@@ -52,7 +52,7 @@ public interface JobsTreeNode extends MutableTreeNode {
      * @return The service provider type for this tree node type.
      */
     PluginType getPluginType();
-
+    
     /**
      * @return The icon for this tree node.
      */

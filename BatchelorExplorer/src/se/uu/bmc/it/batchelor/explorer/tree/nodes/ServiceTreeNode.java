@@ -59,7 +59,7 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
     }
 
     /**
-     * Insert all remotelly queued jobs as child nodes in the tree.
+     * Insert all remotely queued jobs as child nodes in the tree.
      * @throws RemoteException
      */
     @Override
@@ -91,7 +91,7 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
 
     /**
      * Refresh the tree by removing all child nodes and then reading all
-     * remotelly queued jobs from the web service and inserting them in the tree.
+     * remotely queued jobs from the web service and inserting them in the tree.
      * @throws RemoteException
      */
     @Override

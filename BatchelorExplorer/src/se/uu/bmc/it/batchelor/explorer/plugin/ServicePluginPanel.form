@@ -21,6 +21,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelDateHeader" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jLabelDateValue" pref="309" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Component id="jLabelHeader" alignment="1" pref="417" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabelNameHeader" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelTypeHeader" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -32,18 +40,6 @@
                   <Component id="jLabelNameValue" alignment="0" pref="340" max="32767" attributes="0"/>
                   <Component id="jLabelUrlValue" alignment="0" pref="340" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-              <Component id="jLabelHeader" pref="393" max="32767" attributes="0"/>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabelDateHeader" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabelDateValue" pref="309" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -68,7 +64,7 @@
                   <Component id="jLabelUrlHeader" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelUrlValue" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelDateHeader" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelDateValue" alignment="3" min="-2" max="-2" attributes="0"/>
