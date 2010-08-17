@@ -55,6 +55,7 @@ public class FilePluginPanel extends javax.swing.JPanel implements PluginPanelIn
 
         jTextAreaContent.setColumns(20);
         jTextAreaContent.setRows(5);
+        jTextAreaContent.setDragEnabled(true);
         jTextAreaContent.setName("jTextAreaContent"); // NOI18N
         jScrollPane.setViewportView(jTextAreaContent);
 

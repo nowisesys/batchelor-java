@@ -57,6 +57,7 @@ public class DirectoryPluginPanel extends javax.swing.JPanel implements PluginPa
         jScrollPane.setName("jScrollPane"); // NOI18N
 
         jListFiles.setModel(new DefaultListModel());
+        jListFiles.setDragEnabled(true);
         jListFiles.setName("jListFiles"); // NOI18N
         jScrollPane.setViewportView(jListFiles);
 
