@@ -5,7 +5,7 @@
 
 package se.uu.bmc.it.batchelor.explorer.plugin;
 
-import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 
 /*
  * PluginPanelInterface.java
@@ -23,6 +23,6 @@ public interface PluginPanelInterface {
 
     void setActive(boolean active);
 
-    void setService(WebServiceClient service);
+    void setPluginData(PluginData data);
 
 }

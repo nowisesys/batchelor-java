@@ -19,6 +19,8 @@ import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPopupMenu;
 import javax.swing.tree.TreePath;
 import se.uu.bmc.it.batchelor.explorer.plugin.service.PluginService;
@@ -176,11 +178,12 @@ public class BatchelorExplorerView extends FrameView {
 			plugin = loader.getPlugin(node.getPluginType());
 			if (plugin != null) {
 			    jSplitPanel.setRightComponent(plugin.getComponent());
-			    plugin.setService(node.getWebServiceClient());
+			    plugin.setData(node.getPluginData());
 			    plugin.setActive(true);
 			}
 		    }
 		} catch (Exception e) {
+		    Logger.getLogger(BatchelorExplorerView.class.getName()).log(Level.SEVERE, null, e);
 		}
 
 	    }

@@ -12,7 +12,7 @@
 package se.uu.bmc.it.batchelor.explorer.plugin;
 
 import javax.swing.JPanel;
-import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 
 /**
  *
@@ -96,8 +96,8 @@ public class StartPluginPanel extends JPanel implements PluginPanelInterface {
     }
 
     @Override
-    public void setService(WebServiceClient service) {
-	// ignore
+    public void setPluginData(PluginData data) {
+	// Ignore
     }
 
 }

@@ -40,6 +40,7 @@ import se.uu.bmc.it.batchelor.JobIdentity;
 import se.uu.bmc.it.batchelor.QueueFilterResult;
 import se.uu.bmc.it.batchelor.QueueSortResult;
 import se.uu.bmc.it.batchelor.QueuedJob;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 import se.uu.bmc.it.batchelor.rest.BatchelorRestClient;
 import se.uu.bmc.it.batchelor.soap.BatchelorSoapClient;
 
@@ -195,5 +196,12 @@ public class ServiceTreeNode extends AbstractJobsTreeNode {
     @Override
     public PluginType getPluginType() {
 	return PluginType.SERVICE;
+    }
+
+    @Override
+    public PluginData getPluginData() {
+	WebServiceClient service = getWebServiceClient();
+	PluginData data = new PluginData(service);
+	return data;
     }
 }

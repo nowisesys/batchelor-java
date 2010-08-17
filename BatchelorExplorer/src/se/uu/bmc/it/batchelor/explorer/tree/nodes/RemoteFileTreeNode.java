@@ -32,6 +32,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import se.uu.bmc.it.batchelor.JobIdentity;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 import se.uu.bmc.it.batchelor.rest.BatchelorRestClient;
 import se.uu.bmc.it.batchelor.soap.BatchelorSoapClient;
 
@@ -276,5 +277,12 @@ public class RemoteFileTreeNode extends AbstractJobsTreeNode {
     @Override
     public PluginType getPluginType() {
 	return PluginType.FILE;
+    }
+
+    @Override
+    public PluginData getPluginData() {
+	WebServiceClient service = getWebServiceClient();
+	PluginData data = new PluginData(service, identity, file);
+	return data;
     }
 }

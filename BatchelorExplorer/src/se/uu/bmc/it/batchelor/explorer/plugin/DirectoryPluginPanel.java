@@ -8,10 +8,16 @@
  *
  * Created on Aug 11, 2010, 4:27:22 PM
  */
-
 package se.uu.bmc.it.batchelor.explorer.plugin;
 
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import se.uu.bmc.it.batchelor.WebServiceInterface;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 
 /**
  *
@@ -19,11 +25,11 @@ import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
  */
 public class DirectoryPluginPanel extends javax.swing.JPanel implements PluginPanelInterface {
 
-    private WebServiceClient service;
+    private PluginData data;
 
     /** Creates new form DirectoryPluginPanel */
     public DirectoryPluginPanel() {
-        initComponents();
+	initComponents();
     }
 
     /** This method is called from within the constructor to
@@ -50,11 +56,7 @@ public class DirectoryPluginPanel extends javax.swing.JPanel implements PluginPa
 
         jScrollPane.setName("jScrollPane"); // NOI18N
 
-        jListFiles.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jListFiles.setModel(new DefaultListModel());
         jListFiles.setName("jListFiles"); // NOI18N
         jScrollPane.setViewportView(jListFiles);
 
@@ -70,7 +72,7 @@ public class DirectoryPluginPanel extends javax.swing.JPanel implements PluginPa
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabelFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addContainerGap())
             .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -79,14 +81,12 @@ public class DirectoryPluginPanel extends javax.swing.JPanel implements PluginPa
                 .addGap(12, 12, 12)
                 .addComponent(jLabelHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelFiles)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelFiles;
     private javax.swing.JLabel jLabelHeader;
@@ -95,13 +95,35 @@ public class DirectoryPluginPanel extends javax.swing.JPanel implements PluginPa
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void setService(WebServiceClient service) {
-	this.service = service;
-    }
-
-    @Override
     public void setActive(boolean active) {
+	if (active) {
+	    setContent();
+	}
 	this.setVisible(active);
     }
 
+    @Override
+    public void setPluginData(PluginData data) {
+	this.data = data;
+    }
+
+    private void setContent() {
+	WebServiceClient client = data.getService();
+	WebServiceInterface service = client.getService();
+
+	try {
+	    List<String> files = service.readdir(data.getJobIdentity());
+	    DefaultListModel model = (DefaultListModel) jListFiles.getModel();
+	    model.removeAllElements();
+	    for (String file : files) {
+		if (file.startsWith(data.getPath())) {
+		    model.addElement(file);
+		}
+	    }
+	    model.trimToSize();
+	    jLabelFiles.setText(String.format("%d files total", model.getSize()));
+	} catch (RemoteException ex) {
+	    Logger.getLogger(DirectoryPluginPanel.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }
 }

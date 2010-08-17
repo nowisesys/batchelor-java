@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComponent;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginInterface;
 import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 
@@ -55,7 +56,7 @@ public class DefaultStartPlugin implements PluginInterface {
     }
 
     @Override
-    public void setService(WebServiceClient service) {
+    public void setData(PluginData data) {
 	// ignored
     }
 

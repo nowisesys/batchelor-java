@@ -17,6 +17,7 @@ import java.rmi.RemoteException;
 import javax.swing.Icon;
 import javax.swing.JPopupMenu;
 import javax.swing.tree.MutableTreeNode;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 
 /**
@@ -53,6 +54,11 @@ public interface JobsTreeNode extends MutableTreeNode {
      */
     PluginType getPluginType();
     
+    /**
+     * @return Get the relevant plug-in data for this tree node.
+     */
+    PluginData getPluginData();
+
     /**
      * @return The icon for this tree node.
      */

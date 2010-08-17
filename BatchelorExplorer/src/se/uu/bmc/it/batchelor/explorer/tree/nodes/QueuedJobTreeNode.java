@@ -11,6 +11,7 @@
  */
 package se.uu.bmc.it.batchelor.explorer.tree.nodes;
 
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 import se.uu.bmc.it.batchelor.explorer.tree.*;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
@@ -39,35 +40,35 @@ import se.uu.bmc.it.batchelor.JobIdentity;
 public class QueuedJobTreeNode extends AbstractJobsTreeNode {
 
     public QueuedJobTreeNode(QueuedJob job) {
-        super(job);
+	super(job);
     }
 
     public QueuedJob getQueuedJob() {
-        return (QueuedJob) getUserObject();
+	return (QueuedJob) getUserObject();
     }
 
     @Override
     public String toString() {
-        return String.format("%d", getQueuedJob().getJobIdentity().getResult());
+	return String.format("%d", getQueuedJob().getJobIdentity().getResult());
     }
 
     @Override
     public void refreshChildNodes() throws RemoteException {
-        this.removeAllChildren();
-        addChildNodes();
+	this.removeAllChildren();
+	addChildNodes();
     }
 
     @Override
     public void addChildNodes() throws RemoteException {
-        WebServiceClient service = getWebServiceClient();
-        JobIdentity identity = getQueuedJob().getJobIdentity();
+	WebServiceClient service = getWebServiceClient();
+	JobIdentity identity = getQueuedJob().getJobIdentity();
 
-        List<String> list = service.getService().readdir(identity);
+	List<String> list = service.getService().readdir(identity);
 
-        for (String file : list) {
-            TreePath path = new TreePath(file.split("/"));
-            addFileNode(this, path.getParentPath(), (String) path.getLastPathComponent(), file, identity);
-        }
+	for (String file : list) {
+	    TreePath path = new TreePath(file.split("/"));
+	    addFileNode(this, path.getParentPath(), (String) path.getLastPathComponent(), file, identity);
+	}
     }
 
     /**
@@ -78,8 +79,8 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
      * @param identity The job identity.
      */
     private void addFileNode(TreeNode parent, TreePath path, String name, String file, JobIdentity identity) {
-        TreeNode node = createChildNodes(this, path);
-        ((DefaultMutableTreeNode) node).add(new RemoteFileTreeNode(name, file, identity));
+	TreeNode node = createChildNodes(this, path, identity);
+	((DefaultMutableTreeNode) node).add(new RemoteFileTreeNode(name, file, identity));
     }
 
     /**
@@ -87,22 +88,23 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
      * nodes is only created if they don't exist.
      * @param parent The parent node of the directory nodes.
      * @param path The tree path relative parent.
+     * @param identity The job identity.
      * @return Returns the tree node corresponding to the tree path.
      */
-    private TreeNode createChildNodes(TreeNode parent, TreePath path) {
-        if (path != null && path.getPath() != null) {
-            for (Object obj : path.getPath()) {
-                TreeNode child = getChildNode(parent, (String) obj);
-                if (child == null) {
-                    DirectoryTreeNode node = new DirectoryTreeNode(obj);
-                    ((DefaultMutableTreeNode) parent).add(node);
-                    parent = node;
-                } else {
-                    parent = child;
-                }
-            }
-        }
-        return parent;
+    private TreeNode createChildNodes(TreeNode parent, TreePath path, JobIdentity identity) {
+	if (path != null && path.getPath() != null) {
+	    for (Object obj : path.getPath()) {
+		TreeNode child = getChildNode(parent, (String) obj);
+		if (child == null) {
+		    DirectoryTreeNode node = new DirectoryTreeNode((String) obj, identity);
+		    ((DefaultMutableTreeNode) parent).add(node);
+		    parent = node;
+		} else {
+		    parent = child;
+		}
+	    }
+	}
+	return parent;
     }
 
     /**
@@ -112,12 +114,12 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
      * @return The child tree node or null if not found.
      */
     private TreeNode getChildNode(TreeNode parent, String name) {
-        for (int i = 0; i < parent.getChildCount(); ++i) {
-            if (parent.getChildAt(i).toString().compareTo(name) == 0) {
-                return parent.getChildAt(i);
-            }
-        }
-        return null;
+	for (int i = 0; i < parent.getChildCount(); ++i) {
+	    if (parent.getChildAt(i).toString().compareTo(name) == 0) {
+		return parent.getChildAt(i);
+	    }
+	}
+	return null;
     }
 
     /**
@@ -125,66 +127,66 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
      */
     @Override
     public JPopupMenu getContextMenu() {
-        JPopupMenu popup = new JPopupMenu();
-        JMenuItem menuItem;
+	JPopupMenu popup = new JPopupMenu();
+	JMenuItem menuItem;
 
 //        JobsTreeManager manager = JobsTreeManager.getManager();
 //        QueuedJobTreeNode node = (QueuedJobTreeNode) manager.getSelectedNode();
-        String state = getQueuedJob().getState();
+	String state = getQueuedJob().getState();
 
-        menuItem = popup.add(new JMenuItem("Suspend"));
-        menuItem.setEnabled(state.compareTo("running") == 0);
-        menuItem.addActionListener(new ActionListener() {
+	menuItem = popup.add(new JMenuItem("Suspend"));
+	menuItem.setEnabled(state.compareTo("running") == 0);
+	menuItem.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                try {
+	    @Override
+	    public void actionPerformed(ActionEvent event) {
+		try {
 //                    JobsTreeManager manager = JobsTreeManager.getManager();
 //                    QueuedJobTreeNode node = (QueuedJobTreeNode) manager.getSelectedNode();
-                    WebServiceClient service = getWebServiceClient();
-                    service.getService().suspend(getQueuedJob().getJobIdentity());
-                } catch (RemoteException ex) {
-                    Logger.getLogger(QueuedJobTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        menuItem = popup.add(new JMenuItem("Resume"));
-        menuItem.setEnabled(state.compareTo("running") == 0);
-        menuItem.addActionListener(new ActionListener() {
+		    WebServiceClient service = getWebServiceClient();
+		    service.getService().suspend(getQueuedJob().getJobIdentity());
+		} catch (RemoteException ex) {
+		    Logger.getLogger(QueuedJobTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	    }
+	});
+	menuItem = popup.add(new JMenuItem("Resume"));
+	menuItem.setEnabled(state.compareTo("running") == 0);
+	menuItem.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                try {
+	    @Override
+	    public void actionPerformed(ActionEvent event) {
+		try {
 //                    JobsTreeManager manager = JobsTreeManager.getManager();
 //                    QueuedJobTreeNode node = (QueuedJobTreeNode) manager.getSelectedNode();
-                    WebServiceClient service = getWebServiceClient();
-                    service.getService().resume(getQueuedJob().getJobIdentity());
-                } catch (RemoteException ex) {
-                    Logger.getLogger(QueuedJobTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        menuItem = popup.add(new JMenuItem("Delete"));
-        menuItem.addActionListener(new ActionListener() {
+		    WebServiceClient service = getWebServiceClient();
+		    service.getService().resume(getQueuedJob().getJobIdentity());
+		} catch (RemoteException ex) {
+		    Logger.getLogger(QueuedJobTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	    }
+	});
+	menuItem = popup.add(new JMenuItem("Delete"));
+	menuItem.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                try {
+	    @Override
+	    public void actionPerformed(ActionEvent event) {
+		try {
 //                    JobsTreeManager manager = JobsTreeManager.getManager();
 //                    QueuedJobTreeNode node = (QueuedJobTreeNode) manager.getSelectedNode();
 //                    ServiceTreeNode root = (ServiceTreeNode) manager.getRootNode();
-                    WebServiceClient service = getWebServiceClient();
-                    service.getService().dequeue(getQueuedJob().getJobIdentity());
-                } catch (RemoteException ex) {
-                    Logger.getLogger(QueuedJobTreeNode.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        popup.add(new JSeparator());
-        menuItem = popup.add(new JMenuItem("Refresh"));
-        menuItem.addActionListener(JobsTreeManager.getManager());
+		    WebServiceClient service = getWebServiceClient();
+		    service.getService().dequeue(getQueuedJob().getJobIdentity());
+		} catch (RemoteException ex) {
+		    Logger.getLogger(QueuedJobTreeNode.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	    }
+	});
+	popup.add(new JSeparator());
+	menuItem = popup.add(new JMenuItem("Refresh"));
+	menuItem.addActionListener(JobsTreeManager.getManager());
 
-        return popup;
+	return popup;
     }
 
 //    /**
@@ -253,27 +255,35 @@ public class QueuedJobTreeNode extends AbstractJobsTreeNode {
      */
     @Override
     public Icon getIcon() {
-        JobsTreeManager manager = JobsTreeManager.getManager();
-        String state = getQueuedJob().getState();
-        if (state.compareTo("finished") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.JOB_SUCCESS);
-        } else if (state.compareTo("warning") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.JOB_WARNING);
-        } else if (state.compareTo("pending") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.JOB_PENDING);
-        } else if (state.compareTo("running") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.JOB_RUNNING);
-        } else if (state.compareTo("error") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.JOB_ERROR);
-        } else if (state.compareTo("crashed") == 0) {
-            return manager.getIcon(JobsTreeNodeIconType.JOB_CRASHED);
-        } else {
-            return null;
-        }
+	JobsTreeManager manager = JobsTreeManager.getManager();
+	String state = getQueuedJob().getState();
+	if (state.compareTo("finished") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.JOB_SUCCESS);
+	} else if (state.compareTo("warning") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.JOB_WARNING);
+	} else if (state.compareTo("pending") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.JOB_PENDING);
+	} else if (state.compareTo("running") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.JOB_RUNNING);
+	} else if (state.compareTo("error") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.JOB_ERROR);
+	} else if (state.compareTo("crashed") == 0) {
+	    return manager.getIcon(JobsTreeNodeIconType.JOB_CRASHED);
+	} else {
+	    return null;
+	}
     }
 
     @Override
     public PluginType getPluginType() {
 	return PluginType.RESULT;
+    }
+
+    @Override
+    public PluginData getPluginData() {
+	QueuedJob job = (QueuedJob) getUserObject();
+	WebServiceClient service = getWebServiceClient();
+	PluginData data = new PluginData(service, job.getJobIdentity());
+	return data;
     }
 }

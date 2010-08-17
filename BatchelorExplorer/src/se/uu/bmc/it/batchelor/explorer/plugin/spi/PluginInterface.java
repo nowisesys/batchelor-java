@@ -43,11 +43,11 @@ public interface PluginInterface {
     boolean provides(PluginType type);
 
     /**
-     * Set instance object for current web service. The plug-in should use this
-     * object for communication with the web service.
-     * @param service The current active web service.
+     * Set the relevant data for this plug-in. The data object will contains
+     * those properties required by the type of plug-in.
+     * @param data The relevant data for this plug-in.
      */
-    void setService(WebServiceClient service);
+    void setData(PluginData data);
 
     /**
      * Called to get the user interface of this plug-in for embedding in the

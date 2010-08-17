@@ -10,7 +10,12 @@
  */
 package se.uu.bmc.it.batchelor.explorer.plugin;
 
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import se.uu.bmc.it.batchelor.WebServiceInterface;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 
 /**
  *
@@ -18,7 +23,7 @@ import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
  */
 public class FilePluginPanel extends javax.swing.JPanel implements PluginPanelInterface {
 
-    private WebServiceClient service;
+    private PluginData data;
 
     /** Creates new form FilePluginPanel */
     public FilePluginPanel() {
@@ -77,11 +82,29 @@ public class FilePluginPanel extends javax.swing.JPanel implements PluginPanelIn
 
     @Override
     public void setActive(boolean active) {
+	if (active) {
+	    setContent();
+	}
 	setVisible(active);
     }
 
     @Override
-    public void setService(WebServiceClient service) {
-	this.service = service;
+    public void setPluginData(PluginData data) {
+	this.data = data;
+    }
+
+    private void setContent() {
+	WebServiceClient client = data.getService();
+	WebServiceInterface service = client.getService();
+	try {
+	    byte[] bytes = service.fopen(data.getJobIdentity(), data.getPath());
+	    if (bytes.length != 0) {
+		jTextAreaContent.setText(new String(bytes, 0, bytes.length));
+	    }
+	} catch (RemoteException ex) {
+	    Logger.getLogger(FilePluginPanel.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (Exception ex) {
+	    Logger.getLogger(FilePluginPanel.class.getName()).log(Level.SEVERE, null, ex);
+	}
     }
 }

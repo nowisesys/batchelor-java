@@ -12,6 +12,7 @@ package se.uu.bmc.it.batchelor.explorer.plugin;
 
 import javax.swing.JPanel;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 
 /**
  *
@@ -142,8 +143,8 @@ public class ServicePluginPanel extends JPanel implements PluginPanelInterface {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void setService(WebServiceClient service) {
-	this.service = service;
+    public void setPluginData(PluginData data) {
+	this.service = data.getService();
     }
 
     @Override

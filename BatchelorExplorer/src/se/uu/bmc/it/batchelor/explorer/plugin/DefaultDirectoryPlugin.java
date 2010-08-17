@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComponent;
 import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginInterface;
 import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
 
@@ -55,16 +56,17 @@ public class DefaultDirectoryPlugin implements PluginInterface {
     }
 
     @Override
-    public void setService(WebServiceClient service) {
-	panel.setService(service);
-    }
-
-    @Override
     public JComponent getComponent() {
 	return panel;
     }
 
     @Override
     public void setActive(boolean active) {
+	panel.setActive(active);
+    }
+
+    @Override
+    public void setData(PluginData data) {
+	panel.setPluginData(data);
     }
 }

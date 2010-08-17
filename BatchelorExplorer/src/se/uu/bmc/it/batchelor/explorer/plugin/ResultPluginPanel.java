@@ -11,7 +11,7 @@
 package se.uu.bmc.it.batchelor.explorer.plugin;
 
 import javax.swing.JPanel;
-import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
+import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginData;
 
 /**
  *
@@ -19,7 +19,7 @@ import se.uu.bmc.it.batchelor.explorer.WebServiceClient;
  */
 public class ResultPluginPanel extends JPanel implements PluginPanelInterface {
 
-    private WebServiceClient service;
+    private PluginData data;
 
     /** Creates new form ResultPluginPanel */
     public ResultPluginPanel() {
@@ -92,12 +92,12 @@ public class ResultPluginPanel extends JPanel implements PluginPanelInterface {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void setService(WebServiceClient service) {
-	this.service = service;
+    public void setActive(boolean active) {
+	setVisible(active);
     }
 
     @Override
-    public void setActive(boolean active) {
-	setVisible(active);
+    public void setPluginData(PluginData data) {
+	this.data = data;
     }
 }
