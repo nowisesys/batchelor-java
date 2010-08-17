@@ -226,7 +226,11 @@ public class BatchelorExplorerView extends FrameView {
         connectMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
-        preferencesMenuItem = new javax.swing.JMenuItem();
+        copyMenuItem = new javax.swing.JMenuItem();
+        selectAllMenuItem = new javax.swing.JMenuItem();
+        toolsMenu = new javax.swing.JMenu();
+        optionsMenuItem = new javax.swing.JMenuItem();
+        pluginsMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
@@ -248,7 +252,7 @@ public class BatchelorExplorerView extends FrameView {
         jPanelContent.setLayout(jPanelContentLayout);
         jPanelContentLayout.setHorizontalGroup(
             jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addGap(0, 623, Short.MAX_VALUE)
         );
         jPanelContentLayout.setVerticalGroup(
             jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,11 +302,31 @@ public class BatchelorExplorerView extends FrameView {
         editMenu.setText(resourceMap.getString("editMenu.text")); // NOI18N
         editMenu.setName("editMenu"); // NOI18N
 
-        preferencesMenuItem.setText(resourceMap.getString("preferencesMenuItem.text")); // NOI18N
-        preferencesMenuItem.setName("preferencesMenuItem"); // NOI18N
-        editMenu.add(preferencesMenuItem);
+        copyMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        copyMenuItem.setText(resourceMap.getString("copyMenuItem.text")); // NOI18N
+        copyMenuItem.setName("copyMenuItem"); // NOI18N
+        editMenu.add(copyMenuItem);
+
+        selectAllMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        selectAllMenuItem.setText(resourceMap.getString("selectAllMenuItem.text")); // NOI18N
+        selectAllMenuItem.setName("selectAllMenuItem"); // NOI18N
+        editMenu.add(selectAllMenuItem);
 
         menuBar.add(editMenu);
+
+        toolsMenu.setText(resourceMap.getString("toolsMenu.text")); // NOI18N
+        toolsMenu.setName("toolsMenu"); // NOI18N
+
+        optionsMenuItem.setText(resourceMap.getString("optionsMenuItem.text")); // NOI18N
+        optionsMenuItem.setName("optionsMenuItem"); // NOI18N
+        toolsMenu.add(optionsMenuItem);
+
+        pluginsMenuItem.setAction(actionMap.get("showPluginsDialog")); // NOI18N
+        pluginsMenuItem.setText(resourceMap.getString("pluginsMenuItem.text")); // NOI18N
+        pluginsMenuItem.setName("pluginsMenuItem"); // NOI18N
+        toolsMenu.add(pluginsMenuItem);
+
+        menuBar.add(toolsMenu);
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
@@ -384,8 +408,15 @@ public class BatchelorExplorerView extends FrameView {
 		    JOptionPane.ERROR_MESSAGE);
 	}
     }
+
+    @Action
+    public void showPluginsDialog() {
+	PluginsDialog dialog = new PluginsDialog(null, true);
+	dialog.setVisible(true);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem connectMenuItem;
+    private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenu editMenu;
     private javax.swing.JPanel jPanelContent;
     private javax.swing.JScrollPane jScrollPane1;
@@ -393,11 +424,14 @@ public class BatchelorExplorerView extends FrameView {
     private javax.swing.JTree jTreeJobs;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem preferencesMenuItem;
+    private javax.swing.JMenuItem optionsMenuItem;
+    private javax.swing.JMenuItem pluginsMenuItem;
     private javax.swing.JProgressBar progressBar;
+    private javax.swing.JMenuItem selectAllMenuItem;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JMenu toolsMenu;
     // End of variables declaration//GEN-END:variables
     private final Timer messageTimer;
     private final Timer busyIconTimer;

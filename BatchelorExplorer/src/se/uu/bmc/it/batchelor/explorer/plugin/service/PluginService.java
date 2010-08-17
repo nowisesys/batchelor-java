@@ -4,6 +4,7 @@
  */
 package se.uu.bmc.it.batchelor.explorer.plugin.service;
 
+import java.util.Iterator;
 import java.util.ServiceLoader;
 import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginInterface;
 import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
@@ -16,7 +17,7 @@ import se.uu.bmc.it.batchelor.explorer.plugin.spi.PluginType;
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
-public class PluginService {
+public class PluginService implements Iterable<PluginInterface> {
 
     private PluginService() {
 	plugins = ServiceLoader.load(PluginInterface.class);
@@ -27,12 +28,17 @@ public class PluginService {
     }
 
     public synchronized PluginInterface getPlugin(PluginType type) {
-	for(PluginInterface plugin : plugins) {
-	    if(plugin.provides(type)) {
+	for (PluginInterface plugin : plugins) {
+	    if (plugin.provides(type)) {
 		return plugin;
 	    }
 	}
 	return null;
+    }
+
+    @Override
+    public Iterator<PluginInterface> iterator() {
+	return plugins.iterator();
     }
 
     private static class PluginServiceHolder {
