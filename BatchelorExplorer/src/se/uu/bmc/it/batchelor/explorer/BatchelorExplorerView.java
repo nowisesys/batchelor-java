@@ -237,6 +237,7 @@ public class BatchelorExplorerView extends FrameView {
 
         mainPanel.setName("mainPanel"); // NOI18N
 
+        jSplitPanel.setDividerLocation(150);
         jSplitPanel.setName("jSplitPanel"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(se.uu.bmc.it.batchelor.explorer.BatchelorExplorerApp.class).getContext().getResourceMap(BatchelorExplorerView.class);
@@ -247,7 +248,7 @@ public class BatchelorExplorerView extends FrameView {
         jPanelContent.setLayout(jPanelContentLayout);
         jPanelContentLayout.setHorizontalGroup(
             jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 623, Short.MAX_VALUE)
+            .addGap(0, 497, Short.MAX_VALUE)
         );
         jPanelContentLayout.setVerticalGroup(
             jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
