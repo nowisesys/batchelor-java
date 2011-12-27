@@ -77,6 +77,7 @@ public class HttpServerConnection implements HttpServerRequest {
         }
     }
 
+    @Override
     public void setURL(URL url) throws IOException {
         if (connection != null) {
             disconnect();
@@ -84,6 +85,7 @@ public class HttpServerConnection implements HttpServerRequest {
         this.url = url;
     }
 
+    @Override
     public void setProxy(Proxy proxy) throws IOException {
         if (connection != null) {
             disconnect();
@@ -91,6 +93,7 @@ public class HttpServerConnection implements HttpServerRequest {
         this.proxy = proxy;
     }
 
+    @Override
     public HttpURLConnection getConnection() throws IOException {
         if (connection == null) {
             openConnection();
@@ -98,16 +101,19 @@ public class HttpServerConnection implements HttpServerRequest {
         return connection;
     }
 
+    @Override
     public Result getServerResponse() throws IOException {
         connection = getConnection();
         connection.connect();
         return (Result) connection.getContent();
     }
 
+    @Override
     public boolean usingProxy() {
         return proxy != null;
     }
 
+    @Override
     public void disconnect() throws IOException {
         if (connection != null) {
             if (connection.getDoInput()) {

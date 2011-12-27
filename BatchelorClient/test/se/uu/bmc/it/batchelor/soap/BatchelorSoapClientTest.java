@@ -272,7 +272,7 @@ public class BatchelorSoapClientTest {
             assertEquals(0, results.size());
             results = service.readdir(new JobIdentity("", 1));
             assertNotNull(results);
-            assertTrue(results.size() != 0);
+            assertTrue(!results.isEmpty());
 
             System.out.println("(+) Files:");
             for (String result : results) {

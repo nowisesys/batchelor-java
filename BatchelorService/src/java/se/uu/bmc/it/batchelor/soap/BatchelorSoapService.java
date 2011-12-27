@@ -58,6 +58,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "version")
+    @Override
     public String version() throws RemoteException {
         return "1.0";
     }
@@ -67,6 +68,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "enqueue")
+    @Override
     public List<EnqueueResult> enqueue(@WebParam(name = "indata") String indata) throws RemoteException {
         if (indata == null) {
             throw new RemoteException("Invalid indata (null)");
@@ -82,6 +84,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "dequeue")
+    @Override
     public boolean dequeue(@WebParam(name = "job")
         final JobIdentity job) throws RemoteException {
         if (job == null) {
@@ -98,6 +101,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "queue")
+    @Override
     public List<QueuedJob> queue(@WebParam(name = "sort") QueueSortResult sort, @WebParam(name = "filter") QueueFilterResult filter) throws RemoteException {
         List<QueuedJob> result = new ArrayList<QueuedJob>();
         result.add(new QueuedJob(new JobIdentity("Job ABC", 123456789), "running"));
@@ -110,6 +114,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "watch")
+    @Override
     public List<QueuedJob> watch(@WebParam(name = "stamp") int stamp) throws RemoteException {
         List<QueuedJob> result = new ArrayList<QueuedJob>();
         result.add(new QueuedJob(new JobIdentity("Job DEF", 123456789), "running"));
@@ -121,6 +126,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "suspend")
+    @Override
     public boolean suspend(@WebParam(name = "job")
         final JobIdentity job) throws RemoteException {
         if (job == null) {
@@ -137,6 +143,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "resume")
+    @Override
     public boolean resume(@WebParam(name = "job")
         final JobIdentity job) throws RemoteException {
         if (job == null) {
@@ -153,6 +160,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "opendir")
+    @Override
     public List<JobIdentity> opendir() throws RemoteException {
         List<JobIdentity> result = new ArrayList<JobIdentity>();
         result.add(new JobIdentity("Job GHI", 123456789));
@@ -165,6 +173,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "readdir")
+    @Override
     public List<String> readdir(@WebParam(name = "job")
         final JobIdentity job) throws RemoteException {
         if (job == null) {
@@ -185,6 +194,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * @see WebServiceInterface
      */
     @WebMethod(operationName = "fopen")
+    @Override
     public byte[] fopen(@WebParam(name = "job")
         final JobIdentity job, @WebParam(name = "file") String file) throws RemoteException {
         if (job == null || file == null) {
@@ -205,6 +215,7 @@ public class BatchelorSoapService implements WebServiceInterface {
      * Web service operation
      */
     @WebMethod(operationName = "stat")
+    @Override
     public QueuedJob stat(@WebParam(name = "job")
         final JobIdentity job) throws RemoteException {
         if (job == null) {

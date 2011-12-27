@@ -210,6 +210,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return The remote interface version string.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public String version() throws RemoteException {
 
         ServerConnectionFactory factory = ServerConnectionFactory.getFactory();
@@ -234,22 +235,22 @@ public class BatchelorRestClient implements WebServiceInterface {
      * job data from the indata string.
      *
      * @param indata The data to use for the enqueued job.
-     * @return The enqueue result. The array might contain more than one element
-     * if the enqueue operation results in multiple subjobs.
+     * @return The enqueue result. The array might contain more than one element if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public List<EnqueueResult> enqueue(String indata) throws RemoteException {
         ByteArrayInputStream stream = new ByteArrayInputStream(indata.getBytes());
         return enqueue(stream);
     }
 
     /**
-     * Queues an job for later execution. This version of enqueue reads the
-     * job data from the indata string.
+     * Queues an job for later execution. The job data is read from the indata 
+     * byte array. This function is an REST API specific extension of the 
+     * WebServiceInterface.
      *
      * @param indata The input data for the enqueued job.
-     * @return The enqueue result. The array might contain more than one element
-     * if the enqueue operation results in multiple subjobs.
+     * @return The enqueue result. The array might contain more than one element if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
      */
     public List<EnqueueResult> enqueue(byte[] indata) throws RemoteException {
@@ -258,12 +259,11 @@ public class BatchelorRestClient implements WebServiceInterface {
     }
 
     /**
-     * Queues an job for later execution. This version of enqueue reads the
-     * job data from the supplied file.
+     * Queues an job for later execution. The job data is read from the supplied 
+     * file. This function is an REST API specific extension of the WebServiceInterface.
      *
      * @param file The file with input data for the enqueued job.
-     * @return The enqueue result. The array might contain more than one element
-     * if the enqueue operation results in multiple subjobs.
+     * @return The enqueue result. The array might contain more than one element if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
      * @throws java.io.FileNotFoundException
      */
@@ -273,15 +273,16 @@ public class BatchelorRestClient implements WebServiceInterface {
     }
 
     /**
-     * Queues an job for later execution. This function enqueues the job using
+     * <p>Queues an job for later execution. This function enqueues the job using
      * the input stream as the job data source (indata). For some applications
      * this is a requirement because the indata might be big (maybe up to several
      * gigabytes), so trying to use an byte array or string would lead to an
-     * OutOfMemoryException.
+     * OutOfMemoryException.</p>
+     * 
+     * <p>This function is an REST API specific extension of the WebServiceInterface.</p>
      *
      * @param stream The input stream to read job data and send to the enqeueud job.
-     * @return The enqueue result. The array might contain more than one element
-     * if the enqueue operation results in multiple subjobs.
+     * @return The enqueue result. The array might contain more than one element if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
      */
     public List<EnqueueResult> enqueue(InputStream stream) throws RemoteException {
@@ -324,7 +325,9 @@ public class BatchelorRestClient implements WebServiceInterface {
     }
 
     /**
-     * A helper function for dequeue (remove) one or more jobs.
+     * An helper function for dequeue (remove) one or more jobs. This function 
+     * is an REST API specific extension to the WebServiceInterface.
+     *
      * @param url The URL of the jobs to dequeue.
      * @return True if the method completes successful.
      * @throws java.rmi.RemoteException
@@ -360,6 +363,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return True if job was dequeued successful.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public boolean dequeue(JobIdentity job) throws RemoteException {
         String path = String.format("queue/%d/%s", job.getResult(), job.getJobID());
         try {
@@ -370,7 +374,9 @@ public class BatchelorRestClient implements WebServiceInterface {
     }
 
     /**
-     * Dequeue all jobs.
+     * Dequeue all jobs. This function is an REST API specific extension to the 
+     * WebServiceInterface.
+     * 
      * @return True if successful.
      * @throws java.rmi.RemoteException
      */
@@ -384,6 +390,8 @@ public class BatchelorRestClient implements WebServiceInterface {
 
     /**
      * Dequeue all jobs matching the filter (i.e. SUCCESS, ERROR or CRASHED). 
+     * This function is an REST API specific extension to the WebServiceInterface.
+     * 
      * @param filter Filter out the jobs to dequeue.
      * @return True is successful.
      */
@@ -401,15 +409,14 @@ public class BatchelorRestClient implements WebServiceInterface {
      * to restrict the number of elements returned to a subset of all enqueued
      * jobs.
      *
-     * @param sort Allows caller to sort elements in the returned list. Use
-     * null to disable sorting.
-     * @param filter Allows caller to filter elements in the returned list.
-     * Use null to disable filtering.
+     * @param sort Allows caller to sort elements in the returned list. Use null to disable sorting.
+     * @param filter Allows caller to filter elements in the returned list. Use null to disable filtering.
      * @return The list of queued jobs (possibly a subset).
      * @throws java.rmi.RemoteException
      * @see QueueFilterResult
      * @see QueueSortResult
      */
+    @Override
     public List<QueuedJob> queue(QueueSortResult sort, QueueFilterResult filter) throws RemoteException {
         String path;
 
@@ -448,15 +455,15 @@ public class BatchelorRestClient implements WebServiceInterface {
     }
 
     /**
-     * This method gives the caller an opportunity to get an list of queued
-     * jobs that has been enqueued after the given timestamp. The timestamp
-     * is the number of seconds since the start of the UNIX epoch (00:00:00
-     * UTC on January 1, 1970).
+     * Returns a list of queued jobs that's been enqueued after the given 
+     * timestamp. The timestamp is the number of seconds since the start of the 
+     * UNIX epoch (00:00:00 UTC on January 1, 1970).
      *
      * @param stamp The UNIX timestamp.
      * @return The list of jobs enqueued after the UNIX stamp.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public List<QueuedJob> watch(int stamp) throws RemoteException {
 
         ServerConnectionFactory factory = ServerConnectionFactory.getFactory();
@@ -503,6 +510,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return True if job where suspended.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public boolean suspend(JobIdentity job) throws RemoteException {
 
         ServerConnectionFactory factory = ServerConnectionFactory.getFactory();
@@ -539,6 +547,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return True if job where resumed.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public boolean resume(JobIdentity job) throws RemoteException {
 
         ServerConnectionFactory factory = ServerConnectionFactory.getFactory();
@@ -574,6 +583,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return The list of queued jobs.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public List<JobIdentity> opendir() throws RemoteException {
 
         ServerConnectionFactory factory = ServerConnectionFactory.getFactory();
@@ -608,6 +618,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return The list of files and directories.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public List<String> readdir(JobIdentity job) throws RemoteException {
 
         ServerConnectionFactory factory = ServerConnectionFactory.getFactory();
@@ -656,6 +667,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      * return the file content encoded in Base64 encoding. The se.uu.bmc.it.batchelor.codecs.base64.Base64Decoder
      * class can be used to decode the input stream.
      * </p>
+     * 
+     * <p>This function is an REST API specific extension of the WebServiceInterface.</p>
      *
      * @param job An unique identifier of the queued job.
      * @param file The remote filename.
@@ -667,15 +680,15 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @throws java.net.SocketTimeoutException
      */
     public se.uu.bmc.it.batchelor.rest.schema.File fopen(
-        JobIdentity job, String file, int timeout)
-        throws RemoteException, SocketTimeoutException {
+            JobIdentity job, String file, int timeout)
+            throws RemoteException, SocketTimeoutException {
 
         ServerConnectionFactory factory = ServerConnectionFactory.getFactory();
         HttpServerRequest request = factory.createHttpServerConnection(url);
 
         try {
             String path = String.format("result/%d/%s/%s",
-                job.getResult(), job.getJobID(), file);
+                    job.getResult(), job.getJobID(), file);
             request.setURL(getRequestURL(path));
             request.getConnection().setReadTimeout(timeout);
 
@@ -699,7 +712,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      * to descend into subdirectories.</p>
      *
      * <p>This special version of fopen() saves the content of the remote file
-     * to a local file (the path argument).</p>
+     * to a local file (the path argument). This method is an REST API specific 
+     * extension of the WebServiceInterface.</p>
      * 
      * @param job An unique identifier of the queued job.
      * @param file The remote filename.
@@ -709,7 +723,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @throws java.io.IOException
      */
     public void fopen(JobIdentity job, String file, File path)
-        throws RemoteException, FileNotFoundException, IOException {
+            throws RemoteException, FileNotFoundException, IOException {
 
         se.uu.bmc.it.batchelor.rest.schema.File remote = fopen(job, file, 0);
 
@@ -762,6 +776,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return The file contents as an byte array.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public byte[] fopen(JobIdentity job, String file) throws RemoteException {
 
         try {
@@ -798,6 +813,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return Details on the queued job.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public QueuedJob stat(JobIdentity job) throws RemoteException {
 
         ServerConnectionFactory factory = ServerConnectionFactory.getFactory();

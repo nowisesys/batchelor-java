@@ -308,6 +308,7 @@ public class FoaResponseDecoder extends ContentHandler {
      * @param connection The URL connection to read from.
      * @return The next object from decoded FOA encoded response message.
      */
+    @Override
     public Object getContent(URLConnection connection) {
         try {
             Reader reader = new InputStreamReader(connection.getInputStream());

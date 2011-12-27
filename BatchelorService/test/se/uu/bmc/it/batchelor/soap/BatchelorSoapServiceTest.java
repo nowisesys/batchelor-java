@@ -32,9 +32,7 @@ import static org.junit.Assert.*;
 
 import java.rmi.RemoteException;
 
-import se.uu.bmc.it.batchelor.EnqueueResult;
 import se.uu.bmc.it.batchelor.JobIdentity;
-import se.uu.bmc.it.batchelor.QueuedJob;
 import se.uu.bmc.it.batchelor.QueueFilterResult;
 import se.uu.bmc.it.batchelor.QueueSortResult;
 

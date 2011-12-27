@@ -78,6 +78,7 @@ public class XmlResponseDecoder extends ContentHandler {
      * @param connection The URL connection to the REST service.
      * @return Next result object decoded from the XML encoded respose message.
      */
+    @Override
     public Object getContent(URLConnection connection) {
 
         // Use JAXB to unmarshall the input stream to the result object type

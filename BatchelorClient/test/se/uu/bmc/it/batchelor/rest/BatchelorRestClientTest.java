@@ -214,7 +214,7 @@ public class BatchelorRestClientTest {
 
     private void enqueueCheckResult(List<EnqueueResult> results) {
         assertNotNull(results);
-        assertTrue(results.size() != 0);
+        assertTrue(!results.isEmpty());
         System.out.println("(+) EnqueueResult:");
         for (EnqueueResult result : results) {
             assertNotNull(result.getJobID());

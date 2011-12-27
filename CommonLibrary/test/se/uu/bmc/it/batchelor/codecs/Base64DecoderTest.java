@@ -24,7 +24,6 @@
 package se.uu.bmc.it.batchelor.codecs;
 
 import se.uu.bmc.it.batchelor.codecs.base64.Base64Decoder;
-import java.io.InputStream;
 import java.io.ByteArrayInputStream;
 
 import org.junit.After;

@@ -165,6 +165,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return The remote interface version string.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public String version() throws RemoteException {
 
         try { // Call Web Service Operation
@@ -183,6 +184,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * if the enqueue operation results in multiple subjobs.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public List<EnqueueResult> enqueue(String indata) throws RemoteException {
 
         try { // Call Web Service Operation
@@ -206,6 +208,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return True if job was dequeued successful.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public boolean dequeue(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
@@ -229,6 +232,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @see QueueFilterResult
      * @see QueueSortResult
      */
+    @Override
     public List<QueuedJob> queue(QueueSortResult sort, QueueFilterResult filter) throws RemoteException {
 
         try { // Call Web Service Operation
@@ -255,6 +259,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return The list of jobs enqueued after the UNIX stamp.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public List<QueuedJob> watch(int stamp) throws RemoteException {
 
         try { // Call Web Service Operation
@@ -277,6 +282,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return True if job where suspended.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public boolean suspend(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
@@ -295,6 +301,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return True if job where resumed.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public boolean resume(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
@@ -312,6 +319,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return The list of queued jobs.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public List<JobIdentity> opendir() throws RemoteException {
 
         try { // Call Web Service Operation
@@ -333,6 +341,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return The list of files and directories.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public List<String> readdir(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation
@@ -352,6 +361,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return The file contents as an byte array.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public byte[] fopen(JobIdentity job, String file) throws RemoteException {
 
         try { // Call Web Service Operation
@@ -369,6 +379,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @return Details on the queued job.
      * @throws java.rmi.RemoteException
      */
+    @Override
     public QueuedJob stat(JobIdentity job) throws RemoteException {
 
         try { // Call Web Service Operation

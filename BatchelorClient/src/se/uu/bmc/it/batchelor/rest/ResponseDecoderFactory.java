@@ -85,6 +85,7 @@ public class ResponseDecoderFactory implements ContentHandlerFactory {
      * @param mimetype The MIME type.
      * @return The content handler for the MIME type.
      */
+    @Override
     public ContentHandler createContentHandler(String mimetype) {
         if(mimetype.compareTo("text/xml") == 0) {
             return new XmlResponseDecoder();
