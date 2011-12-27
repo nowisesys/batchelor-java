@@ -96,7 +96,7 @@ import java.util.ArrayList;
  *     private BatchelorRestClient client;
  *
  *     public RestServiceClient(URL url) {
- *         client = new RestWebService(url, ResponseEncoder.FOA);
+ *         client = new BatchelorRestClient(url, ResponseEncoder.FOA);
  *     }
  *
  *     // ... methods calling client.XXX()
