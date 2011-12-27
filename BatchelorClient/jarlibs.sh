@@ -3,7 +3,7 @@
 # This script will build splitted jar-files as a complement to the 
 # big batchelor-client-x.y.z.jar library.
 #
-# Author: Anders Lövgren
+# Author: Anders LÃ¶vgren
 # Date:   2009-05-13
 
 cwd="`pwd`"

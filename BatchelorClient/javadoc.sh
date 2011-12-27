@@ -2,7 +2,7 @@
 #
 # Generate javadoc for the client library API.
 #
-# Author: Anders Lövgren
+# Author: Anders LÃ¶vgren
 # Date:   2009-05-06
 
 ANT_COMMAND="ant"
