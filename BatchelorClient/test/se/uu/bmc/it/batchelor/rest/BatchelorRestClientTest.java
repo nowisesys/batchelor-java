@@ -645,5 +645,19 @@ public class BatchelorRestClientTest {
         } catch (RemoteException e) {
             fail("(!) Remote exception: " + e.getMessage());
         }
+        
+//        // Test dequeue all enqueued job:
+//        try {
+//            boolean result = client.dequeue();
+//            assumeTrue(result);
+//            if (result) {
+//                System.out.println("(i) Successful dequeued all jobs");
+//            } else {
+//                System.out.println("(-) Failed dequeue all jobs");
+//            }
+//
+//        } catch (RemoteException e) {
+//            fail("(!) Remote exception: " + e.getMessage());
+//        }
     }
 }
