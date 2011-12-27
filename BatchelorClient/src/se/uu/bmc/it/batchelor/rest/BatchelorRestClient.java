@@ -376,7 +376,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      */
     public boolean dequeue() throws RemoteException {
         try {
-            return dequeue(getRequestURL("qeueue/all"));
+            return dequeue(getRequestURL("queue/all"));
         } catch (MalformedURLException e) {
             throw new RemoteException("Failed dequeue all jobs", e);
         }
