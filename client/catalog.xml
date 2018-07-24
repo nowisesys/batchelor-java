@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://www.w3.org/1999/xlink" uri="src/META-INF/www.w3.org/1999/xlink"/>
+    <system systemId="http://www.w3.org/TR/xlink/" uri="src/META-INF/www.w3.org/tr/xlink"/>
+    <system systemId="http://localhost/batchelor1/ws/schema/wsdl/?wsdl" uri="xml-resources/web-service-references/WsClient/wsdl/localhost/batchelor1/ws/schema/wsdl/.wsdl"/>
+</catalog>
+
