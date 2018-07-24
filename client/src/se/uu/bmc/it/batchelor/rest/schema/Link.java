@@ -20,14 +20,14 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  *
  * <pre>
- * &lt;complexType name="link">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attGroup ref="{http://it.bmc.uu.se/batchelor/rest/200901}request"/>
- *       &lt;attribute ref="{http://it.bmc.uu.se/batchelor/xlink/200901}href use="required""/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="link"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;attGroup ref="{http://it.bmc.uu.se/batchelor/rest/200901}request"/&gt;
+ *       &lt;attribute ref="{http://it.bmc.uu.se/batchelor/xlink/200901}href use="required""/&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  *
  *

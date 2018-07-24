@@ -47,7 +47,7 @@ public class BatchelorRestLoopback extends BatchelorRestClient {
      * Creates an Batchelor REST service client using the REST service on localhost. The object
      * created is only useful for testing.
      *
-     * @throws java.net.MalformedURLException
+     * @throws java.net.MalformedURLException The URL is invalid.
      */
     public BatchelorRestLoopback() throws MalformedURLException {
         super(new URL("http://localhost/batchelor/ws/rest/"), ResponseEncoder.DEFAULT);

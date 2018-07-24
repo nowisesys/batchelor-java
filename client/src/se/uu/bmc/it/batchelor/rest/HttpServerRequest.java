@@ -40,6 +40,8 @@ import se.uu.bmc.it.batchelor.rest.schema.Result;
  * <p>
  * The interface for communicating with the REST service over HTTP(S). Set any connection parameters
  * on the opened connection before calling any methods that connects to the server.
+ * </p>
+ * 
  * <pre>
  * try {
  *     HttpServerRequest request = new HttpServerConnection(url);
@@ -50,7 +52,6 @@ import se.uu.bmc.it.batchelor.rest.schema.Result;
  *     // ...
  * }
  * </pre>
- * </p>
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
@@ -60,7 +61,7 @@ public interface HttpServerRequest {
      * Set the new URL to use. Calling this function will disconnect an already opened connection.
      *
      * @param url The new URL.
-     * @throws java.io.IOException
+     * @throws java.io.IOException If reconnection to server fails.
      */
     void setURL(URL url) throws IOException;
 
@@ -69,7 +70,7 @@ public interface HttpServerRequest {
      * disconnect an already opened connection.
      *
      * @param proxy The proxy server.
-     * @throws java.io.IOException
+     * @throws java.io.IOException If opening proxy connection fails.
      */
     void setProxy(Proxy proxy) throws IOException;
 
@@ -91,7 +92,7 @@ public interface HttpServerRequest {
      * server response message.</p>
      *
      * @return The result object representing the server response.
-     * @throws java.io.IOException
+     * @throws java.io.IOException If reading server response fails.
      */
     Result getServerResponse() throws IOException;
 
@@ -100,14 +101,14 @@ public interface HttpServerRequest {
      * if its not already opened.
      *
      * @return The opened connection.
-     * @throws java.io.IOException
+     * @throws java.io.IOException If server connection is missing.
      */
     HttpURLConnection getConnection() throws IOException;
 
     /**
      * This function closes any open input or output streams, calls disconnect on already connected
      * connection and marks the connection as disconnected.
-     * @throws java.io.IOException
+     * @throws java.io.IOException If disconnecting from server fails.
      */
     void disconnect() throws IOException;
 }

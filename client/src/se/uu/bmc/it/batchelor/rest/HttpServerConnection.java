@@ -68,7 +68,7 @@ public class HttpServerConnection implements HttpServerRequest {
     /**
      * Used internal to open a connection with the server.
      *
-     * @throws java.io.IOException
+     * @throws java.io.IOException If connection to server fails.
      */
     protected void openConnection() throws IOException {
         if (proxy != null) {

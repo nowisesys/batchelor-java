@@ -22,22 +22,22 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  *
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="version" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="error" type="{http://it.bmc.uu.se/batchelor/rest/200901}error" minOccurs="0"/>
- *         &lt;element name="job" type="{http://it.bmc.uu.se/batchelor/rest/200901}job" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="link" type="{http://it.bmc.uu.se/batchelor/rest/200901}link" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="file" type="{http://it.bmc.uu.se/batchelor/rest/200901}file" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute ref="{http://it.bmc.uu.se/batchelor/rest/200901}state use="required""/>
- *       &lt;attribute ref="{http://it.bmc.uu.se/batchelor/rest/200901}type use="required""/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="version" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="error" type="{http://it.bmc.uu.se/batchelor/rest/200901}error" minOccurs="0"/&gt;
+ *         &lt;element name="job" type="{http://it.bmc.uu.se/batchelor/rest/200901}job" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="link" type="{http://it.bmc.uu.se/batchelor/rest/200901}link" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="file" type="{http://it.bmc.uu.se/batchelor/rest/200901}file" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute ref="{http://it.bmc.uu.se/batchelor/rest/200901}state use="required""/&gt;
+ *       &lt;attribute ref="{http://it.bmc.uu.se/batchelor/rest/200901}type use="required""/&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  *
  *

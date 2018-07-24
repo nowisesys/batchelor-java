@@ -76,7 +76,7 @@ import java.util.ArrayList;
  * complete with installing content handling using the ContentHandlerFactory obtained from
  * ReponseDecoderFactory:</p>
  *
- * <code>
+ * <pre><code>
  * import java.rmi.RemoteException;
  * import java.net.URL;
  * import se.uu.bmc.it.batchelor.*;
@@ -101,7 +101,7 @@ import java.util.ArrayList;
  *     // ... methods calling client.XXX()
  *
  * }
- * </code>
+ * </code></pre>
  *
  * <p>
  * See ReponseDecoderFactory for an example of how to handle the case where you already have an
@@ -213,7 +213,7 @@ public class BatchelorRestClient implements WebServiceInterface {
 
     /**
      * @return The remote interface version string.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public String version() throws RemoteException {
@@ -242,8 +242,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param indata The data to use for the enqueued job.
      * @return The enqueue result. The array might contain more than one element if the enqueue
      * operation results in multiple subjobs.
-     * @throws java.rmi.RemoteException
-     * @throws java.lang.NullPointerException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.lang.NullPointerException If input data is missing or null.
      */
     @Override
     public List<EnqueueResult> enqueue(String indata) throws RemoteException {
@@ -258,7 +258,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param indata The input data for the enqueued job.
      * @return The enqueue result. The array might contain more than one element if the enqueue
      * operation results in multiple subjobs.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     public List<EnqueueResult> enqueue(byte[] indata) throws RemoteException {
         ByteArrayInputStream stream = new ByteArrayInputStream(indata);
@@ -272,8 +272,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param file The file with input data for the enqueued job.
      * @return The enqueue result. The array might contain more than one element if the enqueue
      * operation results in multiple subjobs.
-     * @throws java.rmi.RemoteException
-     * @throws java.io.FileNotFoundException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.io.FileNotFoundException If file path is pointing to an none existing file.
      */
     public List<EnqueueResult> enqueue(File file) throws RemoteException, FileNotFoundException {
         FileInputStream stream = new FileInputStream(file);
@@ -293,7 +293,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param stream The input stream to read job data and send to the enqeueud job.
      * @return The enqueue result. The array might contain more than one element if the enqueue
      * operation results in multiple subjobs.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     public List<EnqueueResult> enqueue(InputStream stream) throws RemoteException {
 
@@ -339,7 +339,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      *
      * @param url The URL of the jobs to dequeue.
      * @return True if the method completes successful.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     protected boolean dequeue(URL url) throws RemoteException {
 
@@ -369,8 +369,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      *
      * @param job The identity of the job.
      * @return True if job was dequeued successful.
-     * @throws java.rmi.RemoteException
-     * @throws java.lang.NullPointerException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.lang.NullPointerException If input data is missing or null.
      */
     @Override
     public boolean dequeue(JobIdentity job) throws RemoteException {
@@ -386,7 +386,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * Dequeue all jobs. This function is an REST API specific extension to the WebServiceInterface.
      *
      * @return True if successful.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     public boolean dequeue() throws RemoteException {
         try {
@@ -402,8 +402,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      *
      * @param filter Filter out the jobs to dequeue.
      * @return True is successful.
-     * @throws java.rmi.RemoteException
-     * @throws java.lang.NullPointerException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.lang.NullPointerException If input data is missing or null.
      */
     public boolean dequeue(QueueFilterResult filter) throws RemoteException {
         String path = String.format("queue/filter/%s/list", filter.getValue());
@@ -422,8 +422,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param filter Allows caller to filter elements in the returned list. Use null to disable
      * filtering.
      * @return The list of queued jobs (possibly a subset).
-     * @throws java.rmi.RemoteException
-     * @throws java.lang.NullPointerException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.lang.NullPointerException If input data is missing or null.
      * @see QueueFilterResult
      * @see QueueSortResult
      */
@@ -473,7 +473,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      *
      * @param stamp The UNIX timestamp.
      * @return The list of jobs enqueued after the UNIX stamp.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public List<QueuedJob> watch(int stamp) throws RemoteException {
@@ -519,8 +519,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      *
      * @param job The unique job identity.
      * @return True if job where suspended.
-     * @throws java.rmi.RemoteException
-     * @throws java.lang.NullPointerException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.lang.NullPointerException If input data is missing or null.
      */
     @Override
     public boolean suspend(JobIdentity job) throws RemoteException {
@@ -556,8 +556,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      *
      * @param job The unique job identity.
      * @return True if job where resumed.
-     * @throws java.rmi.RemoteException
-     * @throws java.lang.NullPointerException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.lang.NullPointerException If input data is missing or null.
      */
     @Override
     public boolean resume(JobIdentity job) throws RemoteException {
@@ -592,7 +592,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * to present the remote queue in a tree structure for browsing.
      *
      * @return The list of queued jobs.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public List<JobIdentity> opendir() throws RemoteException {
@@ -626,8 +626,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      *
      * @param job An unique identifier of the queued job.
      * @return The list of files and directories.
-     * @throws java.rmi.RemoteException
-     * @throws java.lang.NullPointerException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.lang.NullPointerException If input data is missing or null.
      */
     @Override
     public List<String> readdir(JobIdentity job) throws RemoteException {
@@ -659,20 +659,27 @@ public class BatchelorRestClient implements WebServiceInterface {
     /**
      * <p>
      * Opens the given file from the job directory associated with the JobIdentity object. The
-     * filename path should use '/' as path separator to descend into subdirectories.</p>
+     * filename path should use '/' as path separator to descend into subdirectories.
+     * </p>
      *
      * <p>
      * This special version of fopen() returns a File object instead of a byte array. Use this
-     * method if the fetched file is expected to be large to avoid an OutOfMemoryException.</p>
+     * method if the fetched file is expected to be large to avoid an OutOfMemoryException.
+     * </p>
      *
      * <p>
      * The File object can be used to read the file response in stream mode and exposes the
      * following methods:
-     * <ul><li>getEncoding(): Either "binary" or "base64".</li>
+     * </p>
+     * 
+     * <ul>
+     * <li>getEncoding(): Either "binary" or "base64".</li>
      * <li>getName(): The filename on the server.</li>
      * <li>getSize(): The number of bytes that can be read.</li>
      * <li>getInputStreamReader(): Returns the input stream.</li>
      * </ul>
+     * 
+     * <p>
      * If encoding is "binary", then the input stream will return the file content "as-is".
      * Basically, it means the file bytes has been sent without any processing. If encoding is
      * "base64", then the input stream will return the file content encoded in Base64 encoding. The
@@ -681,7 +688,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      * </p>
      *
      * <p>
-     * This function is an REST API specific extension of the WebServiceInterface.</p>
+     * This function is an REST API specific extension of the WebServiceInterface.
+     * </p>
      *
      * @param job An unique identifier of the queued job.
      * @param file The remote filename.
@@ -691,8 +699,8 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @return The response file object.
      * @see se.uu.bmc.it.batchelor.rest.schema.File
      * @see se.uu.bmc.it.batchelor.codecs.base64.Base64Decoder
-     * @throws java.rmi.RemoteException
-     * @throws java.net.SocketTimeoutException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.net.SocketTimeoutException If failing to establish connection to server.
      */
     public se.uu.bmc.it.batchelor.rest.schema.File fopen(
             JobIdentity job, String file, int timeout)
@@ -733,9 +741,9 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param job An unique identifier of the queued job.
      * @param file The remote filename.
      * @param path The local filename.
-     * @throws java.rmi.RemoteException
-     * @throws java.io.FileNotFoundException
-     * @throws java.io.IOException
+     * @throws java.rmi.RemoteException When error occurs on server side.
+     * @throws java.io.FileNotFoundException If file path is pointing to an none existing file.
+     * @throws java.io.IOException If an I/O error occurs while reading the file.
      */
     public void fopen(JobIdentity job, String file, File path)
             throws RemoteException, FileNotFoundException, IOException {
@@ -787,7 +795,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      * @param job An unique identifier of the queued job.
      * @param file The remote filename.
      * @return The file contents as an byte array.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public byte[] fopen(JobIdentity job, String file) throws RemoteException {
@@ -824,7 +832,7 @@ public class BatchelorRestClient implements WebServiceInterface {
      *
      * @param job The job identity.
      * @return Details on the queued job.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public QueuedJob stat(JobIdentity job) throws RemoteException {

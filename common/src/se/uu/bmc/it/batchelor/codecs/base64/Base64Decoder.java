@@ -34,7 +34,8 @@ import java.io.IOException;
 
 /**
  * <p>
- * This class provides Base64 decoding of data. Basically, it has two modes of operations:</p>
+ * This class provides Base64 decoding of data. Basically, it has two modes of operations:
+ * </p>
  *
  * <ol><li>Decoding of input streams.</li>
  * <li>Decoding of strings and byte/char arrays.</li>
@@ -44,17 +45,20 @@ import java.io.IOException;
  * Decoding an input stream is an iterative process where decode() gets called in a loop until null
  * is returned (EOF). Strings and byte/char arrays are normally decoded by a single step by calling
  * decode(), but chunked mode can be emulated for i.e. byte arrays by creating a
- * ByteArrayInputStream object and using it as stream argument to decode().</p>
+ * ByteArrayInputStream object and using it as stream argument to decode().
+ * </p>
  *
  * <p>
  * The default number of bytes to decode is BUFFER_SIZE, but can be changed dynamic before or in
- * between calls to decode().</p>
+ * between calls to decode().
+ * </p>
  *
  * <p>
  * This implementation is based on information from
  * <a href="http://en.wikipedia.org/wiki/Base64">http://en.wikipedia.org/wiki/Base64</a>
  * and verified against other Base64 implementations like the base64(1) command from the GNU
- * coreutils package.</p>
+ * coreutils package.
+ * </p>
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
  */

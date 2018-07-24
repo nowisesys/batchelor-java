@@ -20,17 +20,17 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  *
  * <pre>
- * &lt;complexType name="error">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="code" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *       &lt;attribute ref="{http://it.bmc.uu.se/batchelor/rest/200901}origin default="remote""/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="error"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="code" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute ref="{http://it.bmc.uu.se/batchelor/rest/200901}origin default="remote""/&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  *
  *

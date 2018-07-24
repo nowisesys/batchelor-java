@@ -34,7 +34,8 @@ import java.io.IOException;
 
 /**
  * <p>
- * This class provides Base64 encoding of data. Basically, it has two modes of operations:</p>
+ * This class provides Base64 encoding of data. Basically, it has two modes of operations:
+ * </p>
  *
  * <ol><li>Encoding of input streams.</li>
  * <li>Encoding of strings and byte/char arrays.</li>
@@ -45,17 +46,20 @@ import java.io.IOException;
  * is returned (EOF). Strings and byte/char arrays are normally encoded by a single call to
  * encode(), but chunked mode can be emulated i.e. for byte arrays by creating an
  * ByteArrayInputStream object and calling encode(InputStream), using the byte array input
- * stream.</p>
+ * stream.
+ * </p>
  *
  * <p>
  * The default number of bytes to encode is BUFFER_SIZE, but can be changed dynamic before or in
- * between calls to encode().</p>
+ * between calls to encode().
+ * </p>
  *
  * <p>
  * This implementation is based on information from
  * <a href="http://en.wikipedia.org/wiki/Base64">http://en.wikipedia.org/wiki/Base64</a>
  * and verified against other Base64 implementations like the base64(1) command from the GNU
- * coreutils package.</p>
+ * coreutils package.
+ * </p>
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
  */

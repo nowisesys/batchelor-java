@@ -64,7 +64,7 @@ import javax.xml.namespace.QName;
  * This example demonstrate the essential parts of using this class:
  * </p>
  *
- * <code>
+ * <pre><code>
  * import java.rmi.RemoteException;
  * import java.net.URL;
  * import se.uu.bmc.it.batchelor.soap;
@@ -79,7 +79,7 @@ import javax.xml.namespace.QName;
  *     // Add some functions that calls remote methods using the service member...
  *
  * }
- * </code>
+ * </code></pre>
  *
  * @author Anders Lövgren (QNET/BMC CompDept)
  */
@@ -166,7 +166,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
 
     /**
      * @return The remote interface version string.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public String version() throws RemoteException {
@@ -185,7 +185,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @param indata The data to use for the enqueued job.
      * @return The enqueue result. The array might contain more than one elemnt if the enqueue
      * operation results in multiple subjobs.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public List<EnqueueResult> enqueue(String indata) throws RemoteException {
@@ -208,7 +208,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      *
      * @param job The identity of the job.
      * @return True if job was dequeued successful.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public boolean dequeue(JobIdentity job) throws RemoteException {
@@ -228,7 +228,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @param filter Allows caller to filter elements in the returned list. Use null to disable
      * filtering.
      * @return The list of queued jobs (possbly a subset).
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      * @see QueueFilterResult
      * @see QueueSortResult
      */
@@ -260,7 +260,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      *
      * @param stamp The UNIX timestamp.
      * @return The list of jobs enqueued after the UNIX stamp.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public List<QueuedJob> watch(int stamp) throws RemoteException {
@@ -282,7 +282,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      *
      * @param job The unique job identity.
      * @return True if job where suspended.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public boolean suspend(JobIdentity job) throws RemoteException {
@@ -300,7 +300,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      *
      * @param job The unique job identity.
      * @return True if job where resumed.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public boolean resume(JobIdentity job) throws RemoteException {
@@ -317,7 +317,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * to present the remote queue in a tree structure for browsing.
      *
      * @return The list of queued jobs.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public List<JobIdentity> opendir() throws RemoteException {
@@ -339,7 +339,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      *
      * @param job An unique identifier of the queued job.
      * @return The list of files and directories.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public List<String> readdir(JobIdentity job) throws RemoteException {
@@ -358,7 +358,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      * @param job An unique identifier of the queued job.
      * @param file The filename.
      * @return The file contents as an byte array.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public byte[] fopen(JobIdentity job, String file) throws RemoteException {
@@ -376,7 +376,7 @@ public class BatchelorSoapClient implements WebServiceInterface {
      *
      * @param job The job identity.
      * @return Details on the queued job.
-     * @throws java.rmi.RemoteException
+     * @throws java.rmi.RemoteException When error occurs on server side.
      */
     @Override
     public QueuedJob stat(JobIdentity job) throws RemoteException {
