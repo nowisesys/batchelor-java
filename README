@@ -20,9 +20,18 @@
 
 ** VERSION:
 
-   This is version is 1.0.3 of the library, released 2010-08-04. The major and 
+   This is version is 1.0.6 of the library, released 2018-07-25. The major and 
    minor numbers are based on the remote API it implements, while the revision 
-   gets incremented on each release.
+   gets incremented on each release. 
+   
+   Works together with the batchelor 0.8.x releases. 
+   
+** DIRECTORIES:
+   
+   The client directory contains the core web service library. The explorer 
+   directory contains a working sample GUI application built on Swing and SPI 
+   using the library that can be extended by implementing custom display classes
+   for viewing the browse tree nodes content.
    
 ** API:
 
@@ -67,7 +76,7 @@
    *) FOA encoding/decoding requires the foa-java library available for
       download from http://it.bmc.uu.se/andlov/proj/foa-java (recommended).
       
-   *) Sun Java JDK >= 1.5 or equivalent.
+   *) Oracle Java JDK >= 1.8 or equivalent.
    
 ** LICENSE:
 
@@ -82,12 +91,12 @@
    
 ** COPYRIGHT:
 
-   Unless otherwise stated, this library is copyright (C) 2009 by Anders
+   Unless otherwise stated, this library is copyright (C) 2009-2018 by Anders
    Lövgren and the Computing Department at BMC, Uppsala Biomedical Centre,
    Uppsala University (with equally shared rights).
 
 ** ABOUT BATCHELOR:
 
-   See the project homepage: http://it.bmc.uu.se/andlov/proj/batchelor/
+   See the project homepage: http://it.bmc.uu.se/andlov/proj/sci/batchelor/
    
 // Anders Lövgren, 2009-04-04
